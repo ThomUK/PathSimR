@@ -60,19 +60,18 @@ app_ui <- function(request) {
               tags$style(
                 HTML(
                   "
-        input[type=number] {
-              -moz-appearance:textfield;
-        }
-        input[type=number]::{
-              -moz-appearance:textfield;
-        }
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-              -webkit-appearance: none;
-              margin: 0;
-        }
-
-    "
+                    input[type=number] {
+                          -moz-appearance:textfield;
+                    }
+                    input[type=number]::{
+                          -moz-appearance:textfield;
+                    }
+                    input[type=number]::-webkit-outer-spin-button,
+                    input[type=number]::-webkit-inner-spin-button {
+                          -webkit-appearance: none;
+                          margin: 0;
+                    }
+                  "
                 )
               ),
               tags$style(type = "text/css", ".navbar {font-size: 17px;}")
