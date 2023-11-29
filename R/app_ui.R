@@ -19,7 +19,7 @@ app_ui <- function(request) {
               data = c("B"))
   colnames(m2) <- c("Exits")
   rownames(m2) <- c("Enter Names in Right Column")
-  
+
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
@@ -2296,8 +2296,7 @@ app_ui <- function(request) {
 
           fluidRow(
             column(4, align = "center", dataTableOutput("opercentiles")),
-            column(8, align = "center", dataTableOutput("pto_percent", width =
-                                                          "70%"))
+            column(8, align = "center", dataTableOutput("pto_percent"))
           ),
 
           fluidRow(
@@ -2340,8 +2339,7 @@ app_ui <- function(request) {
           ),
           fluidRow(
             column(4, align = "center", dataTableOutput("bpercentiles")),
-            column(8, align = "center", dataTableOutput("ptb_percent", width =
-                                                          "70%"))
+            column(8, align = "center", dataTableOutput("ptb_percent"))
           ),
 
           fluidRow(
@@ -2388,8 +2386,7 @@ app_ui <- function(request) {
           ),
           fluidRow(
             column(4, align = "center", dataTableOutput("dpercentiles")),
-            column(8, align = "center", dataTableOutput("ptd_percent", width =
-                                                          "70%"))
+            column(8, align = "center", dataTableOutput("ptd_percent"))
           ),
 
           fluidRow(
@@ -2436,8 +2433,7 @@ app_ui <- function(request) {
           ),
           fluidRow(
             column(4, align = "center", dataTableOutput("tpercentiles")),
-            column(8, align = "center", dataTableOutput("ptt_percent", width =
-                                                          "70%"))
+            column(8, align = "center", dataTableOutput("ptt_percent"))
           ),
 
           fluidRow(
@@ -2481,8 +2477,7 @@ app_ui <- function(request) {
           ),
           fluidRow(
             column(4, align = "center", dataTableOutput("qpercentiles")),
-            column(8, align = "center", dataTableOutput("ptq_percent", width =
-                                                          "70%"))
+            column(8, align = "center", dataTableOutput("ptq_percent"))
           ),
 
           fluidRow(
