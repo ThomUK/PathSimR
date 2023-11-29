@@ -8,15 +8,13 @@
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
 run_app <- function(
-  onStart = NULL,
-  options = list(),
-  enableBookmarking = NULL,
-  uiPattern = "/",
-  ...
-) {
-
+    onStart = NULL,
+    options = list(),
+    enableBookmarking = NULL,
+    uiPattern = "/",
+    ...) {
   # from PathSimR. find a better place for this
-  options(shiny.maxRequestSize = 30 * 1024 ^ 2) # Sets the Shiny file upload size limit to 30MB
+  options(shiny.maxRequestSize = 30 * 1024^2) # Sets the Shiny file upload size limit to 30MB
 
   with_golem_options(
     app = shinyApp(
