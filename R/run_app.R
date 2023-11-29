@@ -14,6 +14,10 @@ run_app <- function(
   uiPattern = "/",
   ...
 ) {
+
+  # from PathSimR. find a better place for this
+  options(shiny.maxRequestSize = 30 * 1024 ^ 2) # Sets the Shiny file upload size limit to 30MB
+
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
