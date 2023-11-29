@@ -10584,13 +10584,13 @@ app_server <- function(input, output, session) {
       tmp <- x$total_time_in_system
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Total time in system "))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Total time in system "))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10627,13 +10627,13 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Wait"))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Wait"))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10672,13 +10672,13 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Wait"))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Wait"))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10716,14 +10716,16 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Active Service"))
-    ),
-    rownames = FALSE,
-    filter =
-      "top",
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Active Service"))
+      ),
+      rownames = FALSE,
+      filter =
+        "top",
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -10760,14 +10762,16 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Active Service"))
-    ),
-    rownames = FALSE,
-    filter =
-      "top",
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Active Service"))
+      ),
+      rownames = FALSE,
+      filter =
+        "top",
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -10801,15 +10805,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Time Delayed (Capacity Driven)")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Time Delayed (Capacity Driven)")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10848,15 +10852,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Time Delayed (Capacity Driven)")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Time Delayed (Capacity Driven)")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10896,15 +10900,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Time Delayed (Transition)"
-      ))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Time Delayed (Transition)"
+        ))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10942,15 +10946,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Time Delayed (Transition)"
-      ))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Time Delayed (Transition)"
+        ))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -10989,14 +10993,16 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Length of Stay"))
-    ),
-    rownames = FALSE,
-    filter =
-      "top",
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Length of Stay"))
+      ),
+      rownames = FALSE,
+      filter =
+        "top",
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11032,14 +11038,16 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong("Length of Stay"))
-    ),
-    rownames = FALSE,
-    filter =
-      "top",
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong("Length of Stay"))
+      ),
+      rownames = FALSE,
+      filter =
+        "top",
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11075,15 +11083,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Delay to Transfer"
-      ))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Delay to Transfer"
+        ))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11123,15 +11131,15 @@ app_server <- function(input, output, session) {
       tmp <- rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Delay to Transfer"
-      ))
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Delay to Transfer"
+        ))
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11195,15 +11203,15 @@ app_server <- function(input, output, session) {
         )
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Percentage time at delayed level")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Percentage time at delayed level")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11231,14 +11239,16 @@ app_server <- function(input, output, session) {
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Average # Delayed"
-      ))
-    ),
-    rownames = FALSE,
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Average # Delayed"
+        ))
+      ),
+      rownames = FALSE,
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11270,15 +11280,15 @@ app_server <- function(input, output, session) {
         )
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Percentage time at queue length")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Percentage time at queue length")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11306,14 +11316,16 @@ app_server <- function(input, output, session) {
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Average queue length"
-      ))
-    ),
-    rownames = FALSE,
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Average queue length"
+        ))
+      ),
+      rownames = FALSE,
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11345,15 +11357,15 @@ app_server <- function(input, output, session) {
         )
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Percentage time at occupancy level")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Percentage time at occupancy level")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11381,14 +11393,16 @@ app_server <- function(input, output, session) {
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Average Occupancy"
-      ))
-    ),
-    rownames = FALSE,
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Average Occupancy"
+        ))
+      ),
+      rownames = FALSE,
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11420,15 +11434,15 @@ app_server <- function(input, output, session) {
         )
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Percentage time at transition level")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Percentage time at transition level")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11456,14 +11470,16 @@ app_server <- function(input, output, session) {
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Average Transition"
-      ))
-    ),
-    rownames = FALSE,
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Average Transition"
+        ))
+      ),
+      rownames = FALSE,
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
@@ -11495,15 +11511,15 @@ app_server <- function(input, output, session) {
         )
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(
-        strong("Percentage time at occ_bed level")
-      )
-    ),
-    rownames = FALSE,
-    filter = "top",
     options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(
+          strong("Percentage time at occ_bed level")
+        )
+      ),
+      rownames = FALSE,
+      filter = "top",
       pageLength = 10, dom =
         "tlp"
     )
@@ -11531,14 +11547,16 @@ app_server <- function(input, output, session) {
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
-    caption = htmltools::tags$caption(
-      style = "caption-side: top; text-align: center;",
-      htmltools::h4(strong(
-        "Average Bed Occupanncy"
-      ))
-    ),
-    rownames = FALSE,
-    options = list(pageLength = 10, dom = "tlp")
+    options = list(
+      caption = htmltools::tags$caption(
+        style = "caption-side: top; text-align: center;",
+        htmltools::h4(strong(
+          "Average Bed Occupanncy"
+        ))
+      ),
+      rownames = FALSE,
+      pageLength = 10, dom = "tlp"
+    )
   )
 
 
