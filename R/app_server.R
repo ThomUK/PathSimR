@@ -2154,7 +2154,7 @@ app_server <- function(input, output, session) {
   #But with some fitted to non-interval censored regional data (where HES fits did not
     #coverge or were otherwise unavailable). n.b the HES method is NOT the same as that
     #in the "fit your own" data tab, which assumes uncensored data
-  pre_fitted_data <- read.csv("./www/fits_for_pathsimr.csv",
+  pre_fitted_data <- read.csv("inst/app/www/fits_for_pathsimr.csv",
                               check.names = FALSE) %>% 
     arrange(Names)
   
