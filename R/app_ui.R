@@ -5,24 +5,6 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  #### Creating the starting name matricies ####
-  m1 <- matrix(
-    nrow = 1,
-    ncol = 1,
-    data = c("A")
-  )
-  colnames(m1) <- c("Service Points")
-  rownames(m1) <- c("Enter Names in Right Column")
-
-
-  m2 <- matrix(
-    nrow = 1,
-    ncol = 1,
-    data = c("B")
-  )
-  colnames(m2) <- c("Exits")
-  rownames(m2) <- c("Enter Names in Right Column")
-
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
