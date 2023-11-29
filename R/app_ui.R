@@ -153,9 +153,9 @@ app_ui <- function(request) {
           mainPanel(
             br(),
             fluidRow(
-              column(4, align = "center", img(src = "THF_logo.png", style = "height:150px;")),
-              column(4, align = "center", img(src = "BNSSG_logo.png", style = "height:150px;")),
-              column(4, align = "center", img(src = "UoB_logo.png", style = "height:150px;"))
+              column(4, align = "center", img(src = "www/THF_logo.png", style = "height:150px;")),
+              column(4, align = "center", img(src = "www/BNSSG_logo.png", style = "height:150px;")),
+              column(4, align = "center", img(src = "www/UoB_logo.png", style = "height:150px;"))
             ),
             br(),
             br(),
@@ -169,7 +169,7 @@ app_ui <- function(request) {
             br(),
             fluidRow(column(
               12,
-              align = "center", img(src = "Rplot.png", style = "height:400px;")
+              align = "center", img(src = "www/Rplot.png", style = "height:400px;")
             )),
             # fluidRow(column(12,align="center",img(src='Logo2.jpg'))),
 
@@ -762,7 +762,7 @@ app_ui <- function(request) {
                 offset = 0,
                 style = "padding:0px;"
               ),
-              column(6, img(src = "Event_Outputs.png"))
+              column(6, img(src = "www/Event_Outputs.png"))
             )
           ),
           widths = c(2, 10),
@@ -1694,14 +1694,14 @@ app_ui <- function(request) {
               fluidRow(
                 column(
                   6, img(
-                    src = "wu1.png",
+                    src = "www/wu1.png",
                     height = "100%",
                     width = "100%"
                   )
                 ),
                 column(
                   6, img(
-                    src = "wu2.png",
+                    src = "www/wu2.png",
                     height = "100%",
                     width = "100%"
                   )
@@ -1710,14 +1710,14 @@ app_ui <- function(request) {
               fluidRow(
                 column(
                   6, img(
-                    src = "wu3.png",
+                    src = "www/wu3.png",
                     height = "100%",
                     width = "100%"
                   )
                 ),
                 column(
                   6, img(
-                    src = "wu4.png",
+                    src = "www/wu4.png",
                     height = "100%",
                     width = "100%"
                   )
