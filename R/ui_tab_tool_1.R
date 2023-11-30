@@ -1,4 +1,4 @@
-tab_tool_1 <- function() {
+ui_tab_tool_1 <- function() {
   tabPanel(
     "1. Network Import & Visualisation",
     sidebarLayout(

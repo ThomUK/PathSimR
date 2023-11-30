@@ -1,4 +1,4 @@
-tab_service_dist <- function() {
+ui_tab_service_dist <- function() {
   tabPanel(
     title = "Service Distribution Tool",
     icon = icon("chart-area"),

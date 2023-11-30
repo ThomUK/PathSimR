@@ -1,4 +1,4 @@
-tab_introduction <- function() {
+ui_tab_introduction <- function() {
   tabPanel(
     "Introduction",
     sidebarLayout(

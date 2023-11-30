@@ -1,4 +1,4 @@
-tab_overview_and_glossary <- function() {
+ui_tab_overview_and_glossary <- function() {
   tabPanel(
     "Overview & Glossary",
     navlistPanel(

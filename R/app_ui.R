@@ -17,34 +17,34 @@ app_ui <- function(request) {
       id = "navbar",
 
       #### INTRODUCTION TAB ####
-      tab_introduction(),
+      ui_tab_introduction(),
 
       #### OVERVIEW AND GLOSSARY TAB ####
-      tab_overview_and_glossary(),
+      ui_tab_overview_and_glossary(),
 
       #### WIZARD 1 - SETUP TAB ####
-      tab_wizard_1(),
+      ui_tab_wizard_1(),
 
       #### WIZARD 2 - DATA ENTRY TAB ####
-      tab_wizard_2(),
+      ui_tab_wizard_2(),
 
       #### WIZARD 3 - FINAL WIZARD TABLES & DOWNLOAD TAB ####
-      tab_wizard_3(),
+      ui_tab_wizard_3(),
 
       #### SERVICE DISTRIBUTION TOOL TAB ####
-      tab_service_dist(),
+      ui_tab_service_dist(),
 
       #### TOOL 1 - NETWORK IMPORT & VISUALISATION TAB ####
-      tab_tool_1(),
+      ui_tab_tool_1(),
 
       #### TOOL 2 - SIMULATION SETUP & RUN TAB ####
-      tab_tool_2(),
+      ui_tab_tool_2(),
 
       #### TOOL 3 - SIMULATION OUTPUTS TAB ####
-      tab_tool_3(),
+      ui_tab_tool_3(),
 
       #### TOOL 4 - DOWNLOAD OUTPUTS TAB ####
-      tab_tool_4()
+      ui_tab_tool_4()
     )
   )
 }

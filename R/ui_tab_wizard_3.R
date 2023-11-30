@@ -1,4 +1,4 @@
-tab_wizard_3 <- function() {
+ui_tab_wizard_3 <- function() {
   tabPanel(
     "W3. Final Wizard Tables & Download",
     sidebarLayout(

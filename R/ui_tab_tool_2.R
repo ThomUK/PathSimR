@@ -1,4 +1,4 @@
-tab_tool_2 <- function() {
+ui_tab_tool_2 <- function() {
   tabPanel(
     "2. Simulation Setup & Run",
     sidebarLayout(

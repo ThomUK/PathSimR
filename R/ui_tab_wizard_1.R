@@ -1,4 +1,4 @@
-tab_wizard_1 <- function() {
+ui_tab_wizard_1 <- function() {
   #### Creating the starting name matricies ####
   m1 <- matrix(
     nrow = 1,

@@ -1,4 +1,4 @@
-tab_wizard_2 <- function() {
+ui_tab_wizard_2 <- function() {
   tabPanel(
     "W2. Data Entry",
     sidebarLayout(

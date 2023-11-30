@@ -1,4 +1,4 @@
-tab_tool_4 <- function() {
+ui_tab_tool_4 <- function() {
   tabPanel(
     "4. Download Outputs",
     sidebarLayout(

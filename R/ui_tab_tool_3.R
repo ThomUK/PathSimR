@@ -1,4 +1,4 @@
-tab_tool_3 <- function() {
+ui_tab_tool_3 <- function() {
   tabPanel(
     "3. Simulation Outputs",
     navlistPanel(
