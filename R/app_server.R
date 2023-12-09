@@ -6,21 +6,6 @@
 #' @noRd
 app_server <- function(input, output, session) {
   #### SHINY SERVER CODE (INC SIM CODE) ####
-  library(DiagrammeR)
-  library(magrittr)
-  library(readr)
-  library(DT)
-  library(openxlsx)
-  library(grid)
-  library(gridExtra)
-  library(parallel)
-  library(data.table)
-  library(tidyverse)
-  library(shinyMatrix)
-  library(fitdistrplus)
-  library(shinyBS)
-  library(shinyjs)
-  library(shinythemes)
 
   #### Figures for Modals####
   output$ext_arr_example <- renderTable(
