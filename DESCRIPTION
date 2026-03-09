@@ -10,8 +10,13 @@ Description: What the package does (one paragraph).
 License: AGPL (>= 3)
 Imports: 
     config (>= 0.3.1),
+    fitdistrplus,
     golem (>= 0.4.1),
-    shiny (>= 1.7.4)
+    openxlsx,
+    shiny (>= 1.7.4),
+    shinyBS,
+    shinyMatrix,
+    shinythemes
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
