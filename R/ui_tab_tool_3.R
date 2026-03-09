@@ -337,8 +337,8 @@ ui_tab_tool_3 <- function() {
             )
           ),
           fluidRow(
-            column(4, align = "center", dataTableOutput("opercentiles")),
-            column(8, align = "center", dataTableOutput("pto_percent"))
+            column(4, align = "center", DT::dataTableOutput("opercentiles")),
+            column(8, align = "center", DT::dataTableOutput("pto_percent"))
           ),
           fluidRow(
             column(
@@ -346,7 +346,7 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", dataTableOutput("avg_occupancy"))
+            column(2, align = "center", DT::dataTableOutput("avg_occupancy"))
           )
         ),
         conditionalPanel(
@@ -378,8 +378,8 @@ ui_tab_tool_3 <- function() {
             )
           ),
           fluidRow(
-            column(4, align = "center", dataTableOutput("bpercentiles")),
-            column(8, align = "center", dataTableOutput("ptb_percent"))
+            column(4, align = "center", DT::dataTableOutput("bpercentiles")),
+            column(8, align = "center", DT::dataTableOutput("ptb_percent"))
           ),
           fluidRow(
             column(
@@ -387,7 +387,7 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", dataTableOutput("avg_occ_bed"))
+            column(2, align = "center", DT::dataTableOutput("avg_occ_bed"))
           )
         ),
         conditionalPanel(
@@ -419,8 +419,8 @@ ui_tab_tool_3 <- function() {
             )
           ),
           fluidRow(
-            column(4, align = "center", dataTableOutput("dpercentiles")),
-            column(8, align = "center", dataTableOutput("ptd_percent"))
+            column(4, align = "center", DT::dataTableOutput("dpercentiles")),
+            column(8, align = "center", DT::dataTableOutput("ptd_percent"))
           ),
           fluidRow(
             column(
@@ -428,7 +428,7 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", dataTableOutput("avg_delayed"))
+            column(2, align = "center", DT::dataTableOutput("avg_delayed"))
           )
         ),
         conditionalPanel(
@@ -460,8 +460,8 @@ ui_tab_tool_3 <- function() {
             )
           ),
           fluidRow(
-            column(4, align = "center", dataTableOutput("tpercentiles")),
-            column(8, align = "center", dataTableOutput("ptt_percent"))
+            column(4, align = "center", DT::dataTableOutput("tpercentiles")),
+            column(8, align = "center", DT::dataTableOutput("ptt_percent"))
           ),
           fluidRow(
             column(
@@ -469,7 +469,7 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", dataTableOutput("avg_transition"))
+            column(2, align = "center", DT::dataTableOutput("avg_transition"))
           )
         ),
         conditionalPanel(
@@ -501,8 +501,8 @@ ui_tab_tool_3 <- function() {
             )
           ),
           fluidRow(
-            column(4, align = "center", dataTableOutput("qpercentiles")),
-            column(8, align = "center", dataTableOutput("ptq_percent"))
+            column(4, align = "center", DT::dataTableOutput("qpercentiles")),
+            column(8, align = "center", DT::dataTableOutput("ptq_percent"))
           ),
           fluidRow(
             column(
@@ -510,7 +510,7 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", dataTableOutput("avg_queue"))
+            column(2, align = "center", DT::dataTableOutput("avg_queue"))
           )
         ),
         conditionalPanel(
