@@ -3219,7 +3219,7 @@ app_server <- function(input, output, session) {
 
     # Create a node data frame (ndf)
 
-    ndf1 <- create_node_df(
+    ndf1 <- DiagrammeR::create_node_df(
       n = length(nodes),
       type = "lower",
       label = c(nodes),
@@ -3233,7 +3233,7 @@ app_server <- function(input, output, session) {
 
 
 
-    ndf2 <- create_node_df(
+    ndf2 <- DiagrammeR::create_node_df(
       n = length(exits),
       type = "lower",
       label = c(exits),
@@ -3248,7 +3248,7 @@ app_server <- function(input, output, session) {
 
 
 
-    ndf3 <- create_node_df(
+    ndf3 <- DiagrammeR::create_node_df(
       n = length(ext_arr),
       type = "lower",
       label = as.numeric(c(length(c(
@@ -3486,7 +3486,7 @@ app_server <- function(input, output, session) {
     render_graph(graph)
   })
 
-  output$network <- renderGrViz({
+  output$network <- DiagrammeR::renderGrViz({
     viz()
   })
 
@@ -3494,7 +3494,7 @@ app_server <- function(input, output, session) {
     viz()
   })
 
-  output$cl_viz <- renderGrViz({
+  output$cl_viz <- DiagrammeR::renderGrViz({
     checklist_viz()
   })
 
@@ -3712,7 +3712,6 @@ app_server <- function(input, output, session) {
         library(magrittr)
         library(readr)
         library(DT)
-        library(openxlsx)
         library(grid)
         library(gridExtra)
         # library(plotly)
@@ -11775,11 +11774,11 @@ app_server <- function(input, output, session) {
 
 
 
-  output$tables_viz1 <- renderGrViz({
+  output$tables_viz1 <- DiagrammeR::renderGrViz({
     viz()
   })
 
-  output$tables_viz2 <- renderGrViz({
+  output$tables_viz2 <- DiagrammeR::renderGrViz({
     viz()
   })
 
