@@ -2208,7 +2208,7 @@ app_server <- function(input, output, session) {
 
           ggplot(data = dat) +
             geom_line(aes(x = Time, y = Probability),
-              size = 1,
+              linewidth = 1,
               col = "blue"
             ) +
             theme_bw()
@@ -2224,7 +2224,7 @@ app_server <- function(input, output, session) {
 
           ggplot(data = dat) +
             geom_line(aes(x = Time, y = Probability),
-              size = 1,
+              linewidth = 1,
               col = "blue"
             ) +
             theme_bw()
@@ -2240,7 +2240,7 @@ app_server <- function(input, output, session) {
 
           ggplot(data = dat) +
             geom_line(aes(x = Time, y = Probability),
-              size = 1,
+              linewidth = 1,
               col = "blue"
             ) +
             theme_bw()
@@ -2256,7 +2256,7 @@ app_server <- function(input, output, session) {
 
           ggplot(data = dat) +
             geom_line(aes(x = Time, y = Probability),
-              size = 1,
+              linewidth = 1,
               col = "blue"
             ) +
             theme_bw()
@@ -10206,7 +10206,7 @@ app_server <- function(input, output, session) {
             x = time,
             y = mean,
             colour = metric
-          ), size = 1.1) +
+          ), linewidth = 1.1) +
           facet_grid(metric ~ node, scales = "free", labeller = label_wrap_gen(15)) +
           ylab("Mean # of patients") +
           xlab(paste0("Time (", input$time_unit, ")")) +
