@@ -10562,7 +10562,7 @@ app_server <- function(input, output, session) {
   ### RENDER TOTAL TIME IN SYSTEM #####
 
 
-  output$ttis <- renderDataTable(
+  output$ttis <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10604,7 +10604,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER WAITS #####
 
-  output$node_wait <- renderDataTable(
+  output$node_wait <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10649,7 +10649,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$pat_wait <- renderDataTable(
+  output$pat_wait <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10693,7 +10693,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER ACTIVE SERVICE #####
 
-  output$node_active_service <- renderDataTable(
+  output$node_active_service <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10739,7 +10739,7 @@ app_server <- function(input, output, session) {
 
 
 
-  output$pat_active_service <- renderDataTable(
+  output$pat_active_service <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10782,7 +10782,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER CAPACITY DELAYS #####
 
-  output$node_capacity_delay <- renderDataTable(
+  output$node_capacity_delay <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10829,7 +10829,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$pat_capacity_delay <- renderDataTable(
+  output$pat_capacity_delay <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10876,7 +10876,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER TRANSITION DELAYS #####
 
-  output$node_transition_delay <- renderDataTable(
+  output$node_transition_delay <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10923,7 +10923,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$pat_transition_delay <- renderDataTable(
+  output$pat_transition_delay <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -10970,7 +10970,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER LENGTH OF STAY #####
 
-  output$node_los <- renderDataTable(
+  output$node_los <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11015,7 +11015,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$pat_los <- renderDataTable(
+  output$pat_los <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11060,7 +11060,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER DELAY TO TRANSFER #####
 
-  output$node_dtt <- renderDataTable(
+  output$node_dtt <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11108,7 +11108,7 @@ app_server <- function(input, output, session) {
 
 
 
-  output$pat_dtt <- renderDataTable(
+  output$pat_dtt <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11172,7 +11172,7 @@ app_server <- function(input, output, session) {
   ### RENDER DELAY METRICS #####
 
 
-  output$ptd_percent <- renderDataTable(
+  output$ptd_percent <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11214,7 +11214,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$avg_delayed <- renderDataTable(
+  output$avg_delayed <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11249,7 +11249,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER QUEUE METRICS #####
 
-  output$ptq_percent <- renderDataTable(
+  output$ptq_percent <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11291,7 +11291,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$avg_queue <- renderDataTable(
+  output$avg_queue <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11326,7 +11326,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER OCCUPANCY METRICS #####
 
-  output$pto_percent <- renderDataTable(
+  output$pto_percent <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11368,7 +11368,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$avg_occupancy <- renderDataTable(
+  output$avg_occupancy <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11403,7 +11403,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER TRANSITION METRICS #####
 
-  output$ptt_percent <- renderDataTable(
+  output$ptt_percent <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11445,7 +11445,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$avg_transition <- renderDataTable(
+  output$avg_transition <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11480,7 +11480,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER BED OCCUPANCY METRICS #####
 
-  output$ptb_percent <- renderDataTable(
+  output$ptb_percent <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11522,7 +11522,7 @@ app_server <- function(input, output, session) {
   )
 
 
-  output$avg_occ_bed <- renderDataTable(
+  output$avg_occ_bed <- DT::renderDT(
     {
       req(sim_out())
       x <- sim_out()
@@ -11583,7 +11583,7 @@ app_server <- function(input, output, session) {
 
   ### RENDER PERCENTILE TABLES #####
 
-  output$dpercentiles <- renderDataTable({
+  output$dpercentiles <- DT::renderDT({
     req(sim_out())
 
     sketch <- htmltools::withTags(table(
@@ -11621,7 +11621,7 @@ app_server <- function(input, output, session) {
   })
 
 
-  output$qpercentiles <- renderDataTable({
+  output$qpercentiles <- DT::renderDT({
     req(sim_out())
 
     sketch <- htmltools::withTags(table(
@@ -11659,7 +11659,7 @@ app_server <- function(input, output, session) {
   })
 
 
-  output$opercentiles <- renderDataTable({
+  output$opercentiles <- DT::renderDT({
     req(sim_out())
 
     sketch <- htmltools::withTags(table(
@@ -11698,7 +11698,7 @@ app_server <- function(input, output, session) {
     )
   })
 
-  output$bpercentiles <- renderDataTable({
+  output$bpercentiles <- DT::renderDT({
     req(sim_out())
 
     sketch <- htmltools::withTags(table(
@@ -11737,7 +11737,7 @@ app_server <- function(input, output, session) {
 
 
 
-  output$tpercentiles <- renderDataTable({
+  output$tpercentiles <- DT::renderDT({
     req(sim_out())
 
     sketch <- htmltools::withTags(table(
