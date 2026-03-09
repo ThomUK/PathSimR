@@ -190,7 +190,7 @@ ui_tab_tool_3 <- function() {
           condition = "input.run_type=='Full Simulation'",
           fluidRow(column(
             12,
-            align = "center", grVizOutput("tables_viz1", height = "400px")
+            align = "center", DiagrammeR::grVizOutput("tables_viz1", height = "400px")
           )),
           br(),
           fluidRow(
@@ -258,7 +258,7 @@ ui_tab_tool_3 <- function() {
           condition = "input.run_type=='Full Simulation'",
           fluidRow(column(
             12,
-            align = "center", grVizOutput("tables_viz2", height = "400px")
+            align = "center", DiagrammeR::grVizOutput("tables_viz2", height = "400px")
           )),
           br(),
           fluidRow(

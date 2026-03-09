@@ -167,7 +167,7 @@ ui_tab_tool_1 <- function() {
       mainPanel(
         # Output: Data file --
 
-        grVizOutput("network", height = "450px"),
+        DiagrammeR::grVizOutput("network", height = "450px"),
         tableOutput("file_check_issues"),
         tableOutput("contents1"),
         tableOutput("contents2")

@@ -18,7 +18,6 @@ run_app <- function(
 
   # load the libraries in a single place
   suppressMessages({
-    library(DiagrammeR)
     library(magrittr)
     library(readr)
     library(DT)

@@ -3709,7 +3709,6 @@ app_server <- function(input, output, session) {
 
 
         library(shiny)
-        library(DiagrammeR)
         library(magrittr)
         library(readr)
         library(DT)
@@ -4002,7 +4001,6 @@ app_server <- function(input, output, session) {
           cl = cl,
           c(
             library(shiny),
-            library(DiagrammeR),
             library(magrittr),
             library(readr),
             library(DT),
