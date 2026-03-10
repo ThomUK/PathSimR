@@ -519,15 +519,15 @@ logger::log_debug("Starting wizard.")
 
     m3 <- matrix(
       ncol = 3,
-      nrow = node_number,
-      data = ""
+      nrow = 1,
+      data = c(0,"","")
     )
     colnames(m3) <- c("Start Time", "End Time", "Arrival Rate")
 
     m4 <- matrix(
       ncol = 3,
-      nrow = node_number,
-      data = ""
+      nrow = 1,
+      data = c(0,"","")
     )
     colnames(m4) <- c("Start Time", "End Time", "Capacity")
 
@@ -733,7 +733,7 @@ logger::log_debug("Starting wizard.")
                   editableNames = FALSE
                 ),
                 rows = list(
-                  names = TRUE,
+                  names = FALSE,
                   extend = TRUE,
                   editableNames = FALSE,
                   delta = 1
@@ -767,7 +767,7 @@ logger::log_debug("Starting wizard.")
                   editableNames = FALSE
                 ),
                 rows = list(
-                  names = TRUE,
+                  names = FALSE,
                   extend = TRUE,
                   editableNames = FALSE,
                   delta = 1
