@@ -3960,7 +3960,7 @@ app_server <- function(input, output, session) {
         clusterExport(
           cl = cluster,
           varlist = c(
-            "cl",
+            "cluster",
             "var_input",
             "syst_names",
             "syst_names_single",
@@ -3983,7 +3983,7 @@ app_server <- function(input, output, session) {
           envir = environment()
         )
 
-        clusterSetRNGStream(cl)
+        clusterSetRNGStream(cluster)
 
         clusterEvalQ(
           cl = cluster,
@@ -10450,7 +10450,7 @@ app_server <- function(input, output, session) {
         )
 
 
-        stopCluster(cl)
+        stopCluster(cluster)
 
 
         # change to check on number of simulation outputs ####
