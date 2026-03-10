@@ -3663,24 +3663,7 @@ app_server <- function(input, output, session) {
           warm_up <- input$wu
         }
 
-
-        # if (input$run_type == c("Trial Simulation")) {
-        #   # restrict to 2 (or 1) cores
-        #   # cl <- makeCluster(min(c(2, max(
-        #   #  detectCores() - 1, 1
-        #   # ))))
-
-        #   # set to use of n-1 cores
-        #   cl <- makeCluster(
-        #       min(max(reps - 1, 1), detectCores() - 1)
-        #     )
-        # }
-        # if (input$run_type == c("Full Simulation")) {
-        #   cl <- makeCluster(min(max(reps - 1, 1), detectCores() - 1))
-        # }
-
-        # ceiling(detectCores()/2)
-
+        # make a compute cluster with the appropriate number of cores
         cl <- parallel::makeCluster(
           processor_cores_required(reps)
         )
