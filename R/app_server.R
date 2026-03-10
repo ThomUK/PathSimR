@@ -11608,7 +11608,7 @@ logger::log_debug("Wizard complete.")
     # tmp<-ceiling(tmp)
     # tmp<-type.convert(tmp)
     # tmp<-format(tmp,digits=5)
-    datatable(
+    DT::datatable(
       tmp,
       container = sketch,
       options = list(dom = "t", ordering = F),
@@ -11646,7 +11646,7 @@ logger::log_debug("Wizard complete.")
     # tmp<-ceiling(tmp)
     # tmp<-type.convert(tmp)
     # tmp<-format(tmp,digits=5)
-    datatable(
+    DT::datatable(
       tmp,
       container = sketch,
       options = list(dom = "t", ordering = F),
@@ -11686,7 +11686,7 @@ logger::log_debug("Wizard complete.")
     # tmp<-ceiling(tmp)
     # tmp<-type.convert(tmp)
     # tmp<-format(tmp,digits=5)
-    datatable(
+    DT::datatable(
       tmp,
       container = sketch,
       options = list(dom = "t", ordering = F),
@@ -11723,7 +11723,7 @@ logger::log_debug("Wizard complete.")
     # tmp<-ceiling(tmp)
     # tmp<-type.convert(tmp)
     # tmp<-format(tmp,digits=5)
-    datatable(
+    DT::datatable(
       tmp,
       container = sketch,
       options = list(dom = "t", ordering = F),
@@ -11762,7 +11762,7 @@ logger::log_debug("Wizard complete.")
     # tmp<-ceiling(tmp)
     # tmp<-type.convert(tmp)
     # tmp<-format(tmp,digits=5)
-    datatable(
+    DT::datatable(
       tmp,
       container = sketch,
       options = list(dom = "t", ordering = F),
