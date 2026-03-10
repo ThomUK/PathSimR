@@ -675,7 +675,7 @@ logger::log_debug("Starting wizard.")
             numericInput(
               inputId = paste0("ext_q_", i),
               label = "External Queue Capacity",
-              value = 0,
+              value = 9999,
               min = 0
             )
           ),
