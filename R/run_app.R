@@ -21,7 +21,6 @@ run_app <- function(
   suppressMessages({
     library(magrittr)
     library(readr)
-    library(DT)
     library(grid)
     library(gridExtra)
     library(parallel)
