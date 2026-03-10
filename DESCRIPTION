@@ -10,10 +10,17 @@ Description: What the package does (one paragraph).
 License: AGPL (>= 3)
 Imports: 
     config (>= 0.3.1),
+    data.table,
     DiagrammeR,
+    DT,
     fitdistrplus,
     golem (>= 0.4.1),
+    grid,
+    gridExtra,
+    magrittr,
     openxlsx,
+    parallel,
+    readr,
     shiny (>= 1.7.4),
     shinyBS,
     shinyjs,
