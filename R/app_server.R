@@ -4003,7 +4003,6 @@ app_server <- function(input, output, session) {
             library(magrittr),
             library(readr),
             library(DT),
-            library(openxlsx),
             library(grid),
             library(gridExtra),
             # library(plotly),
@@ -11844,7 +11843,7 @@ app_server <- function(input, output, session) {
 
 
 
-      write.xlsx(x = list_of_datasets, file = filename)
+      openxlsx::write.xlsx(x = list_of_datasets, file = filename)
 
 
       showModal(modalDialog(

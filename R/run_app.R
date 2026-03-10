@@ -21,7 +21,6 @@ run_app <- function(
     library(magrittr)
     library(readr)
     library(DT)
-    library(openxlsx)
     library(grid)
     library(gridExtra)
     library(parallel)
