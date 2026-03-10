@@ -8,6 +8,7 @@ app_server <- function(input, output, session) {
   #### SHINY SERVER CODE (INC SIM CODE) ####
 
   #### Figures for Modals####
+  logger::log_debug("Setting up figures for modals.")
   output$ext_arr_example <- renderTable(
     {
       data.frame(
@@ -64,6 +65,7 @@ app_server <- function(input, output, session) {
 
 
   #### Navigation Buttons ####
+  logger::log_debug("Configuring tab hiding and selection behaviour.")
 
   hideTab(inputId = "navbar", target = "1. Network Import & Visualisation")
   hideTab(inputId = "navbar", target = "2. Simulation Setup & Run")
@@ -185,7 +187,7 @@ app_server <- function(input, output, session) {
 
 
   ##### START OF DYNAMIC WIZARD SERVER CODE ######
-
+logger::log_debug("Starting wizard.")
 
   #### Name Input tables and checks ####
   ### Creates table of service point names ###
@@ -283,6 +285,7 @@ app_server <- function(input, output, session) {
 
 
     #### Creates the transition probability inputs & delay departure entry (dynamic based on number of nodes & exits) ####
+    logger::log_debug("Creating transition probability and delay departures.")
     for (j in 1:node_number) {
       assign(
         x = paste0("transition_", j),
@@ -1134,7 +1137,7 @@ app_server <- function(input, output, session) {
   })
 
   #### Creates the input checklist####
-
+logger::log_debug("Creating input checklist.")
   observeEvent(input$go, {
     issues <- c()
 
@@ -1896,6 +1899,7 @@ app_server <- function(input, output, session) {
 
 
   #### Length of Service Model Fit Tab####
+  logger::log_debug("Creating LOS model fitting tab")
   observeEvent(input$go_distfit, {
     req(input$los_dat)
     df <- read.csv(input$los_dat$datapath,
@@ -2115,6 +2119,7 @@ app_server <- function(input, output, session) {
   })
 
   #### Length of Service Scaled Means Tab####
+  logger::log_debug("Creating LOS scaled means tab")
 
   # LOS distriubtion dataframe ####
   # reads in pre-caculated values from csv stored in www folder
@@ -2269,7 +2274,7 @@ app_server <- function(input, output, session) {
 
 
 
-
+logger::log_debug("Wizard complete.")
   ###### END OF WIZARD#######
   ###### START OF SIMULATION TOOL##########
 
@@ -3061,6 +3066,7 @@ app_server <- function(input, output, session) {
 
 
   #### NETWORK VISUALISATION ####
+  logger::log_debug("Creating network visualisation.")
   viz <- eventReactive(input$go_viz, {
     if (input$w_temp == 0) {
       req(input$file1)
@@ -3634,6 +3640,7 @@ app_server <- function(input, output, session) {
   # The tryCatch is a error capture system that results in a pop-up for the user if there are any errors within the system. The exact pop-up can be found at the bottom of the simulation section.
 
   sim_out <- eventReactive(input$sim, {
+    logger::log_info("Simulation Started...")
     tryCatch(
       {
         ### Inputs and Initilisation ##################################################################
@@ -3699,8 +3706,6 @@ app_server <- function(input, output, session) {
 
         library(shiny)
         library(magrittr)
-        library(readr)
-        library(DT)
         library(grid)
         library(gridExtra)
         # library(plotly)
@@ -3711,7 +3716,7 @@ app_server <- function(input, output, session) {
         ptm <- proc.time()
 
         ##### Simulation Inputs ##############################################################
-
+        logger::log_trace("Sim inputs.")
         if (input$w_temp == 0) {
           req(input$file1)
           req(input$file2)
@@ -3854,7 +3859,7 @@ app_server <- function(input, output, session) {
 
 
         ### Shifting Calendars so that the start of the sim_time is the equivalent of 0 on the calendar
-
+        logger::log_trace("Sim shifting calendars.")
         if (warm_up != 0) {
           cap_cal_input_new <- cap_cal_input[0, ]
 
@@ -3939,8 +3944,7 @@ app_server <- function(input, output, session) {
         }
 
         # Sets the timer
-
-
+        logger::log_trace("Sim setting timer.")
 
         record_scale <- 0.8
         na_lim <- 100
@@ -3990,8 +3994,6 @@ app_server <- function(input, output, session) {
           c(
             library(shiny),
             library(magrittr),
-            library(readr),
-            library(DT),
             library(grid),
             library(gridExtra),
             # library(plotly),
@@ -4001,6 +4003,7 @@ app_server <- function(input, output, session) {
 
 
         ####### SIMULATION CODE ##################################################################
+        logger::log_trace("Sim core simulation start.")
         outputs <- parLapply(
           cl = cluster,
           X = 1:reps,
@@ -4319,6 +4322,7 @@ app_server <- function(input, output, session) {
             #### SIMULATION CYCLE ######################################################################################
 
             ### START - Simulation Cycle###
+            logger::log_trace("Sim cycle start.")
             while (min(sch[, "time"], na.rm = T) < t.period) {
               # while(min(sch[,"time"],na.rm = T)<21.2) {
               # print(min(sch[,"time"],na.rm = T))
@@ -7790,7 +7794,7 @@ app_server <- function(input, output, session) {
 
 
             ### Create the patient & node metrics ######################################################
-
+            logger::log_trace("Sim creating patient and node metrics.")
             all_data <-
               data.frame(
                 rep = as.numeric(),
@@ -9016,6 +9020,7 @@ app_server <- function(input, output, session) {
 
 
         #### PLOTS AND SIMULATION LEVEL METRICS #########
+        logger::log_debug("Making plots and simulation-level metrics.")
         nodes <- outputs[[1]][[1]]
         warm_up <- outputs[[1]][[2]]
         sim_time <- outputs[[1]][[3]]
@@ -10116,7 +10121,7 @@ app_server <- function(input, output, session) {
 
 
         ######  MULTI DATA TABLE ########################################################################
-
+        logger::log_debug("Creating multi-data table.")
         multi_spread_uniform <- rbindlist(multi_spread_uniform)
 
         through_time_uniform <- multi_spread_uniform
@@ -10342,6 +10347,7 @@ app_server <- function(input, output, session) {
         # time units added to selected metric names in tables below ####
         # these will be overwritten directly to remove underscores for the on-screen shiny outputs in some cases
         # but will still pull through to the excel file download in the format below
+        logger::log_debug("Creating simulation output list (combo).")
 
         combo <- list(
           total_time_in_system = total_time_in_system %>% mutate(metric = paste0(metric, " (", input$time_unit, ")")),
@@ -10460,6 +10466,7 @@ app_server <- function(input, output, session) {
         # the number being checked for is now 73
         # The reason for performing this check, and what it is intended to achieve, needs to be clarified
         if (length(combo) == 73) {
+          logger::log_debug("Simulation complete (combo item is length 73).")
           showModal(modalDialog(
             title = div(paste0("Simulation Complete \n(", format(Sys.time()), ")"), style = "font-size:200%"),
             div("Click anywhere on screen to continue", style = "font-size:200%"),
@@ -10468,6 +10475,7 @@ app_server <- function(input, output, session) {
             size = "l"
           ))
         } else {
+          logger::log_error("Simulation error.")
           showModal(modalDialog(
             title = "Simulation Error",
             "",
@@ -10486,21 +10494,27 @@ app_server <- function(input, output, session) {
         return(combo)
       },
       error = function(e) {
+        logger::log_error("Simulation error: ", conditionMessage(e))
+        traceback()
+
         showModal(modalDialog(
           title = div("Simulation Error", style = "font-size:200%"),
-          div("Try running the simulation for longer (increase simulation period length).
-      \n If the error persists, return to the data input pages and check that data has been entered correctly. Click anywhere on screen to continue.", style = "font-size:200%"),
-          # TODO remove this error message eventually
-          div(e$message),
+          div(
+            "Try running the simulation for longer (increase simulation \n
+            period length). If the error persists, return to the data input \n
+            pages and check that data has been entered correctly. \n
+            Click anywhere on screen to continue.", style = "font-size:200%"
+          ),
+          div("Error message: ", conditionMessage(e)),
           easyClose = TRUE,
           footer = NULL,
           size = "l"
         ))
 
-
         hideTab(inputId = "navbar", target = "3. Simulation Outputs")
         hideTab(inputId = "navbar", target = "4. Download Outputs")
 
+        stop(e)
         return(NULL)
       }
     )
@@ -10516,11 +10530,12 @@ app_server <- function(input, output, session) {
     y <- x$reps
     time <- proc.time() - x$ptm
     p <-
-      c(
-        "**Simulation completed in ",
+      paste0(
+        "Simulation completed in ",
         round(time[3], digits = 1),
-        " seconds**"
+        " seconds."
       )
+    logger::log_info(p)
     p
   })
 
@@ -10547,7 +10562,7 @@ app_server <- function(input, output, session) {
   #
 
   ### RENDER TOTAL TIME IN SYSTEM #####
-
+  logger::log_debug("Rendering results to shiny.")
 
   output$ttis <- DT::renderDT(
     {
@@ -11773,6 +11788,7 @@ app_server <- function(input, output, session) {
   })
 
   ### XLSX DOWNLOAD HANDLER #####
+  logger::log_debug("Preparing xlsx download handler.")
 
 
 
@@ -11848,6 +11864,7 @@ app_server <- function(input, output, session) {
   )
 
   ### PLOT DOWNLOAD HANDLER #####
+  logger::log_debug("Preparing plot download handler.")
 
   output$downloadplot <- downloadHandler(
     filename = "Plots.pdf",
@@ -11901,6 +11918,7 @@ app_server <- function(input, output, session) {
 
 
   ### RMARKDOWN DOWNLOAD HANDLER #####
+logger::log_debug("Preparing RMarkdown download handler.")
 
   output$downloadreport <- downloadHandler(
     filename = paste0("PathSimR_Report.docx"),
