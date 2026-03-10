@@ -3262,7 +3262,7 @@ app_server <- function(input, output, session) {
       color = "white"
     )
 
-    ndf <- combine_ndfs(ndf1, ndf2, ndf3)
+    ndf <- DiagrammeR::combine_ndfs(ndf1, ndf2, ndf3)
 
     # Create an edge data frame (edf)
     f <- vector()
@@ -3342,7 +3342,7 @@ app_server <- function(input, output, session) {
     }
 
 
-    edf1 <- create_edge_df(
+    edf1 <- DiagrammeR::create_edge_df(
       from = f,
       to = t,
       # rel = c("leading_to"),
@@ -3354,7 +3354,7 @@ app_server <- function(input, output, session) {
 
 
     edf2 <-
-      create_edge_df(
+      DiagrammeR::create_edge_df(
         from = c(length(c(nodes, exits)) + 1):(length(c(nodes, exits)) + length(ext_arr)),
         to = as.numeric(which(rownames(var_input) %in% ext_arr)),
         # rel = c("leading_to"),
@@ -3364,7 +3364,7 @@ app_server <- function(input, output, session) {
         tooltip = "Arrival"
       )
 
-    edf <- combine_edfs(edf1, edf2)
+    edf <- DiagrammeR::combine_edfs(edf1, edf2)
 
 
 
@@ -3455,7 +3455,7 @@ app_server <- function(input, output, session) {
 
     # Create a graph with the ndf and edf
     graph <-
-      create_graph(
+      DiagrammeR::create_graph(
         nodes_df = ndf,
         edges_df = edf
       )
@@ -3483,7 +3483,7 @@ app_server <- function(input, output, session) {
 
 
 
-    render_graph(graph)
+    DiagrammeR::render_graph(graph)
   })
 
   output$network <- DiagrammeR::renderGrViz({
