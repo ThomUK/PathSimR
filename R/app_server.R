@@ -517,19 +517,19 @@ logger::log_debug("Starting wizard.")
 
 
 
-    m3 <- matrix(
+    arrivals_calendar <- matrix(
       ncol = 3,
       nrow = 1,
       data = c(0,"","")
     )
-    colnames(m3) <- c("Start Time", "End Time", "Arrival Rate")
+    colnames(arrivals_calendar) <- c("Start Time", "End Time", "Arrival Rate")
 
-    m4 <- matrix(
+    capacity_calendar <- matrix(
       ncol = 3,
       nrow = 1,
       data = c(0,"","")
     )
-    colnames(m4) <- c("Start Time", "End Time", "Capacity")
+    colnames(capacity_calendar) <- c("Start Time", "End Time", "Capacity")
 
 
 
@@ -725,7 +725,7 @@ logger::log_debug("Starting wizard.")
               12,
               matrixInput(
                 inputId = paste0("ext_arr_", i),
-                value = m3,
+                value = arrivals_calendar,
                 class = "numeric",
                 cols = list(
                   names = TRUE,
@@ -759,7 +759,7 @@ logger::log_debug("Starting wizard.")
               12,
               matrixInput(
                 inputId = paste0("cap_", i),
-                value = m4,
+                value = capacity_calendar,
                 class = "numeric",
                 cols = list(
                   names = TRUE,
