@@ -3706,7 +3706,6 @@ logger::log_debug("Wizard complete.")
 
         library(shiny)
         library(magrittr)
-        library(readr)
         library(grid)
         library(gridExtra)
         # library(plotly)
@@ -3995,7 +3994,6 @@ logger::log_debug("Wizard complete.")
           c(
             library(shiny),
             library(magrittr),
-            library(readr),
             library(grid),
             library(gridExtra),
             # library(plotly),

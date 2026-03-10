@@ -20,7 +20,6 @@ run_app <- function(
   # load the libraries in a single place
   suppressMessages({
     library(magrittr)
-    library(readr)
     library(grid)
     library(gridExtra)
     library(parallel)
