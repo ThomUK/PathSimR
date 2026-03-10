@@ -3664,7 +3664,7 @@ app_server <- function(input, output, session) {
         }
 
         # make a compute cluster with the appropriate number of cores
-        cl <- parallel::makeCluster(
+        cluster <- parallel::makeCluster(
           processor_cores_required(reps)
         )
 
@@ -3958,7 +3958,7 @@ app_server <- function(input, output, session) {
 
 
         clusterExport(
-          cl = cl,
+          cl = cluster,
           varlist = c(
             "cl",
             "var_input",
@@ -3986,7 +3986,7 @@ app_server <- function(input, output, session) {
         clusterSetRNGStream(cl)
 
         clusterEvalQ(
-          cl = cl,
+          cl = cluster,
           c(
             library(shiny),
             library(magrittr),
@@ -4002,7 +4002,7 @@ app_server <- function(input, output, session) {
 
         ####### SIMULATION CODE ##################################################################
         outputs <- parLapply(
-          cl = cl,
+          cl = cluster,
           X = 1:reps,
           fun = function(j) {
             # print(paste("replicate",j))
