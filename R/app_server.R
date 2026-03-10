@@ -3663,21 +3663,10 @@ app_server <- function(input, output, session) {
           warm_up <- input$wu
         }
 
-
-        if (input$run_type == c("Trial Simulation")) {
-          # restrict to 2 (or 1) cores
-          # cl <- makeCluster(min(c(2, max(
-          #  detectCores() - 1, 1
-          # ))))
-
-          # set to use of n-1 cores
-          cl <- makeCluster(min(max(reps - 1, 1), detectCores() - 1))
-        }
-        if (input$run_type == c("Full Simulation")) {
-          cl <- makeCluster(min(max(reps - 1, 1), detectCores() - 1))
-        }
-
-        # ceiling(detectCores()/2)
+        # make a compute cluster with the appropriate number of cores
+        cluster <- parallel::makeCluster(
+          processor_cores_required(reps)
+        )
 
 
 
@@ -3969,7 +3958,7 @@ app_server <- function(input, output, session) {
 
 
         clusterExport(
-          cl = cl,
+          cl = cluster,
           varlist = c(
             "cl",
             "var_input",
@@ -3997,7 +3986,7 @@ app_server <- function(input, output, session) {
         clusterSetRNGStream(cl)
 
         clusterEvalQ(
-          cl = cl,
+          cl = cluster,
           c(
             library(shiny),
             library(magrittr),
@@ -4013,7 +4002,7 @@ app_server <- function(input, output, session) {
 
         ####### SIMULATION CODE ##################################################################
         outputs <- parLapply(
-          cl = cl,
+          cl = cluster,
           X = 1:reps,
           fun = function(j) {
             # print(paste("replicate",j))
