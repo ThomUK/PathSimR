@@ -1,21 +1,19 @@
 ui_tab_wizard_1 <- function() {
   #### Creating the starting name matricies ####
-  m1 <- matrix(
+  service_points <- matrix(
     nrow = 1,
     ncol = 1,
-    data = c("A")
+    data = c("OP Clinic")
   )
-  colnames(m1) <- c("Service Points")
-  rownames(m1) <- c("Enter Names in Right Column")
+  colnames(service_points) <- c("Service Points (enter required names below)")
 
 
-  m2 <- matrix(
+  exits <- matrix(
     nrow = 1,
     ncol = 1,
-    data = c("B")
+    data = c("Home")
   )
-  colnames(m2) <- c("Exits")
-  rownames(m2) <- c("Enter Names in Right Column")
+  colnames(exits) <- c("Exits (enter required names below)")
 
   tabPanel(
     "W1. Setup",
@@ -120,8 +118,8 @@ ui_tab_wizard_1 <- function() {
           column(
             4,
             matrixInput(
-              inputId = "sp",
-              value = m1,
+              inputId = "service_points",
+              value = service_points,
               class = "character",
               cols = list(
                 names = TRUE,
@@ -129,7 +127,7 @@ ui_tab_wizard_1 <- function() {
                 editableNames = FALSE
               ),
               rows = list(
-                names = TRUE,
+                names = FALSE,
                 extend = TRUE,
                 editableNames = FALSE,
                 delta = 1
@@ -146,8 +144,8 @@ ui_tab_wizard_1 <- function() {
           column(
             4,
             matrixInput(
-              inputId = "exit",
-              value = m2,
+              inputId = "exits",
+              value = exits,
               class = "character",
               cols = list(
                 names = TRUE,
@@ -155,7 +153,7 @@ ui_tab_wizard_1 <- function() {
                 editableNames = FALSE
               ),
               rows = list(
-                names = TRUE,
+                names = FALSE,
                 extend = TRUE,
                 editableNames = FALSE,
                 delta = 1

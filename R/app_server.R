@@ -193,18 +193,17 @@ logger::log_debug("Starting wizard.")
   ### Creates table of service point names ###
   output$sp_table <- renderTable(
     {
-      x <- input$sp
+      x <- input$service_points
       x <- unique(x)
       rownames(x) <- 1:nrow(x)
-      colnames(x) <- "Service Point"
       x <- trimws(x = x, which = "both")
       x <- gsub(x = x, pattern = " ", "_")
       x <- x[which(x != "")]
       x <- data.frame("Service Points" = x)
-      colnames(x) <- "Service Points"
+      colnames(x) <- "Service Points" # reinstate the space
       x
     },
-    rownames = TRUE,
+    rownames = FALSE,
     striped = TRUE,
     bordered = TRUE
   )
@@ -213,7 +212,7 @@ logger::log_debug("Starting wizard.")
   ### Creates table of exit names ###
   output$exit_table <- renderTable(
     {
-      x <- input$exit
+      x <- input$exits
       x <- unique(x)
       rownames(x) <- 1:nrow(x)
       x <- trimws(x = x, which = "both")
@@ -221,7 +220,7 @@ logger::log_debug("Starting wizard.")
       x <- x[which(x != "")]
       data.frame("Exits" = x)
     },
-    rownames = TRUE,
+    rownames = FALSE,
     striped = TRUE,
     bordered = TRUE
   )
@@ -230,7 +229,7 @@ logger::log_debug("Starting wizard.")
 
   ### Creates text for duplicates ###
   output$duplicate <- renderText({
-    x <- input$sp
+    x <- input$service_points
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     colnames(x) <- "Service Point"
@@ -243,7 +242,7 @@ logger::log_debug("Starting wizard.")
 
 
 
-    x <- input$exit
+    x <- input$exits
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
@@ -258,14 +257,14 @@ logger::log_debug("Starting wizard.")
 
   #### Creates the Data Entry Service Point tabs UI ####
   output$tabs <- renderUI({
-    x <- input$sp
+    x <- input$service_points
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
     x <- gsub(x = x, pattern = " ", "_")
     sp <- x[which(x != "")]
 
-    x <- input$exit
+    x <- input$exits
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
