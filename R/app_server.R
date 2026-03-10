@@ -10501,6 +10501,8 @@ app_server <- function(input, output, session) {
           title = div("Simulation Error", style = "font-size:200%"),
           div("Try running the simulation for longer (increase simulation period length).
       \n If the error persists, return to the data input pages and check that data has been entered correctly. Click anywhere on screen to continue.", style = "font-size:200%"),
+          # TODO remove this error message eventually
+          div(e$message),
           easyClose = TRUE,
           footer = NULL,
           size = "l"
