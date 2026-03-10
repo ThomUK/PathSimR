@@ -792,14 +792,14 @@ logger::log_debug("Starting wizard.")
 
   #### Creates the trial Var_input ####
   var <- eventReactive(input$go, {
-    x <- input$sp
+    x <- input$service_points
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
     x <- gsub(x = x, pattern = " ", "_")
     sp <- x[which(x != "")]
 
-    x <- input$exit
+    x <- input$exits
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
@@ -1010,14 +1010,14 @@ logger::log_debug("Starting wizard.")
 
   #### Creates the trial Cal_input ####
   cal <- eventReactive(input$go, {
-    x <- input$sp
+    x <- input$service_points
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
     x <- gsub(x = x, pattern = " ", "_")
     sp <- x[which(x != "")]
 
-    x <- input$exit
+    x <- input$exits
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
@@ -1143,14 +1143,14 @@ logger::log_debug("Creating input checklist.")
     var <- var()
     cal <- cal()
 
-    x <- input$sp
+    x <- input$service_points
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
     x <- gsub(x = x, pattern = " ", "_")
     sp <- x[which(x != "")]
 
-    x <- input$exit
+    x <- input$exits
     x <- unique(x)
     rownames(x) <- 1:nrow(x)
     x <- trimws(x = x, which = "both")
@@ -1791,7 +1791,7 @@ logger::log_debug("Creating input checklist.")
 
           mean_table <- c()
 
-          x <- input$sp
+          x <- input$service_points
           x <- unique(x)
           rownames(x) <- 1:nrow(x)
           x <- trimws(x = x, which = "both")
