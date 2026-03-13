@@ -94,88 +94,9 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
 
         ### Shifting Calendars so that the start of the sim_time is the equivalent of 0 on the calendar
         logger::log_trace("Sim shifting calendars.")
-        if (warm_up != 0) {
-          cap_cal_input_new <- cap_cal_input[0, ]
-
-          for (cc in nodes) {
-            cap_cal_shift <- cap_cal_input[which(cap_cal_input$node == cc), ]
-
-            if (nrow(cap_cal_shift) > 1) {
-              cap_cal_max <- max(cap_cal_shift$end)
-              warm_up_modulo <- warm_up %% cap_cal_max
-
-              if (warm_up_modulo != 0) {
-                cap_cal_shift$start <- cap_cal_shift$start + warm_up_modulo
-                cap_cal_shift$end <- cap_cal_shift$end + warm_up_modulo
-
-                cap_cal_stable <-
-                  cap_cal_shift[1:min(which(cap_cal_shift$end >= cap_cal_max)), ]
-                cap_cal_stable$end[nrow(cap_cal_stable)] <- cap_cal_max
-
-                cap_cal_switch <-
-                  cap_cal_shift[min(which(cap_cal_shift$end > cap_cal_max)):nrow(cap_cal_shift), ]
-                cap_cal_switch$start[1] <- cap_cal_max
-                cap_cal_switch$start <- cap_cal_switch$start - cap_cal_max
-                cap_cal_switch$end <- cap_cal_switch$end - cap_cal_max
-
-
-                cap_cal_shift <- rbind(cap_cal_stable, cap_cal_switch)
-                cap_cal_shift <-
-                  cap_cal_shift[order(cap_cal_shift$start), ]
-
-                cap_cal_input_new <-
-                  rbind(cap_cal_input_new, cap_cal_shift)
-              } else {
-                cap_cal_input_new <- rbind(cap_cal_input_new, cap_cal_shift)
-              }
-            } else {
-              cap_cal_input_new <- rbind(cap_cal_input_new, cap_cal_shift)
-            }
-          }
-
-
-          arr_cal_input_new <- arr_cal_input[0, ]
-
-          for (ac in nodes) {
-            arr_cal_shift <- arr_cal_input[which(arr_cal_input$node == ac), ]
-
-            if (nrow(arr_cal_shift) > 1) {
-              arr_cal_max <- max(arr_cal_shift$end)
-              warm_up_modulo <- warm_up %% arr_cal_max
-
-              if (warm_up_modulo != 0) {
-                arr_cal_shift$start <- arr_cal_shift$start + warm_up_modulo
-                arr_cal_shift$end <- arr_cal_shift$end + warm_up_modulo
-
-                arr_cal_stable <-
-                  arr_cal_shift[1:min(which(arr_cal_shift$end > arr_cal_max)), ]
-                arr_cal_stable$end[nrow(arr_cal_stable)] <- arr_cal_max
-
-                arr_cal_switch <-
-                  arr_cal_shift[min(which(arr_cal_shift$end > arr_cal_max)):nrow(arr_cal_shift), ]
-                arr_cal_switch$start[1] <- arr_cal_max
-                arr_cal_switch$start <- arr_cal_switch$start - arr_cal_max
-                arr_cal_switch$end <- arr_cal_switch$end - arr_cal_max
-
-
-                arr_cal_shift <- rbind(arr_cal_stable, arr_cal_switch)
-                arr_cal_shift <-
-                  arr_cal_shift[order(arr_cal_shift$start), ]
-
-                arr_cal_input_new <-
-                  rbind(arr_cal_input_new, arr_cal_shift)
-              } else {
-                arr_cal_input_new <- rbind(arr_cal_input_new, arr_cal_shift)
-              }
-            } else {
-              arr_cal_input_new <- rbind(arr_cal_input_new, arr_cal_shift)
-            }
-          }
-
-
-          cap_cal_input <- cap_cal_input_new
-          arr_cal_input <- arr_cal_input_new
-        }
+        shifted <- shift_calendars(cap_cal_input, arr_cal_input, nodes, warm_up)
+        cap_cal_input <- shifted$cap_cal_input
+        arr_cal_input <- shifted$arr_cal_input
 
         # Sets the timer
         logger::log_trace("Sim setting timer.")
