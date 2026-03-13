@@ -2130,7 +2130,7 @@ logger::log_debug("Creating input checklist.")
   pre_fitted_data <- read.csv("inst/app/www/fits_for_pathsimr.csv",
     check.names = FALSE
   ) %>%
-    arrange(Names)
+    dplyr::arrange(Names)
 
   output$treatment_select_ui <- renderUI({
     x <- as.character(pre_fitted_data$Names)
