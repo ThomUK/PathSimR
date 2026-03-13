@@ -3710,7 +3710,7 @@ logger::log_debug("Wizard complete.")
         # library(plotly)
         #library(parallel)
         #library(data.table)
-        library(tidyverse)
+        #library(tidyverse)
 
         ptm <- proc.time()
 
@@ -3996,7 +3996,7 @@ logger::log_debug("Wizard complete.")
             #library(grid),
             #library(gridExtra),
             # library(plotly),
-            library(tidyverse)
+            #library(tidyverse)
           )
         )
 
@@ -7811,7 +7811,7 @@ logger::log_debug("Wizard complete.")
               )
 
 
-            library(tidyverse)
+            #library(tidyverse)
             #library(data.table)
             for (i in 1:length(nodes)) {
               arr_node <-
@@ -8842,7 +8842,7 @@ logger::log_debug("Wizard complete.")
 
 
             #library(data.table)
-            library(tidyverse)
+            #library(tidyverse)
             multi <-
               data.table::rbindlist(list(
                 datb_multi,
@@ -9621,7 +9621,7 @@ logger::log_debug("Wizard complete.")
         avg_queue <- lapply(
           X = ptq,
           FUN = function(ptq) {
-            # library(tidyverse)
+            # #library(tidyverse)
             tmp <-
               ptq %>%
               group_by(node) %>%
@@ -9774,7 +9774,7 @@ logger::log_debug("Wizard complete.")
         avg_occupancy <- lapply(
           X = pto,
           FUN = function(pto) {
-            # library(tidyverse)
+            # #library(tidyverse)
             tmp <-
               pto %>%
               group_by(node) %>%
@@ -9930,7 +9930,7 @@ logger::log_debug("Wizard complete.")
         avg_transition <- lapply(
           X = ptt,
           FUN = function(ptt) {
-            # library(tidyverse)
+            # #library(tidyverse)
             tmp <-
               ptt %>%
               group_by(node) %>%
@@ -10095,7 +10095,7 @@ logger::log_debug("Wizard complete.")
         avg_occ_bed <- lapply(
           X = ptb,
           FUN = function(ptb) {
-            # library(tidyverse)
+            # #library(tidyverse)
             tmp <-
               ptb %>%
               group_by(node) %>%
