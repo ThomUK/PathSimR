@@ -3992,7 +3992,10 @@ logger::log_debug("Wizard complete.")
           cl = cluster,
           c(
             #library(shiny),
-            #library(magrittr),
+            # required to pass magrittr package to the parallel core workers,
+            # which cannot be prefixed magrittr:: like other code can
+            # TODO refactor to base pipe once tests are in place
+            library(magrittr)
             #library(grid),
             #library(gridExtra),
             # library(plotly),
@@ -8907,10 +8910,12 @@ logger::log_debug("Wizard complete.")
               uniform_ts <- uniform_ts[order(uniform_ts$time), ]
 
               uniform_ts <-
-                uniform_ts %>% fill(rep, occ_bed, delayed, occupancy, transition, queue) ## tidyr::fill function changes the NA values to the previous value down the df
+                uniform_ts %>%
+                  fill(rep, occ_bed, delayed, occupancy, transition, queue) ## tidyr::fill function changes the NA values to the previous value down the df
 
               uniform_ts <-
-                uniform_ts %>% fill(rep,
+                uniform_ts %>%
+                fill(rep,
                   occ_bed,
                   delayed,
                   occupancy,
