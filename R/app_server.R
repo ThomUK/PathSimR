@@ -1900,7 +1900,7 @@ logger::log_debug("Creating input checklist.")
   #### Length of Service Model Fit Tab####
   logger::log_debug("Creating LOS model fitting tab")
   observeEvent(input$go_distfit, {
-    req(input$los_dat)
+    shiny::req(input$los_dat)
     df <- read.csv(input$los_dat$datapath,
       header = F,
       sep = ","
@@ -2153,7 +2153,7 @@ logger::log_debug("Creating input checklist.")
 
 
 
-    req(input$treatment_mean)
+    shiny::req(input$treatment_mean)
 
     df <-
       # as.data.frame(subset(table, table$Names == input$treatment_select))
@@ -2282,7 +2282,7 @@ logger::log_debug("Wizard complete.")
     {
       if (input$disp1 == TRUE) {
         if (input$w_temp == 0) {
-          req(input$file1)
+          shiny::req(input$file1)
           df <- read.csv(input$file1$datapath,
             header = TRUE,
             sep = ","
@@ -2308,7 +2308,7 @@ logger::log_debug("Wizard complete.")
     {
       if (input$disp2 == TRUE) {
         if (input$w_temp == 0) {
-          req(input$file2)
+          shiny::req(input$file2)
           df <- read.csv(input$file2$datapath,
             header = TRUE,
             sep = ","
@@ -2328,8 +2328,8 @@ logger::log_debug("Wizard complete.")
 
 
   issues <- eventReactive(input$go_viz, {
-    req(input$file1)
-    req(input$file2)
+    shiny::req(input$file1)
+    shiny::req(input$file2)
 
     df <- read.csv(input$file1$datapath,
       header = TRUE,
@@ -3068,8 +3068,8 @@ logger::log_debug("Wizard complete.")
   logger::log_debug("Creating network visualisation.")
   viz <- eventReactive(input$go_viz, {
     if (input$w_temp == 0) {
-      req(input$file1)
-      req(input$file2)
+      shiny::req(input$file1)
+      shiny::req(input$file2)
 
       var_input <-
         read.csv(input$file1$datapath,
@@ -3087,7 +3087,7 @@ logger::log_debug("Wizard complete.")
 
       issues <- issues()
 
-      req(issues[1, 1] == "Complete")
+      shiny::req(issues[1, 1] == "Complete")
     } else {
       var_input <- var()
 
@@ -3507,12 +3507,12 @@ logger::log_debug("Wizard complete.")
 
 
   checklist_table <- eventReactive(input$checklist, {
-    # req(input$reps)
+    # shiny::req(input$reps)
 
-    req(input$st)
+    shiny::req(input$st)
 
     if (input$run_type == "Full Simulation") {
-      req(input$wu)
+      shiny::req(input$wu)
       warm_up <- input$wu
     }
 
@@ -3525,7 +3525,7 @@ logger::log_debug("Wizard complete.")
 
 
     if (input$w_temp == 0) {
-      req(input$file1)
+      shiny::req(input$file1)
 
       df <- read.csv(input$file1$datapath,
         header = TRUE,
@@ -3608,17 +3608,17 @@ logger::log_debug("Wizard complete.")
 
   observeEvent(input$sim,
     {
-      # req(input$file1)
-      # req(input$file2)
+      # shiny::req(input$file1)
+      # shiny::req(input$file2)
 
       if (input$run_type == "Full Simulation") {
-        req(input$wu)
+        shiny::req(input$wu)
       }
 
-      req(input$st)
-      req(input$st > 0)
+      shiny::req(input$st)
+      shiny::req(input$st > 0)
       if (input$run_type == c("Full Simulation")) {
-        req(input$reps > 0)
+        shiny::req(input$reps > 0)
       }
 
       showModal(modalDialog(
@@ -3644,15 +3644,15 @@ logger::log_debug("Wizard complete.")
       {
         ### Inputs and Initilisation ##################################################################
 
-        # req(input$file1)
-        # req(input$file2)
-        # req(checklist_table())
-        req(input$st > 0)
+        # shiny::req(input$file1)
+        # shiny::req(input$file2)
+        # shiny::req(checklist_table())
+        shiny::req(input$st > 0)
 
         # if(input$run_type==c("Trial Simulation")){updateRadioButtons(session = session,inputId = "run_type",label = "Select Mode",choices = c("Trial Simulation","Full Simulation"),selected = "Full Simulation")}
 
         if (input$run_type == c("Full Simulation")) {
-          req(input$reps > 0)
+          shiny::req(input$reps > 0)
         }
 
         if (input$run_type == c("Trial Simulation")) {
@@ -3717,8 +3717,8 @@ logger::log_debug("Wizard complete.")
         ##### Simulation Inputs ##############################################################
         logger::log_trace("Sim inputs.")
         if (input$w_temp == 0) {
-          req(input$file1)
-          req(input$file2)
+          shiny::req(input$file1)
+          shiny::req(input$file2)
 
           var_input <-
             read.csv(input$file1$datapath,
@@ -4010,8 +4010,8 @@ logger::log_debug("Wizard complete.")
             # print(paste("replicate",j))
 
 
-            req(var_input)
-            req(cal_input)
+            shiny::req(var_input)
+            shiny::req(cal_input)
 
 
             time <- 0 # Sets time start
@@ -10524,7 +10524,7 @@ logger::log_debug("Wizard complete.")
 
   ### OUTPUT RENDER TEXT ####
   output$comp <- renderText({
-    req(sim_out())
+    shiny::req(sim_out())
     x <- sim_out()
     y <- x$reps
     time <- proc.time() - x$ptm
@@ -10540,7 +10540,7 @@ logger::log_debug("Wizard complete.")
 
 
   # output$run_time<-renderTable({
-  #   req(sim_out())
+  #   shiny::req(sim_out())
   #   out<-sim_out()
   #   x<-out$reps
   #   time<-proc.time()-out$ptm
@@ -10565,7 +10565,7 @@ logger::log_debug("Wizard complete.")
 
   output$ttis <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$total_time_in_system
       # tmp<-format(tmp,digits=5)
@@ -10584,7 +10584,7 @@ logger::log_debug("Wizard complete.")
 
   output$ttiss <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$total_time_in_system_summary
 
@@ -10607,7 +10607,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_wait <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_wait
       tmp <- rbindlist(tmp)
@@ -10628,7 +10628,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_wait_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_wait_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -10652,7 +10652,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_wait <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_wait
       tmp <- rbindlist(tmp)
@@ -10673,7 +10673,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_wait_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_wait_summary
 
@@ -10696,7 +10696,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_active_service <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_active_service
       tmp <- rbindlist(tmp)
@@ -10717,7 +10717,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_active_service_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_active_service_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -10742,7 +10742,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_active_service <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_active_service
       tmp <- rbindlist(tmp)
@@ -10763,7 +10763,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_active_service_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_active_service_summary
       colnames(tmp) <-
@@ -10785,7 +10785,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_capacity_delay <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_capacity_delay
       tmp <- rbindlist(tmp)
@@ -10808,7 +10808,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_capacity_delay_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_capacity_delay_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -10832,7 +10832,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_capacity_delay <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_capacity_delay
       tmp <- rbindlist(tmp)
@@ -10855,7 +10855,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_capacity_delay_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_capacity_delay_summary
 
@@ -10879,7 +10879,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_transition_delay <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_transition_delay
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -10903,7 +10903,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_transition_delay_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_transition_delay_summary
 
@@ -10926,7 +10926,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_transition_delay <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_transition_delay
       tmp <- rbindlist(tmp)
@@ -10949,7 +10949,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_transition_delay_summary <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_capacity_delay_summary
 
@@ -10973,7 +10973,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_los <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_length_of_stay
       tmp <- rbindlist(tmp)
@@ -10994,7 +10994,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_loss <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_length_of_stay_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -11018,7 +11018,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_los <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_length_of_stay
       tmp <- rbindlist(tmp)
@@ -11039,7 +11039,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_loss <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_length_of_stay_summary
 
@@ -11063,7 +11063,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_dtt <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_delay_to_transfer
       tmp <- rbindlist(tmp)
@@ -11086,7 +11086,7 @@ logger::log_debug("Wizard complete.")
 
   output$node_dtts <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_delay_to_transfer_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -11111,7 +11111,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_dtt <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_delay_to_transfer
       tmp <- rbindlist(tmp)
@@ -11134,7 +11134,7 @@ logger::log_debug("Wizard complete.")
 
   output$pat_dtts <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_delay_to_transfer_summary
 
@@ -11158,7 +11158,7 @@ logger::log_debug("Wizard complete.")
 
   output$rejs <- renderTable(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$rejected_summary
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
@@ -11175,7 +11175,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptd_percent <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptd_percent
       tmp <- format(tmp, digits = 4, scientific = F)
@@ -11206,7 +11206,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptd_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptd_plot
       tmp
@@ -11217,7 +11217,7 @@ logger::log_debug("Wizard complete.")
 
   output$avg_delayed <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_delayed_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
@@ -11240,7 +11240,7 @@ logger::log_debug("Wizard complete.")
 
   output$d <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$d
       tmp
@@ -11252,7 +11252,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptq_percent <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptq_percent
       tmp <- format(tmp, digits = 4, scientific = F)
@@ -11283,7 +11283,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptq_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptq_plot
       tmp
@@ -11294,7 +11294,7 @@ logger::log_debug("Wizard complete.")
 
   output$avg_queue <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_queue_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
@@ -11317,7 +11317,7 @@ logger::log_debug("Wizard complete.")
 
   output$q <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$q
       tmp
@@ -11329,7 +11329,7 @@ logger::log_debug("Wizard complete.")
 
   output$pto_percent <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pto_percent
       tmp <- format(tmp, digits = 4, scientific = F)
@@ -11360,7 +11360,7 @@ logger::log_debug("Wizard complete.")
 
   output$pto_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pto_plot
       tmp
@@ -11371,7 +11371,7 @@ logger::log_debug("Wizard complete.")
 
   output$avg_occupancy <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_occupancy_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
@@ -11394,7 +11394,7 @@ logger::log_debug("Wizard complete.")
 
   output$o <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$o
       tmp
@@ -11406,7 +11406,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptt_percent <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptt_percent
       tmp <- format(tmp, digits = 4, scientific = F)
@@ -11437,7 +11437,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptt_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptt_plot
       tmp
@@ -11448,7 +11448,7 @@ logger::log_debug("Wizard complete.")
 
   output$avg_transition <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_transition_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
@@ -11471,7 +11471,7 @@ logger::log_debug("Wizard complete.")
 
   output$t <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$t
       tmp
@@ -11483,7 +11483,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptb_percent <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptb_percent
       tmp <- format(tmp, digits = 4, scientific = F)
@@ -11514,7 +11514,7 @@ logger::log_debug("Wizard complete.")
 
   output$ptb_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$ptb_plot
       tmp
@@ -11525,7 +11525,7 @@ logger::log_debug("Wizard complete.")
 
   output$avg_occ_bed <- DT::renderDT(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_occ_bed_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
@@ -11548,7 +11548,7 @@ logger::log_debug("Wizard complete.")
 
   output$b <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$b
       tmp
@@ -11561,7 +11561,7 @@ logger::log_debug("Wizard complete.")
 
   output$multi_plot <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$avg_through_time_plot
       tmp
@@ -11573,7 +11573,7 @@ logger::log_debug("Wizard complete.")
 
   output$tisp <- renderPlot(
     {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$tisp
       tmp
@@ -11585,7 +11585,7 @@ logger::log_debug("Wizard complete.")
   ### RENDER PERCENTILE TABLES #####
 
   output$dpercentiles <- DT::renderDT({
-    req(sim_out())
+    shiny::req(sim_out())
 
     sketch <- htmltools::withTags(table(
       class = "display",
@@ -11623,7 +11623,7 @@ logger::log_debug("Wizard complete.")
 
 
   output$qpercentiles <- DT::renderDT({
-    req(sim_out())
+    shiny::req(sim_out())
 
     sketch <- htmltools::withTags(table(
       class = "display",
@@ -11661,7 +11661,7 @@ logger::log_debug("Wizard complete.")
 
 
   output$opercentiles <- DT::renderDT({
-    req(sim_out())
+    shiny::req(sim_out())
 
     sketch <- htmltools::withTags(table(
       class = "display",
@@ -11700,7 +11700,7 @@ logger::log_debug("Wizard complete.")
   })
 
   output$bpercentiles <- DT::renderDT({
-    req(sim_out())
+    shiny::req(sim_out())
 
     sketch <- htmltools::withTags(table(
       class = "display",
@@ -11739,7 +11739,7 @@ logger::log_debug("Wizard complete.")
 
 
   output$tpercentiles <- DT::renderDT({
-    req(sim_out())
+    shiny::req(sim_out())
 
     sketch <- htmltools::withTags(table(
       class = "display",
@@ -11796,7 +11796,7 @@ logger::log_debug("Wizard complete.")
       paste0("Simulation Tables.xlsx")
     },
     content = function(filename) {
-      req(sim_out())
+      shiny::req(sim_out())
       x <- sim_out()
 
       showModal(modalDialog(
@@ -11868,7 +11868,7 @@ logger::log_debug("Wizard complete.")
   output$downloadplot <- downloadHandler(
     filename = "Plots.pdf",
     content = function(file) {
-      req(sim_out())
+      shiny::req(sim_out())
 
 
       showModal(modalDialog(
