@@ -3709,7 +3709,7 @@ logger::log_debug("Wizard complete.")
         library(gridExtra)
         # library(plotly)
         library(parallel)
-        library(data.table)
+        #library(data.table)
         library(tidyverse)
 
         ptm <- proc.time()
@@ -7812,7 +7812,7 @@ logger::log_debug("Wizard complete.")
 
 
             library(tidyverse)
-            library(data.table)
+            #library(data.table)
             for (i in 1:length(nodes)) {
               arr_node <-
                 record[which(record$event == "arrival" &
@@ -8841,7 +8841,7 @@ logger::log_debug("Wizard complete.")
             colnames(datq_multi) <- c("time", "value", "node", "rep", "metric")
 
 
-            library(data.table)
+            #library(data.table)
             library(tidyverse)
             multi <-
               rbindlist(list(
