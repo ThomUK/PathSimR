@@ -334,7 +334,7 @@ logger::log_debug("Starting wizard.")
                     paste0("delay_dist_", j, "_", i),
                     " == 'None'"
                   ),
-                  disabled(column(
+                  shinyjs::disabled(column(
                     12,
                     textInput(
                       inputId = paste0("delay_param_none_1_", i),
@@ -478,14 +478,14 @@ logger::log_debug("Starting wizard.")
                   style = "padding:2px; font-size:150%"
                 )
               ),
-              disabled(
+              shinyjs::disabled(
                 numericInput(
                   inputId = paste0("transition_", j, "_", i),
                   label = paste("Proportion from", all_names[j], "to", all_names[i]),
                   value = 0
                 )
               ),
-              disabled(
+              shinyjs::disabled(
                 textInput(
                   inputId = paste0("delay_dist_", j, "_", i),
                   label = paste(
@@ -497,7 +497,7 @@ logger::log_debug("Starting wizard.")
                   value = "None"
                 )
               ),
-              fluidRow(column(12, disabled(
+              fluidRow(column(12, shinyjs::disabled(
                 textInput(
                   inputId = paste0("delay_param_none_1_", i),
                   value = "NA",
