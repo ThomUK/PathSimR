@@ -3703,7 +3703,7 @@ logger::log_debug("Wizard complete.")
 
 
 
-        library(shiny)
+        #library(shiny)
         library(magrittr)
         #library(grid)
         #library(gridExtra)
@@ -3991,7 +3991,7 @@ logger::log_debug("Wizard complete.")
         clusterEvalQ(
           cl = cluster,
           c(
-            library(shiny),
+            #library(shiny),
             library(magrittr),
             #library(grid),
             #library(gridExtra),
