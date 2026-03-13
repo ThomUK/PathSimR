@@ -3704,7 +3704,7 @@ logger::log_debug("Wizard complete.")
 
 
         #library(shiny)
-        library(magrittr)
+        #library(magrittr)
         #library(grid)
         #library(gridExtra)
         # library(plotly)
@@ -3992,7 +3992,7 @@ logger::log_debug("Wizard complete.")
           cl = cluster,
           c(
             #library(shiny),
-            library(magrittr),
+            #library(magrittr),
             #library(grid),
             #library(gridExtra),
             # library(plotly),
