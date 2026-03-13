@@ -1210,7 +1210,7 @@ logger::log_debug("Creating input checklist.")
               sep = ""
             )
           ))
-      } else if (!isTRUE(near(x, 1))) {
+      } else if (!isTRUE(dplyr::near(x, 1))) {
         issues <-
           c(issues, c(
             paste0("Network Input"),
@@ -2438,7 +2438,7 @@ logger::log_debug("Wizard complete.")
               sep = ""
             )
           ))
-      } else if (!isTRUE(near(x, 1))) {
+      } else if (!isTRUE(dplyr::near(x, 1))) {
         issues <-
           c(issues, c(
             paste0("Network Input"),
