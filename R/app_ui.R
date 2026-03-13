@@ -44,7 +44,7 @@ app_ui <- function(request) {
       mod_simulation_outputs_ui("simulation_outputs"),
 
       #### TOOL 4 - DOWNLOAD OUTPUTS TAB ####
-      ui_tab_tool_4()
+      mod_download_outputs_ui("download_outputs")
     )
   )
 }
