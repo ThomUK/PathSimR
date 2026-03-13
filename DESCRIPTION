@@ -12,6 +12,7 @@ Imports:
     config (>= 0.3.1),
     data.table,
     DiagrammeR,
+    dplyr,
     DT,
     fitdistrplus,
     golem (>= 0.4.1),
@@ -26,7 +27,8 @@ Imports:
     shinyBS,
     shinyjs,
     shinyMatrix,
-    shinythemes
+    shinythemes,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
