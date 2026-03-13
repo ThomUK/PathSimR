@@ -14,7 +14,7 @@ ui_tab_tool_2 <- function() {
           style = "font-size:110%"
         ),
         br(),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_sim_mode",
           title = HTML("<h2><strong>Simulation Mode Help</strong></h2>"),
           trigger = "sim_mode_help",
@@ -47,7 +47,7 @@ ui_tab_tool_2 <- function() {
           label = HTML("<strong>What are the warm-up and simulation periods?</strong>"),
           icon = icon("info-circle")
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_wu",
           title = HTML("<h2><strong>Warm-up and Simulation Period Help</strong></h2>"),
           trigger = "wu_help",

@@ -102,7 +102,7 @@ ui_tab_tool_1 <- function() {
           )
         )),
         br(),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_viz",
           title = HTML("<h2><strong>Network Visualisation Help</strong></h2>"),
           trigger = "viz_help",

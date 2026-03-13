@@ -13,7 +13,7 @@ ui_tab_service_dist <- function() {
           style = " font-size:150%"
         ),
         br(),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_model",
           title = HTML("<h2><strong>Service Distribution Tool Help</strong></h2>"),
           trigger = "model_help",

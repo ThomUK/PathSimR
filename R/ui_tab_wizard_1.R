@@ -33,7 +33,7 @@ ui_tab_wizard_1 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_serv_point",
           title = HTML("<h2><strong>Service Point Help</strong></h2>"),
           trigger = "serv_point_help",
@@ -60,7 +60,7 @@ ui_tab_wizard_1 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_exit",
           title = HTML("<h2><strong>Exit Help</strong></h2>"),
           trigger = "exit_help",

@@ -23,7 +23,7 @@ ui_tab_wizard_2 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_serv",
           title = HTML(
             "<h2><strong>Length of Service & Distributions Help</strong></h2>"
@@ -58,7 +58,7 @@ ui_tab_wizard_2 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_queue",
           title = HTML("<h2><strong>External & Internal Queue Help</strong></h2>"),
           trigger = "queue_help",
@@ -112,7 +112,7 @@ ui_tab_wizard_2 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_delay",
           title = HTML("<h2><strong>Departure Delays Help</strong></h2>"),
           trigger = "delay_help",
@@ -163,7 +163,7 @@ ui_tab_wizard_2 <- function() {
           ),
           style = "color:gray"
         ),
-        bsModal(
+        shinyBS::bsModal(
           id = "modal_calendar",
           title = HTML("<h2><strong>Calendar Help</strong></h2>"),
           trigger = "cal_help",
