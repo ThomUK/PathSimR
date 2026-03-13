@@ -4009,9 +4009,9 @@ logger::log_debug("Wizard complete.")
           fun = function(j) {
             # print(paste("replicate",j))
 
-
-            req(var_input)
-            req(cal_input)
+            # shiny:: namespace required inside parallel operations
+            shiny::req(var_input)
+            shiny::req(cal_input)
 
 
             time <- 0 # Sets time start
