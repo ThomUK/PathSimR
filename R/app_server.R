@@ -43,14 +43,14 @@ app_server <- function(input, output, session) {
     {
       x <- c(rexp(10000, 1))
 
-      fe <- fitdist(data = x, distr = "exp")
-      fl <- fitdist(data = x, distr = "lnorm")
-      fu <- fitdist(data = x, distr = "unif")
-      fw <- fitdist(data = x, distr = "weibull")
-      fg <- fitdist(data = x, distr = "gamma")
+      fe <- fitdistrplus::fitdist(data = x, distr = "exp")
+      fl <- fitdistrplus::fitdist(data = x, distr = "lnorm")
+      fu <- fitdistrplus::fitdist(data = x, distr = "unif")
+      fw <- fitdistrplus::fitdist(data = x, distr = "weibull")
+      fg <- fitdistrplus::fitdist(data = x, distr = "gamma")
 
       p <-
-        denscomp(
+        fitdistrplus::denscomp(
           ft = list(fe, fl, fu, fw, fg),
           plotstyle = "ggplot",
           breaks = 100,
@@ -1910,23 +1910,23 @@ logger::log_debug("Creating input checklist.")
     if (is.numeric(df[, 1])) {
       colnames(df) <- "data"
 
-      fe <- fitdist(data = df$data, distr = "exp")
-      fl <- fitdist(data = df$data, distr = "lnorm")
-      fu <- fitdist(data = df$data, distr = "unif")
-      fw <- fitdist(data = df$data, distr = "weibull")
-      fg <- fitdist(data = df$data, distr = "gamma")
+      fe <- fitdistrplus::fitdist(data = df$data, distr = "exp")
+      fl <- fitdistrplus::fitdist(data = df$data, distr = "lnorm")
+      fu <- fitdistrplus::fitdist(data = df$data, distr = "unif")
+      fw <- fitdistrplus::fitdist(data = df$data, distr = "weibull")
+      fg <- fitdistrplus::fitdist(data = df$data, distr = "gamma")
 
 
       output$los_plot <- renderPlot(
         {
-          plotdist(df$data, histo = T, demp = T)
+          fitdistrplus::plotdist(df$data, histo = T, demp = T)
         },
         res = 128
       )
 
       output$los_cf <- renderPlot(
         {
-          descdist(df$data, boot = 100)
+          fitdistrplus::descdist(df$data, boot = 100)
         },
         res = 128
       )
@@ -1934,7 +1934,7 @@ logger::log_debug("Creating input checklist.")
       output$los_fit_plot <- renderPlot(
         {
           p <-
-            denscomp(
+            fitdistrplus::denscomp(
               ft = list(fe, fl, fu, fw, fg),
               plotstyle = "ggplot",
               breaks = 100,
