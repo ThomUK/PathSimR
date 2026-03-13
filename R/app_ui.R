@@ -12,7 +12,7 @@ app_ui <- function(request) {
     navbarPage(
 
       ##### SHINY UI CODE #####
-      theme = shinytheme("cerulean"),
+      theme = shinythemes::shinytheme("cerulean"),
       title = c(tagList(icon("compass"), "Navigation Bar")),
       id = "navbar",
 
