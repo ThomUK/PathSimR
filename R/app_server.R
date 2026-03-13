@@ -536,7 +536,7 @@ logger::log_debug("Starting wizard.")
     myTabs <- lapply(1:node_number, function(i) {
       tabPanel(
         title = HTML(tabnames[i]),
-        useShinyjs(),
+        shinyjs::useShinyjs(),
         br(),
         h1(paste("Service Point Name:", tabnames[i])),
         hr(),
