@@ -722,7 +722,7 @@ logger::log_debug("Starting wizard.")
             ),
             fluidRow(column(
               12,
-              matrixInput(
+              shinyMatrix::matrixInput(
                 inputId = paste0("ext_arr_", i),
                 value = arrivals_calendar,
                 class = "numeric",
@@ -756,7 +756,7 @@ logger::log_debug("Starting wizard.")
             ),
             fluidRow(column(
               12,
-              matrixInput(
+              shinyMatrix::matrixInput(
                 inputId = paste0("cap_", i),
                 value = capacity_calendar,
                 class = "numeric",

@@ -117,7 +117,7 @@ ui_tab_wizard_1 <- function() {
           ),
           column(
             4,
-            matrixInput(
+            shinyMatrix::matrixInput(
               inputId = "service_points",
               value = service_points,
               class = "character",
@@ -143,7 +143,7 @@ ui_tab_wizard_1 <- function() {
           ),
           column(
             4,
-            matrixInput(
+            shinyMatrix::matrixInput(
               inputId = "exits",
               value = exits,
               class = "character",
