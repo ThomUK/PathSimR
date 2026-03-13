@@ -37,11 +37,14 @@ load_cal_input <- function(path) {
   cal_input
 }
 
-# Helper: strip ggplot objects before snapshotting.
-# ggplot objects contain environments and are not reliably serialisable across
-# sessions; the data they are built from IS captured in the other list elements.
-strip_plots <- function(x) {
-  x[!sapply(x, inherits, what = "gg")]
+# Helper: remove non-deterministic elements before snapshotting.
+# - ggplot objects contain environments and are not reliably serialisable.
+# - ptm is a proc.time() snapshot that differs on every run.
+# The data underlying all plots IS captured in the other list elements.
+strip_non_deterministic <- function(x) {
+  is_plot <- sapply(x, inherits, what = "gg")
+  is_timer <- names(x) == "ptm"
+  x[!(is_plot | is_timer)]
 }
 
 
@@ -68,7 +71,7 @@ test_that("run_simulation snapshot matches for template 2 (stroke)", {
   )
 
   expect_equal(length(result), 73)
-  expect_snapshot_value(strip_plots(result), style = "serialize")
+  expect_snapshot_value(strip_non_deterministic(result), style = "serialize")
 })
 
 
@@ -95,7 +98,7 @@ test_that("run_simulation snapshot matches for template 3 (simple 4-node)", {
   )
 
   expect_equal(length(result), 73)
-  expect_snapshot_value(strip_plots(result), style = "serialize")
+  expect_snapshot_value(strip_non_deterministic(result), style = "serialize")
 })
 
 
@@ -122,5 +125,5 @@ test_that("run_simulation snapshot matches for template 3 with warm-up", {
   )
 
   expect_equal(length(result), 73)
-  expect_snapshot_value(strip_plots(result), style = "serialize")
+  expect_snapshot_value(strip_non_deterministic(result), style = "serialize")
 })
