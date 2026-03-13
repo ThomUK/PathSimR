@@ -9018,6 +9018,7 @@ logger::log_debug("Wizard complete.")
         )
         # parallel::stopCluster(cl)
 
+        ########## END OF SIMULATTION CODE ##########
 
         #### PLOTS AND SIMULATION LEVEL METRICS #########
         logger::log_debug("Making plots and simulation-level metrics.")
