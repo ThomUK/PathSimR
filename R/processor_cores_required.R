@@ -6,12 +6,10 @@
 #'
 #' @returns integer. The number of cores to use (1 minimum)
 #'
-processor_cores_required <- function(replications, cores = parallel::detectCores()){
-
+processor_cores_required <- function(replications, cores = parallel::detectCores()) {
   limit_to_replications <- max(replications, 1)
 
   limit_to_cores <- min(cores - 1, replications)
 
   max(limit_to_cores, 1) # we need at least one core!
-
 }
