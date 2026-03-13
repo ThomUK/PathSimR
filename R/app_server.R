@@ -10118,7 +10118,7 @@ logger::log_debug("Wizard complete.")
         rm(multi_spread_uniform)
 
         through_time_uniform_gather <-
-          gather(
+          tidyr::gather(
             through_time_uniform,
             key = "metric",
             value = "value",
