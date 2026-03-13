@@ -7856,10 +7856,11 @@ logger::log_debug("Wizard complete.")
               colnames(tmp4)[1] <- "rep"
               colnames(tmp4)[2] <- "node"
 
-              tmp4 <- mutate(tmp4, wait = ss - arr)
-              tmp4 <- mutate(tmp4, service = se - ss)
-              tmp4 <- mutate(tmp4, delayed = tds - se)
-              tmp4 <- mutate(tmp4, transition = dep - tds)
+              # dplyr:: namespace required inside parallel operations
+              tmp4 <- dplyr::mutate(tmp4, wait = ss - arr)
+              tmp4 <- dplyr::mutate(tmp4, service = se - ss)
+              tmp4 <- dplyr::mutate(tmp4, delayed = tds - se)
+              tmp4 <- dplyr::mutate(tmp4, transition = dep - tds)
 
               tmp4 <-
                 tmp4[, c(
