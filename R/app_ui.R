@@ -32,7 +32,7 @@ app_ui <- function(request) {
       ui_tab_wizard_3(),
 
       #### SERVICE DISTRIBUTION TOOL TAB ####
-      ui_tab_service_dist(),
+      mod_distribution_tool_ui("distribution_tool"),
 
       #### TOOL 1 - NETWORK IMPORT & VISUALISATION TAB ####
       ui_tab_tool_1(),

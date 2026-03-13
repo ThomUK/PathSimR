@@ -1,4 +1,11 @@
-ui_tab_service_dist <- function() {
+#' distribution_tool UI Module
+#'
+#' @param id Internal parameter for {shiny}.
+#'
+#' @import shiny
+#' @noRd
+mod_distribution_tool_ui <- function(id) {
+  ns <- NS(id)
   tabPanel(
     title = "Service Distribution Tool",
     icon = icon("chart-area"),
@@ -7,16 +14,16 @@ ui_tab_service_dist <- function() {
         h3(strong("Instructions")),
         br(),
         actionLink(
-          inputId = "model_help",
+          inputId = ns("model_help"),
           label = HTML("Which option do I need?"),
           icon = icon("info-circle"),
           style = " font-size:150%"
         ),
         br(),
         shinyBS::bsModal(
-          id = "modal_model",
+          id = ns("modal_model"),
           title = HTML("<h2><strong>Service Distribution Tool Help</strong></h2>"),
-          trigger = "model_help",
+          trigger = ns("model_help"),
           size = "large",
           ... =
             HTML(
@@ -35,7 +42,7 @@ ui_tab_service_dist <- function() {
                          </p>
                               "
             ),
-          plotOutput("model_help_figure")
+          plotOutput(ns("model_help_figure"))
         ),
         h4(strong("Option 1: Model fits to user data")),
         h4(
@@ -78,7 +85,7 @@ ui_tab_service_dist <- function() {
         tabPanel(
           title = "Model fits to user data",
           fileInput(
-            inputId = "los_dat",
+            inputId = ns("los_dat"),
             label = "Upload csv",
             multiple = FALSE,
             accept = c(
@@ -88,23 +95,23 @@ ui_tab_service_dist <- function() {
             ),
             width = "25%"
           ),
-          actionButton(inputId = "go_distfit", label = "Run Distribution Fit Tool"),
+          actionButton(inputId = ns("go_distfit"), label = "Run Distribution Fit Tool"),
           br(),
           br(),
           fluidRow(
-            column(10, plotOutput("los_fit_plot"), align = "center"),
-            column(2, br(), br(), br(), tableOutput("mini_summary"), align = "center")
+            column(10, plotOutput(ns("los_fit_plot")), align = "center"),
+            column(2, br(), br(), br(), tableOutput(ns("mini_summary")), align = "center")
           ),
           fluidRow(
             br(),
-            h3(textOutput("los_text")),
-            p(textOutput("los_text_help"))
+            h3(textOutput(ns("los_text"))),
+            p(textOutput(ns("los_text_help")))
           ),
-          fluidRow(column(12, tableOutput("los_fit_table"),
+          fluidRow(column(12, tableOutput(ns("los_fit_table")),
             align =
               "center"
           )),
-          h3(textOutput("fit_error"))
+          h3(textOutput(ns("fit_error")))
         ),
         tabPanel(
           title = "Scale data by mean",
@@ -119,11 +126,11 @@ ui_tab_service_dist <- function() {
           )),
           hr(),
           fluidRow(
-            column(3, uiOutput("treatment_select_ui")),
+            column(3, uiOutput(ns("treatment_select_ui"))),
             column(
               2,
               numericInput(
-                inputId = "treatment_mean",
+                inputId = ns("treatment_mean"),
                 label = "Average Length of Service (Mean)",
                 min = 0,
                 value = 0,
@@ -133,12 +140,12 @@ ui_tab_service_dist <- function() {
             column(
               1,
               br(),
-              actionButton(inputId = "go_scaled_fit", label = "Run/Refresh Scaling Tool")
+              actionButton(inputId = ns("go_scaled_fit"), label = "Run/Refresh Scaling Tool")
             )
           ),
           hr(),
-          tableOutput("scaled_fit"),
-          plotOutput("scaled_fit_plot")
+          tableOutput(ns("scaled_fit")),
+          plotOutput(ns("scaled_fit_plot"))
         )
       ))
     )
