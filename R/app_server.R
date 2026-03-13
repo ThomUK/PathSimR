@@ -3708,7 +3708,7 @@ logger::log_debug("Wizard complete.")
         #library(grid)
         #library(gridExtra)
         # library(plotly)
-        library(parallel)
+        #library(parallel)
         #library(data.table)
         library(tidyverse)
 
