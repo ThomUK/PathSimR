@@ -22,7 +22,7 @@ ui_tab_wizard_1 <- function() {
         h3(strong("Instructions")),
         h4("Step 1: Enter names of all Service Points"),
         p(
-          "'A' is currently listed as an example Service Point.
+          "'OP Clinic' is currently listed as an example Service Point.
                Enter names in the 'Service Point' column by selecting an empty cell or editing an existing one.
                            The entry form will automatically grow when the limit is reached.
                            To refresh, click away and then enter new name.",
@@ -49,7 +49,7 @@ ui_tab_wizard_1 <- function() {
         br(),
         h4("Step 2: Enter names of all Exits"),
         p(
-          "'B' is currently listed as an example Exit.
+          "'Home' is currently listed as an example Exit.
                Enter names in the 'Exit' column by selecting an empty cell or editing an existing one.
                            The entry form will automatically grow when the limit is reached.
                            To refresh, click away and then enter new name.",
