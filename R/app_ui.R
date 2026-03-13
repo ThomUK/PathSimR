@@ -35,7 +35,7 @@ app_ui <- function(request) {
       mod_distribution_tool_ui("distribution_tool"),
 
       #### TOOL 1 - NETWORK IMPORT & VISUALISATION TAB ####
-      ui_tab_tool_1(),
+      mod_network_visualisation_ui("network_visualisation"),
 
       #### TOOL 2 - SIMULATION SETUP & RUN TAB ####
       ui_tab_tool_2(),
