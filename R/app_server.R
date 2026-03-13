@@ -3960,7 +3960,7 @@ logger::log_debug("Wizard complete.")
 
 
 
-        clusterExport(
+        parallel::clusterExport(
           cl = cluster,
           varlist = c(
             "cluster",
@@ -3986,9 +3986,9 @@ logger::log_debug("Wizard complete.")
           envir = environment()
         )
 
-        clusterSetRNGStream(cluster)
+        parallel::clusterSetRNGStream(cluster)
 
-        clusterEvalQ(
+        parallel::clusterEvalQ(
           cl = cluster,
           c(
             #library(shiny),
@@ -4003,7 +4003,7 @@ logger::log_debug("Wizard complete.")
 
         ####### SIMULATION CODE ##################################################################
         logger::log_trace("Sim core simulation start.")
-        outputs <- parLapply(
+        outputs <- parallel::parLapply(
           cl = cluster,
           X = 1:reps,
           fun = function(j) {
@@ -9015,7 +9015,7 @@ logger::log_debug("Wizard complete.")
             return(x)
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         #### PLOTS AND SIMULATION LEVEL METRICS #########
@@ -9455,8 +9455,8 @@ logger::log_debug("Wizard complete.")
         # Calculating the average delayed per node per replicate & then over the simulation per node##
         #
 
-        # cl<-makeCluster(17)
-        # clusterExport(cl = cl,varlist = c("ptd","nodes","node_names"))
+        # cl<-parallel::makeCluster(17)
+        # parallel::clusterExport(cl = cl,varlist = c("ptd","nodes","node_names"))
 
         avg_delayed <- lapply(
           X = ptd,
@@ -9471,7 +9471,7 @@ logger::log_debug("Wizard complete.")
             tmp
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         avg_delayed_summary <-
@@ -9615,8 +9615,8 @@ logger::log_debug("Wizard complete.")
         # Calculating the average queue per node per replicate & then over the simulation per node##
         #
 
-        # cl<-makeCluster(17)
-        # clusterExport(cl = cl,varlist = c("ptq","nodes","node_names"))
+        # cl <- parallel::makeCluster(17)
+        # parallel::clusterExport(cl = cl,varlist = c("ptq","nodes","node_names"))
 
         avg_queue <- lapply(
           X = ptq,
@@ -9632,7 +9632,7 @@ logger::log_debug("Wizard complete.")
             tmp
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         avg_queue_summary <-
@@ -9768,8 +9768,8 @@ logger::log_debug("Wizard complete.")
         # Calculating the average delayed per node per replicate & then over the simulation per node##
 
 
-        # cl<-makeCluster(17)
-        # clusterExport(cl = cl,varlist = c("pto","nodes","node_names"))
+        # cl <- parallel::makeCluster(17)
+        # parallel::clusterExport(cl = cl,varlist = c("pto","nodes","node_names"))
 
         avg_occupancy <- lapply(
           X = pto,
@@ -9785,7 +9785,7 @@ logger::log_debug("Wizard complete.")
             tmp
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         avg_occupancy_summary <-
@@ -9924,8 +9924,8 @@ logger::log_debug("Wizard complete.")
 
         # Calculating the average transition per node per replicate##
 
-        # cl<-makeCluster(17)
-        # clusterExport(cl = cl,varlist = c("ptt","nodes","node_names"))
+        # cl <- parallel::makeCluster(17)
+        # parallel::clusterExport(cl = cl,varlist = c("ptt","nodes","node_names"))
 
         avg_transition <- lapply(
           X = ptt,
@@ -9942,7 +9942,7 @@ logger::log_debug("Wizard complete.")
             tmp
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         avg_transition_summary <-
@@ -10089,8 +10089,8 @@ logger::log_debug("Wizard complete.")
 
         # Calculating the average occ_bed per node per replicate##
         #
-        # cl<-makeCluster(17)
-        # clusterExport(cl = cl,varlist = c("ptb","nodes","node_names"))
+        # cl <- parallel::makeCluster(17)
+        # parallel::clusterExport(cl = cl,varlist = c("ptb","nodes","node_names"))
 
         avg_occ_bed <- lapply(
           X = ptb,
@@ -10106,7 +10106,7 @@ logger::log_debug("Wizard complete.")
             tmp
           }
         )
-        # stopCluster(cl)
+        # parallel::stopCluster(cl)
 
 
         avg_occ_bed_summary <-
@@ -10455,7 +10455,7 @@ logger::log_debug("Wizard complete.")
         )
 
 
-        stopCluster(cluster)
+        parallel::stopCluster(cluster)
 
 
         # change to check on number of simulation outputs ####
