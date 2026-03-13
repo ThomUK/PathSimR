@@ -3706,7 +3706,7 @@ logger::log_debug("Wizard complete.")
         library(shiny)
         library(magrittr)
         #library(grid)
-        library(gridExtra)
+        #library(gridExtra)
         # library(plotly)
         library(parallel)
         #library(data.table)
@@ -3994,7 +3994,7 @@ logger::log_debug("Wizard complete.")
             library(shiny),
             library(magrittr),
             #library(grid),
-            library(gridExtra),
+            #library(gridExtra),
             # library(plotly),
             library(tidyverse)
           )
