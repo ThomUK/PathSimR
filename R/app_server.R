@@ -2157,7 +2157,7 @@ logger::log_debug("Creating input checklist.")
 
     df <-
       # as.data.frame(subset(table, table$Names == input$treatment_select))
-      filter(table, Names == input$treatment_select)
+      dplyr::filter(table, Names == input$treatment_select)
 
     if (df$Distribution == "exponential") {
       df$`Parameter 1 Value` <- 1 / input$treatment_mean
