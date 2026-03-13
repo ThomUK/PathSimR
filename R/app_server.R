@@ -1050,7 +1050,7 @@ logger::log_debug("Starting wizard.")
     })
 
     if (!all(ea_rows == 0)) {
-      eam <- rbindlist(ea[c(which(ea_rows > 0))])
+      eam <- data.table::rbindlist(ea[c(which(ea_rows > 0))])
     }
 
 
@@ -1072,7 +1072,7 @@ logger::log_debug("Starting wizard.")
     })
 
     if (!all(cap_rows == 0)) {
-      capm <- rbindlist(cap[c(which(cap_rows > 0))])
+      capm <- data.table::rbindlist(cap[c(which(cap_rows > 0))])
     }
 
 
@@ -7879,11 +7879,11 @@ logger::log_debug("Wizard complete.")
               tmp4[, "node"] <- node_names[c(tmp4[, "node"]), 2]
 
 
-              all_data <- rbindlist(list(all_data, tmp4))
+              all_data <- data.table::rbindlist(list(all_data, tmp4))
             }
 
 
-            # all_data<-rbindlist(all_data)
+            # all_data<-data.table::rbindlist(all_data)
 
             rep_node_dat <- all_data %>% group_by(rep, node)
 
@@ -8844,7 +8844,7 @@ logger::log_debug("Wizard complete.")
             #library(data.table)
             library(tidyverse)
             multi <-
-              rbindlist(list(
+              data.table::rbindlist(list(
                 datb_multi,
                 datd_multi,
                 dato_multi,
@@ -8898,7 +8898,7 @@ logger::log_debug("Wizard complete.")
                 )
 
               uniform_ts <-
-                rbindlist(list(base, uniform_ts),
+                data.table::rbindlist(list(base, uniform_ts),
                   fill = T,
                   use.names = T
                 )
@@ -8919,7 +8919,7 @@ logger::log_debug("Wizard complete.")
                 ) ## tidyr::fill function changes the NA values to the pervious value up the df
 
               multi_spread_uniform <-
-                rbindlist(list(multi_spread_uniform, uniform_ts), use.names = T)
+                data.table::rbindlist(list(multi_spread_uniform, uniform_ts), use.names = T)
             }
 
             multi_spread_uniform <-
@@ -9152,22 +9152,22 @@ logger::log_debug("Wizard complete.")
 
 
 
-        node_wait <- rbindlist(node_wait)
-        node_active_service <- rbindlist(node_active_service)
-        node_capacity_delay <- rbindlist(node_capacity_delay)
-        node_transition_delay <- rbindlist(node_transition_delay)
-        node_length_of_stay <- rbindlist(node_length_of_stay)
-        node_delay_to_transfer <- rbindlist(node_delay_to_transfer)
+        node_wait <- data.table::rbindlist(node_wait)
+        node_active_service <- data.table::rbindlist(node_active_service)
+        node_capacity_delay <- data.table::rbindlist(node_capacity_delay)
+        node_transition_delay <- data.table::rbindlist(node_transition_delay)
+        node_length_of_stay <- data.table::rbindlist(node_length_of_stay)
+        node_delay_to_transfer <- data.table::rbindlist(node_delay_to_transfer)
 
-        pat_wait <- rbindlist(pat_wait)
-        pat_active_service <- rbindlist(pat_active_service)
-        pat_capacity_delay <- rbindlist(pat_capacity_delay)
-        pat_transition_delay <- rbindlist(pat_transition_delay)
-        pat_length_of_stay <- rbindlist(pat_length_of_stay)
-        pat_delay_to_transfer <- rbindlist(pat_delay_to_transfer)
+        pat_wait <- data.table::rbindlist(pat_wait)
+        pat_active_service <- data.table::rbindlist(pat_active_service)
+        pat_capacity_delay <- data.table::rbindlist(pat_capacity_delay)
+        pat_transition_delay <- data.table::rbindlist(pat_transition_delay)
+        pat_length_of_stay <- data.table::rbindlist(pat_length_of_stay)
+        pat_delay_to_transfer <- data.table::rbindlist(pat_delay_to_transfer)
 
-        total_time_in_system <- rbindlist(total_time_in_system)
-        rejected <- rbindlist(rejected)
+        total_time_in_system <- data.table::rbindlist(total_time_in_system)
+        rejected <- data.table::rbindlist(rejected)
 
         node_wait_summary <-
           node_wait %>%
@@ -9340,7 +9340,7 @@ logger::log_debug("Wizard complete.")
         # Calculating the time at each delayed length##
 
 
-        ptd_total <- as.data.frame(rbindlist(ptd))
+        ptd_total <- as.data.frame(data.table::rbindlist(ptd))
         rownames(ptd_total) <- c()
         ptd_total$delayed <- as.numeric(as.character(ptd_total$delayed))
         ptd_total$time_at_delayed_level <-
@@ -9498,7 +9498,7 @@ logger::log_debug("Wizard complete.")
 
 
 
-        ptq_total <- as.data.frame(rbindlist(ptq))
+        ptq_total <- as.data.frame(data.table::rbindlist(ptq))
         rownames(ptq_total) <- c()
         ptq_total$queue <- as.numeric(as.character(ptq_total$queue))
         ptq_total$time_at_queue_length <-
@@ -9651,7 +9651,7 @@ logger::log_debug("Wizard complete.")
         # Calculating the time at each occupancy##
 
 
-        pto_total <- as.data.frame(rbindlist(pto))
+        pto_total <- as.data.frame(data.table::rbindlist(pto))
         rownames(pto_total) <- c()
         pto_total$occupancy <-
           as.numeric(as.character(pto_total$occupancy))
@@ -9807,7 +9807,7 @@ logger::log_debug("Wizard complete.")
         # Calculating the time at each transition length##
 
 
-        ptt_total <- as.data.frame(rbindlist(ptt))
+        ptt_total <- as.data.frame(data.table::rbindlist(ptt))
         rownames(ptt_total) <- c()
         ptt_total$transition <-
           as.numeric(as.character(ptt_total$transition))
@@ -9968,7 +9968,7 @@ logger::log_debug("Wizard complete.")
 
         #### % time at bed occupancy level###
 
-        ptb_total <- as.data.frame(rbindlist(ptb))
+        ptb_total <- as.data.frame(data.table::rbindlist(ptb))
         rownames(ptb_total) <- c()
         ptb_total$occ_bed <- as.numeric(as.character(ptb_total$occ_bed))
         ptb_total$time_at_occ_bed_level <-
@@ -10121,7 +10121,7 @@ logger::log_debug("Wizard complete.")
 
         ######  MULTI DATA TABLE ########################################################################
         logger::log_debug("Creating multi-data table.")
-        multi_spread_uniform <- rbindlist(multi_spread_uniform)
+        multi_spread_uniform <- data.table::rbindlist(multi_spread_uniform)
 
         through_time_uniform <- multi_spread_uniform
         through_time_uniform$time <- through_time_uniform$time - warm_up
@@ -10610,7 +10610,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_wait
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10655,7 +10655,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_wait
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10699,7 +10699,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_active_service
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10745,7 +10745,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_active_service
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10788,7 +10788,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_capacity_delay
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10835,7 +10835,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_capacity_delay
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10883,7 +10883,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$node_transition_delay
       tmp <- tmp[order(factor(x = tmp$node, levels = x$syst_names[, 2])), ]
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10929,7 +10929,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_transition_delay
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -10976,7 +10976,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_length_of_stay
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -11021,7 +11021,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_length_of_stay
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -11066,7 +11066,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$node_delay_to_transfer
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -11114,7 +11114,7 @@ logger::log_debug("Wizard complete.")
       shiny::req(sim_out())
       x <- sim_out()
       tmp <- x$pat_delay_to_transfer
-      tmp <- rbindlist(tmp)
+      tmp <- data.table::rbindlist(tmp)
       # tmp<-format(tmp,digits=5)
     },
     options = list(
@@ -11221,7 +11221,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$avg_delayed_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
-      # tmp<-rbindlist(tmp)
+      # tmp<-data.table::rbindlist(tmp)
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
@@ -11298,7 +11298,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$avg_queue_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
-      # tmp<-rbindlist(tmp)
+      # tmp<-data.table::rbindlist(tmp)
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
@@ -11375,7 +11375,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$avg_occupancy_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
-      # tmp<-rbindlist(tmp)
+      # tmp<-data.table::rbindlist(tmp)
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
@@ -11452,7 +11452,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$avg_transition_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
-      # tmp<-rbindlist(tmp)
+      # tmp<-data.table::rbindlist(tmp)
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
@@ -11529,7 +11529,7 @@ logger::log_debug("Wizard complete.")
       x <- sim_out()
       tmp <- x$avg_occ_bed_summary
       tmp[, 1] <- str_replace_all(tmp[, 1], pattern = "_", replacement = " ")
-      # tmp<-rbindlist(tmp)
+      # tmp<-data.table::rbindlist(tmp)
       tmp[, 2] <- format(tmp[, 2], digits = 5)
       tmp
     },
