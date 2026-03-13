@@ -7889,24 +7889,26 @@ logger::log_debug("Wizard complete.")
 
             # all_data<-data.table::rbindlist(all_data)
 
-            rep_node_dat <- all_data %>% group_by(rep, node)
+            # dplyr:: namespace required inside parallel operations
+            rep_node_dat <- all_data %>% 
+              dplyr::group_by(rep, node)
 
             pat_dat <- all_data %>%
-              group_by(patient, rep) %>%
-              transmute(
+              dplyr::group_by(patient, rep) %>%
+              dplyr::transmute(
                 wait = sum(wait),
                 service = sum(service),
                 delayed = sum(delayed),
                 transition = sum(transition)
               ) %>%
-              ungroup() %>%
-              group_by(rep)
+              dplyr::ungroup() %>%
+              dplyr::group_by(rep)
 
             # change all of the below to include time units? #####
 
             node_wait <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "wait",
                   mean = mean(wait, na.rm = T),
@@ -7918,7 +7920,7 @@ logger::log_debug("Wizard complete.")
 
             node_active_service <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "active_service",
                   mean = mean(service, na.rm = T),
@@ -7934,7 +7936,7 @@ logger::log_debug("Wizard complete.")
 
             node_capacity_delay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "capacity_delay",
                   mean = mean(delayed, na.rm = T),
@@ -7950,7 +7952,7 @@ logger::log_debug("Wizard complete.")
 
             node_transition_delay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "transition_delay",
                   mean = mean(transition, na.rm = T),
@@ -7966,7 +7968,7 @@ logger::log_debug("Wizard complete.")
 
             node_length_of_stay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "length_of_stay",
                   mean = mean(service + delayed + transition, na.rm = T),
@@ -7982,7 +7984,7 @@ logger::log_debug("Wizard complete.")
 
             node_delay_to_transfer <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   rep_node_dat,
                   metric = "delay_to_transfer",
                   mean = mean(delayed + transition, na.rm = T),
@@ -7999,7 +8001,7 @@ logger::log_debug("Wizard complete.")
 
             pat_wait <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "wait",
                   mean = mean(wait, na.rm = T),
@@ -8011,7 +8013,7 @@ logger::log_debug("Wizard complete.")
 
             pat_active_service <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "service",
                   mean = mean(service, na.rm = T),
@@ -8023,7 +8025,7 @@ logger::log_debug("Wizard complete.")
 
             pat_capacity_delay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "capacity_delay",
                   mean = mean(delayed, na.rm = T),
@@ -8035,7 +8037,7 @@ logger::log_debug("Wizard complete.")
 
             pat_transition_delay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "transition_delay",
                   mean = mean(transition, na.rm = T),
@@ -8047,7 +8049,7 @@ logger::log_debug("Wizard complete.")
 
             pat_length_of_stay <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "length_of_stay",
                   mean = mean(service + delayed + transition, na.rm = T),
@@ -8059,7 +8061,7 @@ logger::log_debug("Wizard complete.")
 
             pat_delay_to_transfer <-
               as.data.frame(
-                summarise(
+                dplyr::summarise(
                   pat_dat,
                   metric = "delay_to_transfer",
                   mean = mean(delayed + transition, na.rm = T),
@@ -8070,14 +8072,14 @@ logger::log_debug("Wizard complete.")
               )
 
 
-
+            # dplyr:: namespace required inside parallel operations
             ttis_dat <- all_data %>%
-              group_by(patient, rep) %>%
-              transmute(ttis = max(dep) - min(arr))
+              dplyr::group_by(patient, rep) %>%
+              dplyr::transmute(ttis = max(dep) - min(arr))
 
             total_time_in_system <- ttis_dat %>%
-              group_by(rep) %>%
-              summarise(
+              dplyr::group_by(rep) %>%
+              dplyr::summarise(
                 node = "ALL",
                 metric = "total_time_in_system",
                 mean = mean(ttis, na.rm = T),
@@ -8857,8 +8859,8 @@ logger::log_debug("Wizard complete.")
               ))
 
 
-
-            multi_spread <- spread(
+            # tidyr:: namespace required inside parallel operations
+            multi_spread <- tidyr::spread(
               data = multi,
               key = metric,
               value = value
@@ -8909,13 +8911,14 @@ logger::log_debug("Wizard complete.")
 
               uniform_ts <- uniform_ts[order(uniform_ts$time), ]
 
+              # tidyr:: namespace required inside parallel operations
               uniform_ts <-
                 uniform_ts %>%
-                  fill(rep, occ_bed, delayed, occupancy, transition, queue) ## tidyr::fill function changes the NA values to the previous value down the df
+                  tidyr::fill(rep, occ_bed, delayed, occupancy, transition, queue) ## tidyr::fill function changes the NA values to the previous value down the df
 
               uniform_ts <-
                 uniform_ts %>%
-                fill(rep,
+                tidyr::fill(rep,
                   occ_bed,
                   delayed,
                   occupancy,
