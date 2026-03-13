@@ -12,10 +12,10 @@
 make_cap <- function(node, starts, ends, values) {
   data.frame(
     metric = "cap",
-    node   = node,
-    start  = starts,
-    end    = ends,
-    value  = values,
+    node = node,
+    start = starts,
+    end = ends,
+    value = values,
     stringsAsFactors = FALSE
   )
 }
@@ -23,10 +23,10 @@ make_cap <- function(node, starts, ends, values) {
 make_arr <- function(node, starts, ends, values) {
   data.frame(
     metric = "ext_arr",
-    node   = node,
-    start  = starts,
-    end    = ends,
-    value  = values,
+    node = node,
+    start = starts,
+    end = ends,
+    value = values,
     stringsAsFactors = FALSE
   )
 }
@@ -96,14 +96,14 @@ test_that("fractional warm_up rotates capacity calendar correctly", {
   #   row3: start=30→0, end=35-30=5, value=5
   # Final order by start: 0-5(v5), 5-15(v5), 15-25(v10), 25-30(v5)
   cap <- make_cap(1, c(0, 10, 20), c(10, 20, 30), c(5, 10, 5))
-  arr <- make_arr(1, c(0, 50), c(50, 100), c(3, 0))  # simple arr, just check cap
+  arr <- make_arr(1, c(0, 50), c(50, 100), c(3, 0)) # simple arr, just check cap
 
   result <- shift_calendars(cap, arr, nodes = 1, warm_up = 35)
   shifted_cap <- result$cap_cal_input
 
   expect_equal(nrow(shifted_cap), 4)
   expect_equal(shifted_cap$start, c(0, 5, 15, 25))
-  expect_equal(shifted_cap$end,   c(5, 15, 25, 30))
+  expect_equal(shifted_cap$end, c(5, 15, 25, 30))
   expect_equal(shifted_cap$value, c(5, 5, 10, 5))
 })
 
@@ -116,7 +116,7 @@ test_that("fractional warm_up rotates arrival calendar correctly", {
   #   stable = rows 1..2, stable$end[last] clamped to 100 → 75-100
   # switch = row 2: start=100→0, end=125-100=25, value=0
   # Final: 0-25(v0), 25-75(v3), 75-100(v0)
-  cap <- make_cap(1, c(0, 10), c(10, 20), c(5, 5))  # simple cap
+  cap <- make_cap(1, c(0, 10), c(10, 20), c(5, 5)) # simple cap
   arr <- make_arr(1, c(0, 50), c(50, 100), c(3, 0))
 
   result <- shift_calendars(cap, arr, nodes = 1, warm_up = 25)
@@ -124,7 +124,7 @@ test_that("fractional warm_up rotates arrival calendar correctly", {
 
   expect_equal(nrow(shifted_arr), 3)
   expect_equal(shifted_arr$start, c(0, 25, 75))
-  expect_equal(shifted_arr$end,   c(25, 75, 100))
+  expect_equal(shifted_arr$end, c(25, 75, 100))
   expect_equal(shifted_arr$value, c(0, 3, 0))
 })
 

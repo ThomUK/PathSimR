@@ -14,13 +14,17 @@
 load_var <- function(filename) {
   path <- testthat::test_path("fixtures", filename)
   var_input <- read.csv(path, header = TRUE, sep = ",")
-  syst_names        <- cbind(as.numeric(1:nrow(var_input)),
-                             as.character(var_input[, 1]))
+  syst_names <- cbind(
+    as.numeric(1:nrow(var_input)),
+    as.character(var_input[, 1])
+  )
   var_input <- var_input[, -1]
   rownames(var_input) <- 1:nrow(var_input)
   colnames(var_input)[1:nrow(var_input)] <- c(1:nrow(var_input))
-  list(var_input = var_input, syst_names = syst_names,
-       syst_names_single = syst_names[, 2])
+  list(
+    var_input = var_input, syst_names = syst_names,
+    syst_names_single = syst_names[, 2]
+  )
 }
 
 load_cal <- function(filename) {
@@ -34,10 +38,12 @@ load_cal <- function(filename) {
 # Note: cap_cal_input_original and arr_cal_input_original come from
 # prepare_simulation_inputs() but are not parameters of run_single_replication().
 make_inputs <- function(var_file, cal_file, warm_up = 0, sim_time = 100, reps = 3) {
-  v   <- load_var(var_file)
+  v <- load_var(var_file)
   cal <- load_cal(cal_file)
-  si  <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up, sim_time)
+  si <- prepare_simulation_inputs(
+    v$var_input, cal, v$syst_names,
+    warm_up, sim_time
+  )
   list(
     nodes             = si$nodes,
     node_names        = si$node_names,
@@ -108,7 +114,8 @@ test_that("returns a list of length 29 with the expected named elements", {
 
 test_that("output echoes nodes, warm_up, sim_time, reps correctly", {
   inp <- make_inputs("input_template_3.csv", "cal_input_3.csv",
-                     warm_up = 10, sim_time = 50, reps = 7)
+    warm_up = 10, sim_time = 50, reps = 7
+  )
 
   set.seed(42)
   out <- call_rep(
@@ -123,10 +130,10 @@ test_that("output echoes nodes, warm_up, sim_time, reps correctly", {
     node_names = inp$node_names, reps = inp$reps
   )
 
-  expect_equal(out$nodes,    inp$nodes)
-  expect_equal(out$warm_up,  10)
+  expect_equal(out$nodes, inp$nodes)
+  expect_equal(out$warm_up, 10)
   expect_equal(out$sim_time, 50)
-  expect_equal(out$reps,     7)
+  expect_equal(out$reps, 7)
 })
 
 
@@ -175,8 +182,10 @@ test_that("different seeds produce different node_wait means", {
     node_names = inp$node_names, reps = inp$reps
   )
 
-  set.seed(42);  out1 <- suppressWarnings(do.call(run_single_replication, args))
-  set.seed(9999); out2 <- suppressWarnings(do.call(run_single_replication, args))
+  set.seed(42)
+  out1 <- suppressWarnings(do.call(run_single_replication, args))
+  set.seed(9999)
+  out2 <- suppressWarnings(do.call(run_single_replication, args))
 
   expect_false(identical(out1$node_wait$mean, out2$node_wait$mean))
 })
@@ -201,10 +210,12 @@ test_that("same seed produces identical node_wait output on two calls", {
     node_names = inp$node_names, reps = inp$reps
   )
 
-  set.seed(42); out_a <- suppressWarnings(do.call(run_single_replication, args))
-  set.seed(42); out_b <- suppressWarnings(do.call(run_single_replication, args))
+  set.seed(42)
+  out_a <- suppressWarnings(do.call(run_single_replication, args))
+  set.seed(42)
+  out_b <- suppressWarnings(do.call(run_single_replication, args))
 
-  expect_identical(out_a$node_wait,           out_b$node_wait)
+  expect_identical(out_a$node_wait, out_b$node_wait)
   expect_identical(out_a$node_active_service, out_b$node_active_service)
   expect_identical(out_a$total_time_in_system, out_b$total_time_in_system)
 })

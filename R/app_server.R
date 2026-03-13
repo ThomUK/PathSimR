@@ -187,7 +187,7 @@ app_server <- function(input, output, session) {
 
 
   ##### START OF DYNAMIC WIZARD SERVER CODE ######
-logger::log_debug("Starting wizard.")
+  logger::log_debug("Starting wizard.")
 
   #### Name Input tables and checks ####
   ### Creates table of service point names ###
@@ -519,14 +519,14 @@ logger::log_debug("Starting wizard.")
     arrivals_calendar <- matrix(
       ncol = 3,
       nrow = 1,
-      data = c(0,"","")
+      data = c(0, "", "")
     )
     colnames(arrivals_calendar) <- c("Start Time", "End Time", "Arrival Rate")
 
     capacity_calendar <- matrix(
       ncol = 3,
       nrow = 1,
-      data = c(0,"","")
+      data = c(0, "", "")
     )
     colnames(capacity_calendar) <- c("Start Time", "End Time", "Capacity")
 
@@ -1136,7 +1136,7 @@ logger::log_debug("Starting wizard.")
   })
 
   #### Creates the input checklist####
-logger::log_debug("Creating input checklist.")
+  logger::log_debug("Creating input checklist.")
   observeEvent(input$go, {
     issues <- c()
 
@@ -2273,7 +2273,7 @@ logger::log_debug("Creating input checklist.")
 
 
 
-logger::log_debug("Wizard complete.")
+  logger::log_debug("Wizard complete.")
   ###### END OF WIZARD#######
   ###### START OF SIMULATION TOOL##########
 
@@ -3748,15 +3748,15 @@ logger::log_debug("Wizard complete.")
         ##### Run Simulation ##############################################################
         logger::log_info("Calling run_simulation().")
         run_simulation(
-          var_input        = var_input,
-          cal_input        = cal_input,
-          sim_time         = input$st,
-          warm_up          = warm_up,
-          reps             = reps,
-          syst_names       = syst_names,
+          var_input = var_input,
+          cal_input = cal_input,
+          sim_time = input$st,
+          warm_up = warm_up,
+          reps = reps,
+          syst_names = syst_names,
           syst_names_single = syst_names_single,
-          time_unit        = input$time_unit,
-          session          = session
+          time_unit = input$time_unit,
+          session = session
         )
       },
       error = function(e) {
@@ -3769,7 +3769,8 @@ logger::log_debug("Wizard complete.")
             "Try running the simulation for longer (increase simulation \n
             period length). If the error persists, return to the data input \n
             pages and check that data has been entered correctly. \n
-            Click anywhere on screen to continue.", style = "font-size:200%"
+            Click anywhere on screen to continue.",
+            style = "font-size:200%"
           ),
           div("Error message: ", conditionMessage(e)),
           easyClose = TRUE,
@@ -5185,7 +5186,7 @@ logger::log_debug("Wizard complete.")
 
 
   ### RMARKDOWN DOWNLOAD HANDLER #####
-logger::log_debug("Preparing RMarkdown download handler.")
+  logger::log_debug("Preparing RMarkdown download handler.")
 
   output$downloadreport <- downloadHandler(
     filename = paste0("PathSimR_Report.docx"),

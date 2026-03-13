@@ -13,13 +13,17 @@
 load_var <- function(filename) {
   path <- testthat::test_path("fixtures", filename)
   var_input <- read.csv(path, header = TRUE, sep = ",")
-  syst_names        <- cbind(as.numeric(1:nrow(var_input)),
-                             as.character(var_input[, 1]))
+  syst_names <- cbind(
+    as.numeric(1:nrow(var_input)),
+    as.character(var_input[, 1])
+  )
   var_input <- var_input[, -1]
   rownames(var_input) <- 1:nrow(var_input)
   colnames(var_input)[1:nrow(var_input)] <- c(1:nrow(var_input))
-  list(var_input = var_input, syst_names = syst_names,
-       syst_names_single = syst_names[, 2])
+  list(
+    var_input = var_input, syst_names = syst_names,
+    syst_names_single = syst_names[, 2]
+  )
 }
 
 load_cal <- function(filename) {
@@ -34,11 +38,13 @@ load_cal <- function(filename) {
 # the pre-existing rm() call inside run_single_replication().
 make_outputs <- function(reps = 3, warm_up = 0, sim_time = 100,
                          var_file = "input_template_3.csv",
-                         cal_file  = "cal_input_3.csv") {
-  v   <- load_var(var_file)
+                         cal_file = "cal_input_3.csv") {
+  v <- load_var(var_file)
   cal <- load_cal(cal_file)
-  si  <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up, sim_time)
+  si <- prepare_simulation_inputs(
+    v$var_input, cal, v$syst_names,
+    warm_up, sim_time
+  )
   rep_args <- list(
     var_input         = v$var_input,
     syst_names        = v$syst_names,
@@ -63,8 +69,8 @@ make_outputs <- function(reps = 3, warm_up = 0, sim_time = 100,
     suppressWarnings(do.call(run_single_replication, c(list(j = j), rep_args)))
   })
   list(
-    outputs               = outputs,
-    syst_names_single     = v$syst_names_single,
+    outputs = outputs,
+    syst_names_single = v$syst_names_single,
     cap_cal_input_original = si$cap_cal_input_original,
     arr_cal_input_original = si$arr_cal_input_original
   )
@@ -80,10 +86,10 @@ test_that("returns a named list of length 73", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -97,10 +103,10 @@ test_that("combo contains the expected top-level names", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -132,16 +138,16 @@ test_that("reps, warm_up, sim_time are echoed correctly in combo", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
 
-  expect_equal(combo$reps,     3)
-  expect_equal(combo$warm_up,  0)
+  expect_equal(combo$reps, 3)
+  expect_equal(combo$warm_up, 0)
   expect_equal(combo$sim_time, 100)
 })
 
@@ -150,10 +156,10 @@ test_that("warm_up value is echoed correctly when non-zero", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -171,10 +177,10 @@ test_that("time_unit label is appended to metric column in node_wait", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "hours",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "hours",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -194,10 +200,10 @@ test_that("cap_cal_input and arr_cal_input in combo equal the originals", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -216,18 +222,18 @@ test_that("node_wait_summary has node, metric, mean, sd, iqr, percentile_95 colu
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
 
   expect_true(all(c("node", "metric", "mean", "sd", "iqr", "percentile_95") %in%
-                    colnames(combo$node_wait_summary)))
+    colnames(combo$node_wait_summary)))
   expect_true(all(c("metric", "mean", "sd", "iqr", "percentile_95") %in%
-                    colnames(combo$pat_wait_summary)))
+    colnames(combo$pat_wait_summary)))
 })
 
 test_that("rejected_summary has node and mean columns with non-negative values", {
@@ -235,10 +241,10 @@ test_that("rejected_summary has node and mean columns with non-negative values",
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -257,10 +263,10 @@ test_that("ptd_plot, ptq_plot, pto_plot, avg_through_time_plot are ggplot object
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "days",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "days",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )
@@ -281,10 +287,10 @@ test_that("time_unit string is stored in combo$time_unit", {
   ptm <- proc.time()
 
   combo <- process_simulation_outputs(
-    outputs               = ctx$outputs,
-    syst_names_single     = ctx$syst_names_single,
-    time_unit             = "minutes",
-    ptm                   = ptm,
+    outputs = ctx$outputs,
+    syst_names_single = ctx$syst_names_single,
+    time_unit = "minutes",
+    ptm = ptm,
     cap_cal_input_original = ctx$cap_cal_input_original,
     arr_cal_input_original = ctx$arr_cal_input_original
   )

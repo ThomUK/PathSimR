@@ -18,17 +18,21 @@
 load_var_input <- function(path) {
   var_input <- read.csv(path, header = TRUE, sep = ",")
 
-  syst_names        <- cbind(as.numeric(c(1:nrow(var_input))),
-                             as.character(var_input[, 1]))
+  syst_names <- cbind(
+    as.numeric(c(1:nrow(var_input))),
+    as.character(var_input[, 1])
+  )
   syst_names_single <- syst_names[, 2]
 
-  var_input <- var_input[, -1]                             # drop name column
+  var_input <- var_input[, -1] # drop name column
   rownames(var_input) <- 1:nrow(var_input)
   colnames(var_input)[1:nrow(var_input)] <- c(1:nrow(var_input))
 
-  list(var_input        = var_input,
-       syst_names       = syst_names,
-       syst_names_single = syst_names_single)
+  list(
+    var_input = var_input,
+    syst_names = syst_names,
+    syst_names_single = syst_names_single
+  )
 }
 
 load_cal_input <- function(path) {
@@ -54,7 +58,7 @@ strip_non_deterministic <- function(x) {
 test_that("run_simulation snapshot matches for template 2 (stroke)", {
   skip_on_cran()
 
-  v         <- load_var_input(testthat::test_path("fixtures", "input_template_2.csv"))
+  v <- load_var_input(testthat::test_path("fixtures", "input_template_2.csv"))
   cal_input <- load_cal_input(testthat::test_path("fixtures", "cal_input_2.csv"))
 
   set.seed(42)
@@ -81,7 +85,7 @@ test_that("run_simulation snapshot matches for template 2 (stroke)", {
 test_that("run_simulation snapshot matches for template 3 (simple 4-node)", {
   skip_on_cran()
 
-  v         <- load_var_input(testthat::test_path("fixtures", "input_template_3.csv"))
+  v <- load_var_input(testthat::test_path("fixtures", "input_template_3.csv"))
   cal_input <- load_cal_input(testthat::test_path("fixtures", "cal_input_3.csv"))
 
   set.seed(42)
@@ -108,7 +112,7 @@ test_that("run_simulation snapshot matches for template 3 (simple 4-node)", {
 test_that("run_simulation snapshot matches for template 3 with warm-up", {
   skip_on_cran()
 
-  v         <- load_var_input(testthat::test_path("fixtures", "input_template_3.csv"))
+  v <- load_var_input(testthat::test_path("fixtures", "input_template_3.csv"))
   cal_input <- load_cal_input(testthat::test_path("fixtures", "cal_input_3.csv"))
 
   set.seed(42)

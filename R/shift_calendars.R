@@ -19,10 +19,11 @@
 #'   \code{arr_cal_input}, each shifted appropriately.
 #' @noRd
 shift_calendars <- function(cap_cal_input, arr_cal_input, nodes, warm_up) {
-
   if (warm_up == 0) {
-    return(list(cap_cal_input = cap_cal_input,
-                arr_cal_input = arr_cal_input))
+    return(list(
+      cap_cal_input = cap_cal_input,
+      arr_cal_input = arr_cal_input
+    ))
   }
 
   ### Shift capacity calendar ------------------------------------------------
@@ -97,6 +98,8 @@ shift_calendars <- function(cap_cal_input, arr_cal_input, nodes, warm_up) {
     }
   }
 
-  list(cap_cal_input = cap_cal_input_new,
-       arr_cal_input = arr_cal_input_new)
+  list(
+    cap_cal_input = cap_cal_input_new,
+    arr_cal_input = arr_cal_input_new
+  )
 }

@@ -11,16 +11,20 @@ load_var <- function(filename) {
   path <- testthat::test_path("fixtures", filename)
   var_input <- read.csv(path, header = TRUE, sep = ",")
 
-  syst_names        <- cbind(as.numeric(1:nrow(var_input)),
-                             as.character(var_input[, 1]))
+  syst_names <- cbind(
+    as.numeric(1:nrow(var_input)),
+    as.character(var_input[, 1])
+  )
   syst_names_single <- syst_names[, 2]
 
   var_input <- var_input[, -1]
   rownames(var_input) <- 1:nrow(var_input)
   colnames(var_input)[1:nrow(var_input)] <- c(1:nrow(var_input))
 
-  list(var_input = var_input, syst_names = syst_names,
-       syst_names_single = syst_names_single)
+  list(
+    var_input = var_input, syst_names = syst_names,
+    syst_names_single = syst_names_single
+  )
 }
 
 load_cal <- function(filename) {
@@ -36,17 +40,20 @@ load_cal <- function(filename) {
 # ---------------------------------------------------------------------------
 
 test_that("returns a list with all 13 expected elements", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_type(out, "list")
-  expect_named(out, c("nodes", "node_names", "delay_dist", "delay_param",
-                      "delay_list", "cap_cal_input", "arr_cal_input",
-                      "cap_cal_input_original", "arr_cal_input_original",
-                      "record_scale", "na_lim", "rpi", "t.period"))
+  expect_named(out, c(
+    "nodes", "node_names", "delay_dist", "delay_param",
+    "delay_list", "cap_cal_input", "arr_cal_input",
+    "cap_cal_input_original", "arr_cal_input_original",
+    "record_scale", "na_lim", "rpi", "t.period"
+  ))
 })
 
 
@@ -55,21 +62,23 @@ test_that("returns a list with all 13 expected elements", {
 # ---------------------------------------------------------------------------
 
 test_that("t.period equals warm_up + sim_time", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 20, sim_time = 100)
+    warm_up = 20, sim_time = 100
+  )
 
   expect_equal(out$t.period, 120)
 })
 
 test_that("t.period is correct when warm_up is 0", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 365)
+    warm_up = 0, sim_time = 365
+  )
 
   expect_equal(out$t.period, 365)
 })
@@ -80,15 +89,16 @@ test_that("t.period is correct when warm_up is 0", {
 # ---------------------------------------------------------------------------
 
 test_that("simulation constants are fixed values", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_equal(out$record_scale, 0.8)
-  expect_equal(out$na_lim,       100)
-  expect_equal(out$rpi,          0.1)
+  expect_equal(out$na_lim, 100)
+  expect_equal(out$rpi, 0.1)
 })
 
 
@@ -97,11 +107,12 @@ test_that("simulation constants are fixed values", {
 # ---------------------------------------------------------------------------
 
 test_that("nodes contains only active service nodes (numeric)", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_type(out$nodes, "double")
   expect_true(length(out$nodes) > 0)
@@ -110,11 +121,12 @@ test_that("nodes contains only active service nodes (numeric)", {
 })
 
 test_that("nodes is consistent across template 2 (larger network)", {
-  v   <- load_var("input_template_2.csv")
+  v <- load_var("input_template_2.csv")
   cal <- load_cal("cal_input_2.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_true(length(out$nodes) > 0)
   expect_true(all(out$nodes %in% as.numeric(rownames(v$var_input))))
@@ -126,11 +138,12 @@ test_that("nodes is consistent across template 2 (larger network)", {
 # ---------------------------------------------------------------------------
 
 test_that("node_names has one more row than nodes (trailing NA sentinel)", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_equal(nrow(out$node_names), length(out$nodes) + 1)
   expect_true(all(is.na(out$node_names[nrow(out$node_names), ])))
@@ -142,15 +155,16 @@ test_that("node_names has one more row than nodes (trailing NA sentinel)", {
 # ---------------------------------------------------------------------------
 
 test_that("delay_dist and delay_param are square with nrow == nrow(var_input)", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   n <- nrow(v$var_input)
-  expect_equal(nrow(out$delay_dist),  n)
-  expect_equal(ncol(out$delay_dist),  n)
+  expect_equal(nrow(out$delay_dist), n)
+  expect_equal(ncol(out$delay_dist), n)
   expect_equal(nrow(out$delay_param), n)
   expect_equal(ncol(out$delay_param), n)
 })
@@ -161,11 +175,12 @@ test_that("delay_dist and delay_param are square with nrow == nrow(var_input)", 
 # ---------------------------------------------------------------------------
 
 test_that("delay_list is a two-column matrix starting with (0, 0)", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_true(is.matrix(out$delay_list))
   expect_equal(ncol(out$delay_list), 2)
@@ -179,11 +194,12 @@ test_that("delay_list is a two-column matrix starting with (0, 0)", {
 # ---------------------------------------------------------------------------
 
 test_that("cap_cal_input contains only cap rows and arr_cal_input only ext_arr rows", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_true(all(out$cap_cal_input$metric == "cap"))
   expect_true(all(out$arr_cal_input$metric == "ext_arr"))
@@ -195,16 +211,17 @@ test_that("cap_cal_input contains only cap rows and arr_cal_input only ext_arr r
 # ---------------------------------------------------------------------------
 
 test_that("calendar node column is numeric after name-to-ID conversion", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
   cal <- load_cal("cal_input_3.csv")
 
   out <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                   warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
 
   expect_true(is.numeric(out$cap_cal_input$node) ||
-                all(!is.na(suppressWarnings(as.numeric(out$cap_cal_input$node)))))
+    all(!is.na(suppressWarnings(as.numeric(out$cap_cal_input$node)))))
   expect_true(is.numeric(out$arr_cal_input$node) ||
-                all(!is.na(suppressWarnings(as.numeric(out$arr_cal_input$node)))))
+    all(!is.na(suppressWarnings(as.numeric(out$arr_cal_input$node)))))
 })
 
 
@@ -213,21 +230,25 @@ test_that("calendar node column is numeric after name-to-ID conversion", {
 # ---------------------------------------------------------------------------
 
 test_that("originals are identical to pre-shift calendars; shifted differ when warm_up > 0", {
-  v   <- load_var("input_template_3.csv")
+  v <- load_var("input_template_3.csv")
 
   # Use a cal_input where at least one node has a multi-row calendar so a
   # shift is actually applied. Template 3 cal has multi-row entries.
   cal <- load_cal("cal_input_3.csv")
 
   out_no_warmup <- prepare_simulation_inputs(v$var_input, cal, v$syst_names,
-                                             warm_up = 0, sim_time = 100)
+    warm_up = 0, sim_time = 100
+  )
   cal2 <- load_cal("cal_input_3.csv")
-  out_warmup    <- prepare_simulation_inputs(v$var_input, cal2, v$syst_names,
-                                             warm_up = 25, sim_time = 100)
+  out_warmup <- prepare_simulation_inputs(v$var_input, cal2, v$syst_names,
+    warm_up = 25, sim_time = 100
+  )
 
   # Originals must equal the no-warmup shifted versions (no shift applied when warm_up=0)
-  expect_identical(out_no_warmup$cap_cal_input,
-                   out_no_warmup$cap_cal_input_original)
+  expect_identical(
+    out_no_warmup$cap_cal_input,
+    out_no_warmup$cap_cal_input_original
+  )
 
   # With warm_up > 0, the shifted and original differ (assuming multi-row cal)
   # We check t.period includes the warmup
