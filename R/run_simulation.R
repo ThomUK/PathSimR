@@ -26,87 +26,24 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
     processor_cores_required(reps)
   )
 
-        nodes <-
-          as.numeric(rownames(var_input[which(rowSums(var_input[, 1:which(colnames(var_input) ==
-            "serv_dist") - 1], na.rm = T) != 0), ])) ## create a list of the service nodes
-        node_names <- syst_names[nodes, ]
-        node_names <- rbind(node_names, c(NA, NA))
-        rownames(node_names) <- c()
-
-
-        delay_dist <-
-          var_input[, (nrow(var_input) + 5):(nrow(var_input) + nrow(var_input) + 4)] ## Import the template in csv
-        rownames(delay_dist) <- 1:nrow(delay_dist)
-        colnames(delay_dist)[1:nrow(delay_dist)] <- c(1:nrow(delay_dist))
-        delay_dist[which(delay_dist == "", arr.ind = T)] <- NA
-
-        delay_param <-
-          var_input[, (nrow(var_input) + nrow(var_input) + 5):(ncol(var_input))] ## Import the template in csv
-        rownames(delay_param) <- 1:nrow(delay_param)
-        colnames(delay_param)[1:nrow(delay_param)] <-
-          c(1:nrow(delay_param))
-        delay_param[which(delay_param == "", arr.ind = T)] <- NA
-
+        logger::log_trace("Sim preparing inputs.")
+        sim_inputs <- prepare_simulation_inputs(var_input, cal_input, syst_names,
+                                                warm_up, sim_time)
+        nodes                  <- sim_inputs$nodes
+        node_names             <- sim_inputs$node_names
+        delay_dist             <- sim_inputs$delay_dist
+        delay_param            <- sim_inputs$delay_param
+        delay_list             <- sim_inputs$delay_list
+        cap_cal_input          <- sim_inputs$cap_cal_input
+        arr_cal_input          <- sim_inputs$arr_cal_input
+        cap_cal_input_original <- sim_inputs$cap_cal_input_original
+        arr_cal_input_original <- sim_inputs$arr_cal_input_original
+        record_scale           <- sim_inputs$record_scale
+        na_lim                 <- sim_inputs$na_lim
+        rpi                    <- sim_inputs$rpi
+        t.period               <- sim_inputs$t.period
 
         rep_bed <- list()
-
-        from <- c(0)
-        to <- c(0)
-
-
-        for (i in 1:nrow(delay_dist)) {
-          for (j in 1:nrow(delay_dist)) {
-            if (!is.na(delay_dist[i, j])) {
-              from <- c(from, i)
-              to <- c(to, j)
-            }
-          }
-        }
-
-        delay_list <- cbind(from, to)
-
-        #
-        # cal_input<-read.csv(input$file2$datapath,header = TRUE,sep = ",") ## Import the template in csv
-        # cal_input$node<-as.character(cal_input$node)
-        #
-
-
-        if (!is.null(nrow(node_names))) {
-          for (i in 1:nrow(node_names)) {
-            cal_input$node[as.character(cal_input$node) == node_names[i, 2]] <-
-              as.numeric(i)
-          }
-        }
-
-        if (is.null(nrow(node_names))) {
-          cal_input$node[as.character(cal_input$node) == node_names[2]] <- 1
-        }
-
-        cap_cal_input <- cal_input[which(cal_input$metric == "cap"), ]
-        cap_cal_input <- as.data.frame(cap_cal_input)
-
-        arr_cal_input <- cal_input[which(cal_input$metric == "ext_arr"), ]
-        arr_cal_input <- as.data.frame(arr_cal_input)
-        cap_cal_input_original <- cap_cal_input
-        arr_cal_input_original <- arr_cal_input
-
-
-
-        ### Shifting Calendars so that the start of the sim_time is the equivalent of 0 on the calendar
-        logger::log_trace("Sim shifting calendars.")
-        shifted <- shift_calendars(cap_cal_input, arr_cal_input, nodes, warm_up)
-        cap_cal_input <- shifted$cap_cal_input
-        arr_cal_input <- shifted$arr_cal_input
-
-        # Sets the timer
-        logger::log_trace("Sim setting timer.")
-
-        record_scale <- 0.8
-        na_lim <- 100
-        rpi <- 0.1
-
-
-        t.period <- warm_up + sim_time # Sets simulation period
 
 
 
