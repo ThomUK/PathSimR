@@ -1191,7 +1191,7 @@ mod_network_visualisation_server <- function(id, var, cal, parent_session) {
       graph$global_attrs <-
         rbind(graph$global_attrs, c("splines", "true", "graph"))
 
-      showTab(inputId = "navbar", target = "2. Simulation Setup & Run")
+      showTab(inputId = "navbar", target = "2. Simulation Setup & Run", session = parent_session)
 
       output$next_button <- renderUI({
         column(6, align = "center", actionButton(inputId = ns("j2PSR2"), label = c(tagList(
