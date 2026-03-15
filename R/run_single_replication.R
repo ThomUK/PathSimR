@@ -31,7 +31,7 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
                                    record_scale, na_lim, rpi,
                                    warm_up, sim_time, t.period,
                                    node_names, reps) {
-  # print(paste("replicate",j))
+  logger::log_info("Replication {j} of {reps} starting.")
 
   # shiny:: namespace required inside parallel operations
   # (shiny::req removed - not needed when called outside Shiny)
