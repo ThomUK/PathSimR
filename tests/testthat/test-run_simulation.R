@@ -107,6 +107,40 @@ test_that("run_simulation snapshot matches for template 3 (simple 4-node)", {
 
 
 # ---------------------------------------------------------------------------
+# Cluster cleanup: stopCluster must be called even when the simulation errors
+# after makeCluster — prevents orphaned workers holding ports on subsequent runs
+# ---------------------------------------------------------------------------
+test_that("stopCluster is called via on.exit when simulation errors after makeCluster", {
+  stop_called <- FALSE
+
+  local_mocked_bindings(
+    makeCluster      = function(...) list(),                       # fake cluster, no workers
+    clusterExport    = function(...) stop("forced test error"),    # fail before any sim runs
+    stopCluster      = function(cl) stop_called <<- TRUE,
+    .package = "parallel"
+  )
+
+  v <- load_var_input(test_path("fixtures", "input_template_3.csv"))
+  cal_input <- load_cal_input(test_path("fixtures", "cal_input_3.csv"))
+
+  expect_error(
+    run_simulation(
+      var_input         = v$var_input,
+      cal_input         = cal_input,
+      sim_time          = 10,
+      warm_up           = 0,
+      reps              = 1,
+      syst_names        = v$syst_names,
+      syst_names_single = v$syst_names_single
+    ),
+    "forced test error"
+  )
+
+  expect_true(stop_called, "stopCluster must be called even when simulation errors mid-run")
+})
+
+
+# ---------------------------------------------------------------------------
 # Template 3 with warm-up: verifies calendar-shifting logic is preserved
 # ---------------------------------------------------------------------------
 test_that("run_simulation snapshot matches for template 3 with warm-up", {

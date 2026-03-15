@@ -24,6 +24,7 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
   cluster <- parallel::makeCluster(
     processor_cores_required(reps)
   )
+  on.exit(parallel::stopCluster(cluster), add = TRUE)
 
   logger::log_trace("Sim preparing inputs.")
   sim_inputs <- prepare_simulation_inputs(
@@ -123,9 +124,6 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
     cap_cal_input_original = sim_inputs$cap_cal_input_original,
     arr_cal_input_original = sim_inputs$arr_cal_input_original
   )
-
-
-  parallel::stopCluster(cluster)
 
 
   # change to check on number of simulation outputs ####
