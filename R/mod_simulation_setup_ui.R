@@ -137,7 +137,6 @@ mod_simulation_setup_ui <- function(id) {
         h5(
           "Step 5: Simulation Outputs and Download Outputs tabs are now available"
         ),
-
         hr(),
         fluidRow(column(
           12,
@@ -214,7 +213,6 @@ mod_simulation_setup_ui <- function(id) {
         ),
         width = 3
       ),
-
       mainPanel(
         fluidRow(
           column(4, align = "center", tableOutput(ns("checklist_table_render"))),

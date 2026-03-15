@@ -114,9 +114,9 @@ test_that("stopCluster is called via on.exit when simulation errors after makeCl
   stop_called <- FALSE
 
   local_mocked_bindings(
-    makeCluster      = function(...) list(),                       # fake cluster, no workers
-    clusterExport    = function(...) stop("forced test error"),    # fail before any sim runs
-    stopCluster      = function(cl) stop_called <<- TRUE,
+    makeCluster = function(...) list(), # fake cluster, no workers
+    clusterExport = function(...) stop("forced test error"), # fail before any sim runs
+    stopCluster = function(cl) stop_called <<- TRUE,
     .package = "parallel"
   )
 
