@@ -23,13 +23,13 @@ app_ui <- function(request) {
       ui_tab_overview_and_glossary(),
 
       #### WIZARD 1 - SETUP TAB ####
-      ui_tab_wizard_1(),
+      mod_wizard_ui_1("wizard"),
 
       #### WIZARD 2 - DATA ENTRY TAB ####
-      ui_tab_wizard_2(),
+      mod_wizard_ui_2("wizard"),
 
       #### WIZARD 3 - FINAL WIZARD TABLES & DOWNLOAD TAB ####
-      ui_tab_wizard_3(),
+      mod_wizard_ui_3("wizard"),
 
       #### SERVICE DISTRIBUTION TOOL TAB ####
       mod_distribution_tool_ui("distribution_tool"),
