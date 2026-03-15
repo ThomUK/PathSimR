@@ -5,7 +5,6 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
-  #### SHINY SERVER CODE (INC SIM CODE) ####
 
   #### Navigation Buttons ####
   logger::log_debug("Configuring tab hiding and selection behaviour.")
@@ -20,8 +19,8 @@ app_server <- function(input, output, session) {
   hideTab(inputId = "navbar", target = "Service Distribution Tool")
 
 
-
-  observeEvent(input$j2w, {
+  # button to go to wizard
+  observeEvent(input$intro_goto_wizard, {
     hideTab(inputId = "navbar", target = "1. Network Import & Visualisation")
     hideTab(inputId = "navbar", target = "2. Simulation Setup & Run")
     hideTab(inputId = "navbar", target = "3. Simulation Outputs")
@@ -33,14 +32,13 @@ app_server <- function(input, output, session) {
 
     showTab(inputId = "navbar", target = "W1. Setup")
 
-
     updateTabsetPanel(session, "navbar",
       selected = "W1. Setup"
     )
   })
 
-
-  observeEvent(input$j2s1, {
+ # button to go to simulation tool
+  observeEvent(input$intro_goto_sim, {
     hideTab(inputId = "navbar", target = "1. Network Import & Visualisation")
     hideTab(inputId = "navbar", target = "2. Simulation Setup & Run")
     hideTab(inputId = "navbar", target = "3. Simulation Outputs")
@@ -51,6 +49,7 @@ app_server <- function(input, output, session) {
     hideTab(inputId = "navbar", target = "Service Distribution Tool")
 
     showTab(inputId = "navbar", target = "1. Network Import & Visualisation")
+
     updateTabsetPanel(session, "navbar",
       selected = "1. Network Import & Visualisation"
     )
@@ -67,10 +66,6 @@ app_server <- function(input, output, session) {
 
   #### Service Distribution Tool Module ####
   mod_distribution_tool_server("distribution_tool")
-
-  logger::log_debug("Wizard complete.")
-  ###### END OF WIZARD#######
-  ###### START OF SIMULATION TOOL##########
 
   #### Network Visualisation Module ####
   network_viz <- mod_network_visualisation_server("network_visualisation", wizard$var, wizard$cal, session)

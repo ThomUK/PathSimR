@@ -48,7 +48,7 @@ ui_tab_introduction <- function() {
           12,
           align = "center",
           actionButton(
-            inputId = "j2w",
+            inputId = "intro_goto_wizard",
             label = "Start Pathway Wizard",
             icon = icon("magic"),
             style = "padding:16px; font-size:150%"
@@ -59,7 +59,7 @@ ui_tab_introduction <- function() {
           12,
           align = "center",
           actionButton(
-            inputId = "j2s1",
+            inputId = "intro_goto_sim",
             label = "Start Simulation Tool",
             icon = icon("project-diagram"),
             style = "padding:16px; font-size:150%"
