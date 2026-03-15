@@ -38,7 +38,7 @@ app_ui <- function(request) {
       mod_network_visualisation_ui("network_visualisation"),
 
       #### TOOL 2 - SIMULATION SETUP & RUN TAB ####
-      ui_tab_tool_2(),
+      mod_simulation_setup_ui("simulation_setup"),
 
       #### TOOL 3 - SIMULATION OUTPUTS TAB ####
       mod_simulation_outputs_ui("simulation_outputs"),
