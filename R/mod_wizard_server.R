@@ -41,13 +41,13 @@ mod_wizard_server <- function(id, parent_session) {
 
     #### Navigation Buttons ####
 
-    observeEvent(input$jb2i2, {
+    observeEvent(input$w1_back, {
       updateTabsetPanel(parent_session, "navbar",
         selected = "Introduction"
       )
     })
 
-    observeEvent(input$j2de, {
+    observeEvent(input$w1_next, {
       showTab(inputId = "navbar", target = "W2. Data Entry", session = parent_session)
       showTab(inputId = "navbar", target = "Service Distribution Tool", session = parent_session)
       updateTabsetPanel(parent_session, "navbar",
@@ -55,27 +55,27 @@ mod_wizard_server <- function(id, parent_session) {
       )
     })
 
-    observeEvent(input$j2s, {
+    observeEvent(input$w2_prev, {
       updateTabsetPanel(parent_session, "navbar",
         selected = "W1. Setup"
       )
     })
 
-    observeEvent(input$j2ftd, {
+    observeEvent(input$w2_next, {
       showTab(inputId = "navbar", target = "W3. Final Wizard Tables & Download", session = parent_session)
       updateTabsetPanel(parent_session, "navbar",
         selected = "W3. Final Wizard Tables & Download"
       )
     })
 
-    observeEvent(input$jb2de, {
+    observeEvent(input$w3_prev, {
       showTab(inputId = "navbar", target = "W2. Data Entry", session = parent_session)
       updateTabsetPanel(parent_session, "navbar",
         selected = "W2. Data Entry"
       )
     })
 
-    observeEvent(input$j2PSR, {
+    observeEvent(input$w3_to_sim, {
       showTab(inputId = "navbar", target = "1. Network Import & Visualisation", session = parent_session)
       updateTabsetPanel(parent_session, "navbar",
         selected = "1. Network Import & Visualisation"
@@ -1759,9 +1759,9 @@ mod_wizard_server <- function(id, parent_session) {
         }
       })
 
-      output$j2st <- renderUI({
+      output$w3_to_sim_ui <- renderUI({
         if (length(issues) == 0) {
-          column(6, align = "center", actionButton(inputId = session$ns("j2PSR"), label = c(
+          column(6, align = "center", actionButton(inputId = session$ns("w3_to_sim"), label = c(
             tagList("Move to Simulation Tool", icon("arrow-right"))
           )))
         }

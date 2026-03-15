@@ -93,13 +93,13 @@ mod_wizard_ui_1 <- function(id) {
             6,
             align = "center",
             actionButton(
-              inputId = ns("jb2i2"),
+              inputId = ns("w1_back"),
               label = "Back to Intro",
               icon = icon("arrow-left")
             )
           ),
           column(6, align = "center", actionButton(
-            inputId = ns("j2de"), label = c(tagList("Next", icon("arrow-right")))
+            inputId = ns("w1_next"), label = c(tagList("Next", icon("arrow-right")))
           ))
         ),
         width = 3
@@ -436,13 +436,13 @@ mod_wizard_ui_2 <- function(id) {
             6,
             align = "center",
             actionButton(
-              inputId = ns("j2s"),
+              inputId = ns("w2_prev"),
               label = "Previous",
               icon = icon("arrow-left")
             )
           ),
           column(6, align = "center", actionButton(
-            inputId = ns("j2ftd"), label = c(tagList("Next", icon("arrow-right")))
+            inputId = ns("w2_next"), label = c(tagList("Next", icon("arrow-right")))
           ))
         ),
         width = 3
@@ -510,12 +510,12 @@ mod_wizard_ui_3 <- function(id) {
             6,
             align = "center",
             actionButton(
-              inputId = ns("jb2de"),
+              inputId = ns("w3_prev"),
               label = "Previous",
               icon = icon("arrow-left")
             )
           ),
-          uiOutput(ns("j2st"))
+          uiOutput(ns("w3_to_sim_ui"))
         ),
         width = 3
       ),
