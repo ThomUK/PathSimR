@@ -177,7 +177,6 @@ mod_wizard_server <- function(id, parent_session) {
 
 
       #### Creates the transition probability inputs & delay departure entry (dynamic based on number of nodes & exits) ####
-      logger::log_debug("Creating transition probability and delay departures.")
       for (j in 1:node_number) {
         assign(
           x = paste0("transition_", j),

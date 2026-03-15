@@ -26,7 +26,6 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
   )
   on.exit(parallel::stopCluster(cluster), add = TRUE)
 
-  logger::log_trace("Sim preparing inputs.")
   sim_inputs <- prepare_simulation_inputs(
     var_input, cal_input, syst_names,
     warm_up, sim_time
@@ -87,7 +86,7 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
 
 
   ####### SIMULATION CODE ##################################################################
-  logger::log_trace("Sim core simulation start.")
+  logger::log_debug("Parallel workers starting.")
   outputs <- parallel::parLapply(
     cl = cluster,
     X = 1:reps,

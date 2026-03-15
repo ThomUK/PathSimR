@@ -8,7 +8,6 @@
 mod_download_outputs_server <- function(id, sim_out) {
   moduleServer(id, function(input, output, session) {
     ### XLSX DOWNLOAD HANDLER #####
-    logger::log_debug("Preparing xlsx download handler.")
 
     output$downloadtables <- downloadHandler(
       filename = function() {
@@ -76,8 +75,6 @@ mod_download_outputs_server <- function(id, sim_out) {
     )
 
     ### PLOT DOWNLOAD HANDLER #####
-    logger::log_debug("Preparing plot download handler.")
-
     output$downloadplot <- downloadHandler(
       filename = "Plots.pdf",
       content = function(file) {
@@ -123,8 +120,6 @@ mod_download_outputs_server <- function(id, sim_out) {
     )
 
     ### RMARKDOWN DOWNLOAD HANDLER #####
-    logger::log_debug("Preparing RMarkdown download handler.")
-
     output$downloadreport <- downloadHandler(
       filename = paste0("PathSimR_Report.docx"),
       content = function(file) {

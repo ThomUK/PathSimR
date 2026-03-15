@@ -150,7 +150,6 @@ mod_simulation_setup_server <- function(id, network_viz, parent_session) {
             ))))
           })
 
-          logger::log_trace("Sim inputs.")
           inp <- network_viz$inputs()
           var_input <- inp$var_input
           cal_input <- inp$cal_input

@@ -7,7 +7,6 @@
 app_server <- function(input, output, session) {
 
   #### Navigation Buttons ####
-  logger::log_debug("Configuring tab hiding and selection behaviour.")
 
   hideTab(inputId = "navbar", target = "1. Network Import & Visualisation")
   hideTab(inputId = "navbar", target = "2. Simulation Setup & Run")
@@ -61,7 +60,6 @@ app_server <- function(input, output, session) {
 
 
   #### Wizard Module ####
-  logger::log_debug("Starting wizard.")
   wizard <- mod_wizard_server("wizard", session)
 
   #### Service Distribution Tool Module ####
