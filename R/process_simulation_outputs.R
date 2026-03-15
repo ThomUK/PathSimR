@@ -176,142 +176,142 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   rejected <- data.table::rbindlist(rejected)
 
   node_wait_summary <-
-    node_wait %>%
-    group_by(node) %>%
+    node_wait |>
+    group_by(node) |>
     summarise(
       metric = "wait",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   node_active_service_summary <-
-    node_active_service %>%
-    group_by(node) %>%
+    node_active_service |>
+    group_by(node) |>
     summarise(
       metric = "active_service",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   node_capacity_delay_summary <-
-    node_capacity_delay %>%
-    group_by(node) %>%
+    node_capacity_delay |>
+    group_by(node) |>
     summarise(
       metric = "capacity_delay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   node_transition_delay_summary <-
-    node_transition_delay %>%
-    group_by(node) %>%
+    node_transition_delay |>
+    group_by(node) |>
     summarise(
       metric = "transition_delay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   node_length_of_stay_summary <-
-    node_length_of_stay %>%
-    group_by(node) %>%
+    node_length_of_stay |>
+    group_by(node) |>
     summarise(
       metric = "length_of_stay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   node_delay_to_transfer_summary <-
-    node_delay_to_transfer %>%
-    group_by(node) %>%
+    node_delay_to_transfer |>
+    group_by(node) |>
     summarise(
       metric = "delay_to_transfer",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
 
   pat_wait_summary <-
-    pat_wait %>%
+    pat_wait |>
     summarise(
       metric = "wait",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   pat_active_service_summary <-
-    pat_active_service %>%
+    pat_active_service |>
     summarise(
       metric = "active_service",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   pat_capacity_delay_summary <-
-    pat_capacity_delay %>%
+    pat_capacity_delay |>
     summarise(
       metric = "capacity_delay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   pat_transition_delay_summary <-
-    pat_transition_delay %>%
+    pat_transition_delay |>
     summarise(
       metric = "transition_delay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   pat_length_of_stay_summary <-
-    pat_length_of_stay %>%
+    pat_length_of_stay |>
     summarise(
       metric = "length_of_stay",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   pat_delay_to_transfer_summary <-
-    pat_delay_to_transfer %>%
+    pat_delay_to_transfer |>
     summarise(
       metric = "delay_to_transfer",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
 
   total_time_in_system_summary <-
-    total_time_in_system %>%
+    total_time_in_system |>
     summarise(
       metric = "total_time_in_system",
       mean = mean(mean, na.rm = T),
       sd = mean(sd, na.rm = T),
       iqr = mean(iqr, na.rm = T),
       percentile_95 = mean(percentile_95, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
 
   pat_rep_summary <-
@@ -335,9 +335,9 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   rejected_summary <-
-    rejected %>%
-    group_by(node) %>%
-    summarise(mean = mean(mean)) %>%
+    rejected |>
+    group_by(node) |>
+    summarise(mean = mean(mean)) |>
     as.data.frame()
 
   ### Create the delayed metrics ######################################################
@@ -354,8 +354,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptd_total <- ptd_total[, -4]
 
   ptd_time <-
-    ptd_total %>%
-    group_by(node, delayed) %>%
+    ptd_total |>
+    group_by(node, delayed) |>
     mutate(
       time_at_delayed_level =
         sum(time_at_delayed_level) / reps
@@ -366,15 +366,15 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptd_time <- ptd_time[order(ptd_time$node, ptd_time$delayed), ]
 
   ptd_percent <-
-    ptd_time %>%
-    group_by(node) %>%
+    ptd_time |>
+    group_by(node) |>
     transmute(
       delayed,
       percent_time_at_delayed_level = 100 * time_at_delayed_level / sum(time_at_delayed_level)
     )
   ptd_percent <-
-    ptd_percent %>%
-    group_by(node) %>%
+    ptd_percent |>
+    group_by(node) |>
     transmute(
       delayed,
       percent_time_at_delayed_level,
@@ -396,7 +396,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   ptd_plot <-
     ggplot(
-      data = ptd_percent %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
+      data = ptd_percent |> mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
       aes(x = delayed, y = percent_time_at_delayed_level, fill = node)
     ) +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -468,10 +468,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     X = ptd,
     FUN = function(ptd) {
       tmp <-
-        ptd %>%
-        group_by(node) %>%
+        ptd |>
+        group_by(node) |>
         summarise(avg_delayed = sum(delayed * time_at_delayed_level) /
-          sum(time_at_delayed_level)) %>%
+          sum(time_at_delayed_level)) |>
         as.data.frame()
       tmp$node <- node_names[tmp$node, 2]
       tmp
@@ -481,10 +481,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   avg_delayed_summary <-
-    ptd_time %>%
-    group_by(node) %>%
+    ptd_time |>
+    group_by(node) |>
     summarise(avg_delayed = sum(delayed * time_at_delayed_level) /
-      sum(time_at_delayed_level)) %>%
+      sum(time_at_delayed_level)) |>
     as.data.frame()
   avg_delayed_summary$node <- node_names[avg_delayed_summary$node, 2]
 
@@ -512,8 +512,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptq_total <- ptq_total[, -4]
 
   ptq_time <-
-    ptq_total %>%
-    group_by(node, queue) %>%
+    ptq_total |>
+    group_by(node, queue) |>
     mutate(time_at_queue_length = sum(time_at_queue_length) /
       reps)
   ptq_time <- as.data.frame(ptq_time)
@@ -522,15 +522,15 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptq_time <- ptq_time[order(ptq_time$node, ptq_time$queue), ]
 
   ptq_percent <-
-    ptq_time %>%
-    group_by(node) %>%
+    ptq_time |>
+    group_by(node) |>
     transmute(
       queue,
       percent_time_at_queue_length = 100 * time_at_queue_length / sum(time_at_queue_length)
     )
   ptq_percent <-
-    ptq_percent %>%
-    group_by(node) %>%
+    ptq_percent |>
+    group_by(node) |>
     transmute(
       queue,
       percent_time_at_queue_length,
@@ -551,7 +551,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   ptq_plot <-
     ggplot(
-      data = ptq_percent %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
+      data = ptq_percent |> mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
       aes(x = queue, y = percent_time_at_queue_length, fill = node)
     ) +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -628,10 +628,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     X = ptq,
     FUN = function(ptq) {
       tmp <-
-        ptq %>%
-        group_by(node) %>%
+        ptq |>
+        group_by(node) |>
         summarise(avg_queue = sum(queue * time_at_queue_length) /
-          sum(time_at_queue_length)) %>%
+          sum(time_at_queue_length)) |>
         as.data.frame()
       tmp$node <- node_names[tmp$node, 2]
       tmp
@@ -641,10 +641,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   avg_queue_summary <-
-    ptq_time %>%
-    group_by(node) %>%
+    ptq_time |>
+    group_by(node) |>
     summarise(avg_queue = sum(queue * time_at_queue_length) /
-      sum(time_at_queue_length)) %>%
+      sum(time_at_queue_length)) |>
     as.data.frame()
   avg_queue_summary$node <- node_names[avg_queue_summary$node, 2]
 
@@ -665,8 +665,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   pto_total <- pto_total[, -4]
 
   pto_time <-
-    pto_total %>%
-    group_by(node, occupancy) %>%
+    pto_total |>
+    group_by(node, occupancy) |>
     mutate(time_at_occupancy = sum(time_at_occupancy) /
       reps)
   pto_time <- as.data.frame(pto_time)
@@ -675,15 +675,15 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   pto_time <- pto_time[order(pto_time$node, pto_time$occupancy), ]
 
   pto_percent <-
-    pto_time %>%
-    group_by(node) %>%
+    pto_time |>
+    group_by(node) |>
     transmute(
       occupancy,
       percent_time_at_occupancy = 100 * time_at_occupancy / sum(time_at_occupancy)
     )
   pto_percent <-
-    pto_percent %>%
-    group_by(node) %>%
+    pto_percent |>
+    group_by(node) |>
     transmute(
       occupancy,
       percent_time_at_occupancy,
@@ -704,7 +704,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   pto_plot <-
     ggplot(
-      data = pto_percent %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
+      data = pto_percent |> mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
       aes(x = occupancy, y = percent_time_at_occupancy, fill = node)
     ) +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -780,10 +780,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     X = pto,
     FUN = function(pto) {
       tmp <-
-        pto %>%
-        group_by(node) %>%
+        pto |>
+        group_by(node) |>
         summarise(avg_occupancy = sum(occupancy * time_at_occupancy) /
-          sum(time_at_occupancy)) %>%
+          sum(time_at_occupancy)) |>
         as.data.frame()
       tmp$node <- node_names[tmp$node, 2]
       tmp
@@ -793,10 +793,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   avg_occupancy_summary <-
-    pto_time %>%
-    group_by(node) %>%
+    pto_time |>
+    group_by(node) |>
     summarise(avg_occupancy = sum(occupancy *
-      time_at_occupancy) / sum(time_at_occupancy)) %>%
+      time_at_occupancy) / sum(time_at_occupancy)) |>
     as.data.frame()
   avg_occupancy_summary$node <-
     node_names[avg_occupancy_summary$node, 2]
@@ -820,8 +820,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptt_total <- ptt_total[, -4]
 
   ptt_time <-
-    ptt_total %>%
-    group_by(node, transition) %>%
+    ptt_total |>
+    group_by(node, transition) |>
     mutate(
       time_at_transition_level =
         sum(time_at_transition_level) / reps
@@ -832,15 +832,15 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptt_time <- ptt_time[order(ptt_time$node, ptt_time$transition), ]
 
   ptt_percent <-
-    ptt_time %>%
-    group_by(node) %>%
+    ptt_time |>
+    group_by(node) |>
     transmute(
       transition,
       percent_time_at_transition_level = 100 * time_at_transition_level / sum(time_at_transition_level)
     )
   ptt_percent <-
-    ptt_percent %>%
-    group_by(node) %>%
+    ptt_percent |>
+    group_by(node) |>
     transmute(
       transition,
       percent_time_at_transition_level,
@@ -861,7 +861,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   ptt_plot <-
     ggplot(
-      data = ptt_percent %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
+      data = ptt_percent |> mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
       aes(x = transition, y = percent_time_at_transition_level, fill = node)
     ) +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -935,11 +935,11 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     X = ptt,
     FUN = function(ptt) {
       tmp <-
-        ptt %>%
-        group_by(node) %>%
+        ptt |>
+        group_by(node) |>
         summarise(
           avg_transition = sum(transition * time_at_transition_level) / sum(time_at_transition_level)
-        ) %>%
+        ) |>
         as.data.frame()
       tmp$node <- node_names[tmp$node, 2]
       tmp
@@ -949,11 +949,11 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   avg_transition_summary <-
-    ptt_time %>%
-    group_by(node) %>%
+    ptt_time |>
+    group_by(node) |>
     summarise(
       avg_transition = sum(transition * time_at_transition_level) / sum(time_at_transition_level)
-    ) %>%
+    ) |>
     as.data.frame()
   avg_transition_summary$node <-
     node_names[avg_transition_summary$node, 2]
@@ -979,8 +979,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptb_total <- ptb_total[, -4]
 
   ptb_time <-
-    ptb_total %>%
-    group_by(node, occ_bed) %>%
+    ptb_total |>
+    group_by(node, occ_bed) |>
     mutate(
       time_at_occ_bed_level =
         sum(time_at_occ_bed_level) / reps
@@ -991,15 +991,15 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   ptb_time <- ptb_time[order(ptb_time$node, ptb_time$occ_bed), ]
 
   ptb_percent <-
-    ptb_time %>%
-    group_by(node) %>%
+    ptb_time |>
+    group_by(node) |>
     transmute(
       occ_bed,
       percent_time_at_occ_bed_level = 100 * time_at_occ_bed_level / sum(time_at_occ_bed_level)
     )
   ptb_percent <-
-    ptb_percent %>%
-    group_by(node) %>%
+    ptb_percent |>
+    group_by(node) |>
     transmute(
       occ_bed,
       percent_time_at_occ_bed_level,
@@ -1020,7 +1020,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   ptb_plot <-
     ggplot(
-      data = ptb_percent %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
+      data = ptb_percent |> mutate(node = str_replace_all(node, pattern = "_", replacement = " ")),
       aes(x = occ_bed, y = percent_time_at_occ_bed_level, fill = node)
     ) +
     geom_bar(stat = "identity", position = position_dodge()) +
@@ -1099,10 +1099,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     X = ptb,
     FUN = function(ptb) {
       tmp <-
-        ptb %>%
-        group_by(node) %>%
+        ptb |>
+        group_by(node) |>
         summarise(avg_occ_bed = sum(occ_bed * time_at_occ_bed_level) /
-          sum(time_at_occ_bed_level)) %>%
+          sum(time_at_occ_bed_level)) |>
         as.data.frame()
       tmp$node <- node_names[tmp$node, 2]
       tmp
@@ -1112,10 +1112,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
 
   avg_occ_bed_summary <-
-    ptb_time %>%
-    group_by(node) %>%
+    ptb_time |>
+    group_by(node) |>
     summarise(avg_occ_bed = sum(occ_bed * time_at_occ_bed_level) /
-      sum(time_at_occ_bed_level)) %>%
+      sum(time_at_occ_bed_level)) |>
     as.data.frame()
   avg_occ_bed_summary$node <- node_names[avg_occ_bed_summary$node, 2]
 
@@ -1143,8 +1143,8 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
     )
 
 
-  avg_through_time <- through_time_uniform_gather %>%
-    group_by(time, node, metric) %>%
+  avg_through_time <- through_time_uniform_gather |>
+    group_by(time, node, metric) |>
     summarise(
       mean = mean(value, na.rm = T),
       L99 = quantile(value, 0.005, na.rm = T),
@@ -1153,7 +1153,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
       U95 = quantile(value, 0.975, na.rm = T),
       L50 = quantile(value, 0.25, na.rm = T),
       U50 = quantile(value, 0.75, na.rm = T)
-    ) %>%
+    ) |>
     as.data.frame()
   avg_through_time$metric <-
     factor(
@@ -1165,7 +1165,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   avg_through_time$node <-
     factor(x = avg_through_time$node, levels = syst_names_single)
 
-  avg_through_time_plot <- ggplot(avg_through_time %>% mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
+  avg_through_time_plot <- ggplot(avg_through_time |> mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_ribbon(aes(
       x = time,
       ymin = L99,
@@ -1243,9 +1243,9 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   total_in_system <- total_in_system[, c(1, 3, 5)]
 
   total_in_system_dat <-
-    total_in_system %>%
-    group_by(time, rep) %>%
-    summarise("value" = sum(value)) %>%
+    total_in_system |>
+    group_by(time, rep) |>
+    summarise("value" = sum(value)) |>
     as.data.frame()
 
 
@@ -1254,7 +1254,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   # the plot "o" ####
   o <-
-    ggplot(data = through_time_mini[which(through_time_mini$metric == "occupancy"), ] %>%
+    ggplot(data = through_time_mini[which(through_time_mini$metric == "occupancy"), ] |>
       mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_step(aes(x = time, y = value, col = node)) +
     facet_grid(node ~ rep, labeller = label_wrap_gen(15)) +
@@ -1269,7 +1269,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   # the plot "q" ####
   q <-
-    ggplot(data = through_time_mini[which(through_time_mini$metric == "queue"), ] %>%
+    ggplot(data = through_time_mini[which(through_time_mini$metric == "queue"), ] |>
       mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_step(aes(x = time, y = value, col = node)) +
     facet_grid(node ~ rep, labeller = label_wrap_gen(15)) +
@@ -1284,7 +1284,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   # the plot "d" ####
   d <-
-    ggplot(data = through_time_mini[which(through_time_mini$metric == "delayed"), ] %>%
+    ggplot(data = through_time_mini[which(through_time_mini$metric == "delayed"), ] |>
       mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_step(aes(x = time, y = value, col = node)) +
     facet_grid(node ~ rep, labeller = label_wrap_gen(15)) +
@@ -1299,7 +1299,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   # the plot "t" ####
   t <-
-    ggplot(data = through_time_mini[which(through_time_mini$metric == "transition"), ] %>%
+    ggplot(data = through_time_mini[which(through_time_mini$metric == "transition"), ] |>
       mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_step(aes(x = time, y = value, col = node)) +
     facet_grid(node ~ rep, labeller = label_wrap_gen(15)) +
@@ -1314,7 +1314,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   # the plot "b" ####
   b <-
-    ggplot(data = through_time_mini[which(through_time_mini$metric == "occ_bed"), ] %>%
+    ggplot(data = through_time_mini[which(through_time_mini$metric == "occ_bed"), ] |>
       mutate(node = str_replace_all(node, pattern = "_", replacement = " "))) +
     geom_step(aes(x = time, y = value, col = node)) +
     facet_grid(node ~ rep, labeller = label_wrap_gen(15)) +
@@ -1351,53 +1351,53 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
   logger::log_debug("Creating simulation output list (combo).")
 
   combo <- list(
-    total_time_in_system = total_time_in_system %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    total_time_in_system_summary = total_time_in_system_summary %>% mutate(
+    total_time_in_system = total_time_in_system |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    total_time_in_system_summary = total_time_in_system_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    node_wait = node_wait %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    node_wait_summary = node_wait_summary %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    pat_wait = pat_wait %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    pat_wait_summary = pat_wait_summary %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    node_active_service = node_active_service %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    node_active_service_summary = node_active_service_summary %>% mutate(
+    node_wait = node_wait |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    node_wait_summary = node_wait_summary |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_wait = pat_wait |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_wait_summary = pat_wait_summary |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    node_active_service = node_active_service |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    node_active_service_summary = node_active_service_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    pat_active_service = pat_active_service %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    pat_active_service_summary = pat_active_service_summary %>% mutate(
+    pat_active_service = pat_active_service |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_active_service_summary = pat_active_service_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    node_length_of_stay = node_length_of_stay %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    node_length_of_stay_summary = node_length_of_stay_summary %>% mutate(
+    node_length_of_stay = node_length_of_stay |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    node_length_of_stay_summary = node_length_of_stay_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    pat_length_of_stay = pat_length_of_stay %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    pat_length_of_stay_summary = pat_length_of_stay_summary %>% mutate(
+    pat_length_of_stay = pat_length_of_stay |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_length_of_stay_summary = pat_length_of_stay_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    node_delay_to_transfer = node_delay_to_transfer %>% mutate(
+    node_delay_to_transfer = node_delay_to_transfer |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    node_delay_to_transfer_summary = node_delay_to_transfer_summary %>% mutate(
+    node_delay_to_transfer_summary = node_delay_to_transfer_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    pat_delay_to_transfer = pat_delay_to_transfer %>% mutate(
+    pat_delay_to_transfer = pat_delay_to_transfer |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    pat_delay_to_transfer_summary = pat_delay_to_transfer_summary %>% mutate(
+    pat_delay_to_transfer_summary = pat_delay_to_transfer_summary |> mutate(
       metric =
         paste0(metric, " (", time_unit, ")")
     ),
-    pat_rep_summary = pat_rep_summary %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
-    pat_total_summary = pat_total_summary %>% mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_rep_summary = pat_rep_summary |> mutate(metric = paste0(metric, " (", time_unit, ")")),
+    pat_total_summary = pat_total_summary |> mutate(metric = paste0(metric, " (", time_unit, ")")),
     ptd_percent = ptd_percent,
     ptd_plot = ptd_plot,
     avg_delayed = avg_delayed,

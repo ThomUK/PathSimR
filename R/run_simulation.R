@@ -74,14 +74,9 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
 
   parallel::clusterSetRNGStream(cluster)
 
-  # required to pass magrittr package to the parallel core workers,
-  # which cannot be prefixed magrittr:: like other code can
-  # TODO refactor to base pipe once tests are in place
   parallel::clusterEvalQ(
     cl = cluster,
-    c(
-      library(magrittr)
-    )
+    library(logger)
   )
 
 

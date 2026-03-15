@@ -46,7 +46,6 @@ read_network_template <- function(path) {
 #' @returns A data.frame with columns: metric, node, start, end, value.
 #' @export
 read_calendar_template <- function(path) {
-  cal <- read.csv(path, header = TRUE)
-  cal$node <- as.character(cal$node)
-  cal
+  read.csv(path, header = TRUE) |>
+    transform(node = as.character(node))
 }

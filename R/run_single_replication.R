@@ -3908,18 +3908,18 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
   # all_data<-data.table::rbindlist(all_data)
 
   # dplyr:: namespace required inside parallel operations
-  rep_node_dat <- all_data %>%
+  rep_node_dat <- all_data |>
     dplyr::group_by(rep, node)
 
-  pat_dat <- all_data %>%
-    dplyr::group_by(patient, rep) %>%
+  pat_dat <- all_data |>
+    dplyr::group_by(patient, rep) |>
     dplyr::transmute(
       wait = sum(wait),
       service = sum(service),
       delayed = sum(delayed),
       transition = sum(transition)
-    ) %>%
-    dplyr::ungroup() %>%
+    ) |>
+    dplyr::ungroup() |>
     dplyr::group_by(rep)
 
   # change all of the below to include time units? #####
@@ -4091,12 +4091,12 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
 
 
   # dplyr:: namespace required inside parallel operations
-  ttis_dat <- all_data %>%
-    dplyr::group_by(patient, rep) %>%
+  ttis_dat <- all_data |>
+    dplyr::group_by(patient, rep) |>
     dplyr::transmute(ttis = max(dep) - min(arr))
 
-  total_time_in_system <- ttis_dat %>%
-    dplyr::group_by(rep) %>%
+  total_time_in_system <- ttis_dat |>
+    dplyr::group_by(rep) |>
     dplyr::summarise(
       node = "ALL",
       metric = "total_time_in_system",
@@ -4929,11 +4929,11 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
 
     # tidyr:: namespace required inside parallel operations
     uniform_ts <-
-      uniform_ts %>%
+      uniform_ts |>
       tidyr::fill(rep, occ_bed, delayed, occupancy, transition, queue) ## tidyr::fill function changes the NA values to the previous value down the df
 
     uniform_ts <-
-      uniform_ts %>%
+      uniform_ts |>
       tidyr::fill(rep,
         occ_bed,
         delayed,

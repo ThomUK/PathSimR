@@ -264,7 +264,7 @@ mod_distribution_tool_server <- function(id) {
     # in the "fit your own" data tab, which assumes uncensored data
     pre_fitted_data <- read.csv("inst/app/www/fits_for_pathsimr.csv",
       check.names = FALSE
-    ) %>%
+    ) |>
       dplyr::arrange(Names)
 
     output$treatment_select_ui <- renderUI({
