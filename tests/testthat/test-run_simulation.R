@@ -10,36 +10,12 @@
 #   testthat::snapshot_accept("run_simulation")
 
 # ---------------------------------------------------------------------------
-# Helpers: load and pre-process CSVs exactly as the server does
+# Helpers: thin wrappers around the exported reader functions
 # ---------------------------------------------------------------------------
 
-# Returns a list with var_input, syst_names, and syst_names_single —
-# mirroring the server's file-upload path.
-load_var_input <- function(path) {
-  var_input <- read.csv(path, header = TRUE, sep = ",")
+load_var_input <- read_network_template
 
-  syst_names <- cbind(
-    as.numeric(c(1:nrow(var_input))),
-    as.character(var_input[, 1])
-  )
-  syst_names_single <- syst_names[, 2]
-
-  var_input <- var_input[, -1] # drop name column
-  rownames(var_input) <- 1:nrow(var_input)
-  colnames(var_input)[1:nrow(var_input)] <- c(1:nrow(var_input))
-
-  list(
-    var_input = var_input,
-    syst_names = syst_names,
-    syst_names_single = syst_names_single
-  )
-}
-
-load_cal_input <- function(path) {
-  cal_input <- read.csv(path, header = TRUE, sep = ",")
-  cal_input$node <- as.character(cal_input$node)
-  cal_input
-}
+load_cal_input <- read_calendar_template
 
 # Helper: remove non-deterministic elements before snapshotting.
 # - ggplot objects contain environments and are not reliably serialisable.
