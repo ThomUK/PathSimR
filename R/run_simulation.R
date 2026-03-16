@@ -24,8 +24,8 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
   cluster <- parallel::makeCluster(
     processor_cores_required(reps)
   )
+  on.exit(parallel::stopCluster(cluster), add = TRUE)
 
-  logger::log_trace("Sim preparing inputs.")
   sim_inputs <- prepare_simulation_inputs(
     var_input, cal_input, syst_names,
     warm_up, sim_time
@@ -74,19 +74,14 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
 
   parallel::clusterSetRNGStream(cluster)
 
-  # required to pass magrittr package to the parallel core workers,
-  # which cannot be prefixed magrittr:: like other code can
-  # TODO refactor to base pipe once tests are in place
   parallel::clusterEvalQ(
     cl = cluster,
-    c(
-      library(magrittr)
-    )
+    library(logger)
   )
 
 
   ####### SIMULATION CODE ##################################################################
-  logger::log_trace("Sim core simulation start.")
+  logger::log_debug("Parallel workers starting.")
   outputs <- parallel::parLapply(
     cl = cluster,
     X = 1:reps,
@@ -123,9 +118,6 @@ run_simulation <- function(var_input, cal_input, sim_time, warm_up, reps,
     cap_cal_input_original = sim_inputs$cap_cal_input_original,
     arr_cal_input_original = sim_inputs$arr_cal_input_original
   )
-
-
-  parallel::stopCluster(cluster)
 
 
   # change to check on number of simulation outputs ####

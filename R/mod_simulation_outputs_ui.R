@@ -1,8 +1,15 @@
-ui_tab_tool_3 <- function() {
+#' simulation_outputs UI Module
+#'
+#' @param id Internal parameter for {shiny}.
+#'
+#' @import shiny
+#' @noRd
+mod_simulation_outputs_ui <- function(id) {
+  ns <- NS(id)
   tabPanel(
     "3. Simulation Outputs",
     navlistPanel(
-      id = "Simulation Outputs",
+      id = ns("sim_outputs_panels"),
       tabPanel(
         title = "Output Interpretation",
         icon = icon("book"),
@@ -146,7 +153,7 @@ ui_tab_tool_3 <- function() {
         h2(strong("Warm-Up Period Assistance")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           p(
             "The warm-up period represents the time it takes for a simulation to reach stable running conditions and after which results can be recorded.
                          As each simulation starts from empty, it is important that the warm-up period be long enough so that the results collected are reflective of
@@ -154,13 +161,13 @@ ui_tab_tool_3 <- function() {
                                    For highly dynamic systems, you may also need to consult the average through time tab to see how the number of people in each service point and queue is changing. The
                                    warm-up period can be determined in the same way as before but needs to be the time required for all metrics to stabilise."
           ),
-          plotOutput("tisp",
+          plotOutput(ns("tisp"),
             height =
               "850px"
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           h2(strong(
             "Not Available in Full Simulation"
           ))
@@ -179,7 +186,7 @@ ui_tab_tool_3 <- function() {
                         e.g. if a unit has reached capcaity and stayed full, if the queue length has stabilised or if it is continuously increasing, whether the number of patients being delayed
                         due to capacity is lower than expected values."
         ),
-        plotOutput("multi_plot", height = "850px")
+        plotOutput(ns("multi_plot"), height = "850px")
       ),
       tabPanel(
         "Service Point Statistics",
@@ -187,10 +194,10 @@ ui_tab_tool_3 <- function() {
         h2(strong("Service Point Statistics")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(column(
             12,
-            align = "center", DiagrammeR::grVizOutput("tables_viz1", height = "400px")
+            align = "center", DiagrammeR::grVizOutput(ns("tables_viz1"), height = "400px")
           )),
           br(),
           fluidRow(
@@ -198,21 +205,21 @@ ui_tab_tool_3 <- function() {
               4,
               align = "center",
               h4("Wait Time"),
-              tableOutput("node_wait_summary"),
+              tableOutput(ns("node_wait_summary")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Time Delayed (Capacity Driven)"),
-              tableOutput("node_capacity_delay_summary"),
+              tableOutput(ns("node_capacity_delay_summary")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Time Delayed (Transition)"),
-              tableOutput("node_transition_delay_summary"),
+              tableOutput(ns("node_transition_delay_summary")),
               align = "center"
             )
           ),
@@ -221,14 +228,14 @@ ui_tab_tool_3 <- function() {
               4,
               align = "center",
               h4("Length Of Stay"),
-              tableOutput("node_loss"),
+              tableOutput(ns("node_loss")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Delay-To-Transfer"),
-              tableOutput("node_dtts"),
+              tableOutput(ns("node_dtts")),
               align = "center"
             ),
             column(
@@ -236,14 +243,14 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, h4("Rejection Rate"), tableOutput("rejs"),
+            column(2, h4("Rejection Rate"), tableOutput(ns("rejs")),
               align =
                 "center"
             )
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -255,10 +262,10 @@ ui_tab_tool_3 <- function() {
         h2(strong("Pathway Statistics")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(column(
             12,
-            align = "center", DiagrammeR::grVizOutput("tables_viz2", height = "400px")
+            align = "center", DiagrammeR::grVizOutput(ns("tables_viz2"), height = "400px")
           )),
           br(),
           fluidRow(
@@ -266,21 +273,21 @@ ui_tab_tool_3 <- function() {
               4,
               align = "center",
               h4("Wait Time"),
-              tableOutput("pat_wait_summary"),
+              tableOutput(ns("pat_wait_summary")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Time Delayed (Capacity Driven)"),
-              tableOutput("pat_capacity_delay_summary"),
+              tableOutput(ns("pat_capacity_delay_summary")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Time Delayed (Transition)"),
-              tableOutput("pat_transition_delay_summary"),
+              tableOutput(ns("pat_transition_delay_summary")),
               align = "center"
             )
           ),
@@ -289,27 +296,27 @@ ui_tab_tool_3 <- function() {
               4,
               align = "center",
               h4("Length Of Stay"),
-              tableOutput("pat_loss"),
+              tableOutput(ns("pat_loss")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Delay-To-Transfer"),
-              tableOutput("pat_dtts"),
+              tableOutput(ns("pat_dtts")),
               align = "center"
             ),
             column(
               4,
               align = "center",
               h4("Total Time in System"),
-              tableOutput("ttiss"),
+              tableOutput(ns("ttiss")),
               align = "center"
             )
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -321,24 +328,24 @@ ui_tab_tool_3 <- function() {
         h2(strong("Patient Occupancy Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
               align = "center",
               h3("% time at Patient Occupancy level"),
-              plotOutput("pto_plot", height = "500px")
+              plotOutput(ns("pto_plot"), height = "500px")
             ),
             column(
               6,
               align = "center",
               h3("Patient Occupancy for 5 replicates"),
-              plotOutput("o", height = "500px")
+              plotOutput(ns("o"), height = "500px")
             )
           ),
           fluidRow(
-            column(4, align = "center", DT::dataTableOutput("opercentiles")),
-            column(8, align = "center", DT::dataTableOutput("pto_percent"))
+            column(4, align = "center", DT::dataTableOutput(ns("opercentiles"))),
+            column(8, align = "center", DT::dataTableOutput(ns("pto_percent")))
           ),
           fluidRow(
             column(
@@ -346,11 +353,11 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", DT::dataTableOutput("avg_occupancy"))
+            column(2, align = "center", DT::dataTableOutput(ns("avg_occupancy")))
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -362,24 +369,24 @@ ui_tab_tool_3 <- function() {
         h2(strong("Bed Occupancy Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
               align = "center",
               h3("% time at Bed Occupancy level"),
-              plotOutput("ptb_plot", height = "500px")
+              plotOutput(ns("ptb_plot"), height = "500px")
             ),
             column(
               6,
               align = "center",
               h3("Bed Occupancy for 5 replicates"),
-              plotOutput("b", height = "500px")
+              plotOutput(ns("b"), height = "500px")
             )
           ),
           fluidRow(
-            column(4, align = "center", DT::dataTableOutput("bpercentiles")),
-            column(8, align = "center", DT::dataTableOutput("ptb_percent"))
+            column(4, align = "center", DT::dataTableOutput(ns("bpercentiles"))),
+            column(8, align = "center", DT::dataTableOutput(ns("ptb_percent")))
           ),
           fluidRow(
             column(
@@ -387,11 +394,11 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", DT::dataTableOutput("avg_occ_bed"))
+            column(2, align = "center", DT::dataTableOutput(ns("avg_occ_bed")))
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -403,24 +410,24 @@ ui_tab_tool_3 <- function() {
         h2(strong("Capacity Driven Delay Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
               align = "center",
               h3("% time at Capacity Delay level"),
-              plotOutput("ptd_plot", height = "500px")
+              plotOutput(ns("ptd_plot"), height = "500px")
             ),
             column(
               6,
               align = "center",
               h3("Capacity Delay Level for 5 replicates"),
-              plotOutput("d", height = "500px")
+              plotOutput(ns("d"), height = "500px")
             )
           ),
           fluidRow(
-            column(4, align = "center", DT::dataTableOutput("dpercentiles")),
-            column(8, align = "center", DT::dataTableOutput("ptd_percent"))
+            column(4, align = "center", DT::dataTableOutput(ns("dpercentiles"))),
+            column(8, align = "center", DT::dataTableOutput(ns("ptd_percent")))
           ),
           fluidRow(
             column(
@@ -428,11 +435,11 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", DT::dataTableOutput("avg_delayed"))
+            column(2, align = "center", DT::dataTableOutput(ns("avg_delayed")))
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -444,24 +451,24 @@ ui_tab_tool_3 <- function() {
         h2(strong("Transition Delay Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
               align = "center",
               h3("% time at Transition Delay level"),
-              plotOutput("ptt_plot", height = "500px")
+              plotOutput(ns("ptt_plot"), height = "500px")
             ),
             column(
               6,
               align = "center",
               h3("Transition Delay Level for 5 replicates"),
-              plotOutput("t", height = "500px")
+              plotOutput(ns("t"), height = "500px")
             )
           ),
           fluidRow(
-            column(4, align = "center", DT::dataTableOutput("tpercentiles")),
-            column(8, align = "center", DT::dataTableOutput("ptt_percent"))
+            column(4, align = "center", DT::dataTableOutput(ns("tpercentiles"))),
+            column(8, align = "center", DT::dataTableOutput(ns("ptt_percent")))
           ),
           fluidRow(
             column(
@@ -469,11 +476,11 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", DT::dataTableOutput("avg_transition"))
+            column(2, align = "center", DT::dataTableOutput(ns("avg_transition")))
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -485,24 +492,24 @@ ui_tab_tool_3 <- function() {
         h2(strong("Queueing Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
               align = "center",
               h3("% time at Queue Length"),
-              plotOutput("ptq_plot", height = "500px")
+              plotOutput(ns("ptq_plot"), height = "500px")
             ),
             column(
               6,
               align = "center",
               h3("Queue Length for 5 replicates"),
-              plotOutput("q", height = "500px")
+              plotOutput(ns("q"), height = "500px")
             )
           ),
           fluidRow(
-            column(4, align = "center", DT::dataTableOutput("qpercentiles")),
-            column(8, align = "center", DT::dataTableOutput("ptq_percent"))
+            column(4, align = "center", DT::dataTableOutput(ns("qpercentiles"))),
+            column(8, align = "center", DT::dataTableOutput(ns("ptq_percent")))
           ),
           fluidRow(
             column(
@@ -510,11 +517,11 @@ ui_tab_tool_3 <- function() {
               offset = 0,
               style = "padding:0px;"
             ),
-            column(2, align = "center", DT::dataTableOutput("avg_queue"))
+            column(2, align = "center", DT::dataTableOutput(ns("avg_queue")))
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )

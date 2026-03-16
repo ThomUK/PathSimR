@@ -4,6 +4,7 @@
 # PathSimR
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 This is a fork of a project from
@@ -64,6 +65,67 @@ directory. This includes the folders below:
     simple example of pair of input templates which will create an error
     are also included in this folder, as an aid to identifying problem
     inputs.
+
+## Running the simulation programmatically
+
+The simulation engine can be called directly from R, without launching
+the Shiny app. This is useful for scripted analyses, batch runs, or
+automated testing.
+
+> **Note:** `run_simulation()` is currently an internal function. Access
+> it with `:::` until it is formally exported.
+
+### Step 1 — Prepare inputs
+
+Inputs are two CSVs: a **network template** (node parameters and
+transition probabilities) and a **calendar template** (arrival rates and
+capacities over time). Sample templates are provided in
+`PathSimR_Shiny/network_templates/`.
+
+``` r
+network  <- read_network_template("PathSimR_Shiny/network_templates/input_template_1.csv")
+calendar <- read_calendar_template("PathSimR_Shiny/network_templates/cal_input_1.csv")
+```
+
+### Step 2 — Run the simulation
+
+``` r
+result <- PathSimR:::run_simulation(
+  var_input         = network$var_input,
+  cal_input         = calendar,
+  sim_time          = 365,
+  warm_up           = 50,
+  reps              = 100,
+  syst_names        = network$syst_names,
+  syst_names_single = network$syst_names_single,
+  time_unit         = "days"
+)
+```
+
+### Step 3 — Access results
+
+`run_simulation()` returns a named list of 73 elements. Key outputs:
+
+``` r
+# Mean wait time per node across all replications
+result$node_wait_summary
+
+# Mean length of stay per node
+result$node_length_of_stay_summary
+
+# Percentage of time each node is occupied (and percentile breakdown)
+result$pto_percent
+result$opercentiles
+
+# Average occupancy per node
+result$avg_occupancy_summary
+
+# Total time patients spend in the system
+result$total_time_in_system_summary
+
+# Summary across patients and replications
+result$pat_total_summary
+```
 
 ## Report template files
 

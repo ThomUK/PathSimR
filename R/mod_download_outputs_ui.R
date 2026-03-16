@@ -1,4 +1,11 @@
-ui_tab_tool_4 <- function() {
+#' download_outputs UI Module
+#'
+#' @param id Internal parameter for {shiny}.
+#'
+#' @import shiny
+#' @noRd
+mod_download_outputs_ui <- function(id) {
+  ns <- NS(id)
   tabPanel(
     "4. Download Outputs",
     sidebarLayout(
@@ -21,7 +28,7 @@ ui_tab_tool_4 <- function() {
           12,
           align = "center",
           downloadButton(
-            outputId = "downloadtables",
+            outputId = ns("downloadtables"),
             label = "Download Tables",
             icon = icon("download"),
             style = "padding:10px; font-size:125%"
@@ -37,7 +44,7 @@ ui_tab_tool_4 <- function() {
           12,
           align = "center",
           downloadButton(
-            outputId = "downloadplot",
+            outputId = ns("downloadplot"),
             label = "Download Plots",
             icon = icon("download"),
             style = "padding:10px; font-size:125%"
@@ -53,7 +60,7 @@ ui_tab_tool_4 <- function() {
           12,
           align = "center",
           downloadButton(
-            outputId = "downloadreport",
+            outputId = ns("downloadreport"),
             label = "Download Report",
             icon = icon("download"),
             style = "padding:10px; font-size:125%"

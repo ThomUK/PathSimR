@@ -24,7 +24,6 @@
 #' @importFrom ggplot2 unit
 #' @importFrom ggplot2 xlab
 #' @importFrom ggplot2 ylab
-#' @importFrom magrittr %>%
 #' @importFrom shiny renderText
 #' @importFrom shiny req
 #' @importFrom stringr str_replace_all

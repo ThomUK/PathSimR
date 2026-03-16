@@ -1,0 +1,9 @@
+* text=auto
+
+*.R text
+*.Rmd text
+*.Rd text
+
+*.rds binary
+*.rda binary
+*.RData binary
