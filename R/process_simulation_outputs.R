@@ -409,7 +409,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   if (max(ptd_percent$delayed) == 1) {
     ptd_plot <-
-      ptd_plot + scale_x_discrete(limits = c(min(ptd_percent$delayed), max(ptd_percent$delayed)))
+      ptd_plot + scale_x_discrete(limits = as.character(c(min(ptd_percent$delayed), max(ptd_percent$delayed))))
   }
 
   # ptd_plot
@@ -563,7 +563,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   if (max(ptq_percent$queue) == 1) {
     ptq_plot <-
-      ptq_plot + scale_x_discrete(limits = c(min(ptq_percent$queue), max(ptq_percent$queue)))
+      ptq_plot + scale_x_discrete(limits = as.character(c(min(ptq_percent$queue), max(ptq_percent$queue))))
   }
 
   # ptq_plot
@@ -717,10 +717,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   if (max(pto_percent$occupancy) == 1) {
     pto_plot <-
-      pto_plot + scale_x_discrete(limits = c(
+      pto_plot + scale_x_discrete(limits = as.character(c(
         min(pto_percent$occupancy),
         max(pto_percent$occupancy)
-      ))
+      )))
   }
 
   # pto_plot
@@ -874,10 +874,10 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   if (max(ptt_percent$transition) == 1) {
     ptt_plot <-
-      ptt_plot + scale_x_discrete(limits = c(
+      ptt_plot + scale_x_discrete(limits = as.character(c(
         min(ptt_percent$transition),
         max(ptt_percent$transition)
-      ))
+      )))
   }
 
   # ptt_plot
@@ -1033,7 +1033,7 @@ process_simulation_outputs <- function(outputs, syst_names_single, time_unit,
 
   if (max(ptb_percent$occ_bed) == 1) {
     ptb_plot <-
-      ptb_plot + scale_x_discrete(limits = c(min(ptb_percent$occ_bed), max(ptb_percent$occ_bed)))
+      ptb_plot + scale_x_discrete(limits = as.character(c(min(ptb_percent$occ_bed), max(ptb_percent$occ_bed))))
   }
 
   # ptq_plot
