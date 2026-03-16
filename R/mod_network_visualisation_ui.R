@@ -1,4 +1,11 @@
-ui_tab_tool_1 <- function() {
+#' network_visualisation UI Module
+#'
+#' @param id Internal parameter for {shiny}.
+#'
+#' @import shiny
+#' @noRd
+mod_network_visualisation_ui <- function(id) {
+  ns <- NS(id)
   tabPanel(
     "1. Network Import & Visualisation",
     sidebarLayout(
@@ -32,7 +39,7 @@ ui_tab_tool_1 <- function() {
           12,
           align = "center",
           checkboxInput(
-            inputId = "w_temp",
+            inputId = ns("w_temp"),
             label = "Bring Through Wizard Results",
             value = 0
           )
@@ -41,7 +48,7 @@ ui_tab_tool_1 <- function() {
         # add box to choose time unit ####
         # not used for any calculation, just for labelling of outputs
         selectInput(
-          inputId = "time_unit",
+          inputId = ns("time_unit"),
           label = "Choose time unit",
           choices = list(
             "seconds",
@@ -54,9 +61,9 @@ ui_tab_tool_1 <- function() {
           )
         ),
         conditionalPanel(
-          condition = "input.w_temp== '0'",
+          condition = paste0("input['", ns("w_temp"), "'] == '0'"),
           fileInput(
-            inputId = "file1",
+            inputId = ns("file1"),
             label = "Upload Network CSV",
             buttonLabel = list(icon("project-diagram"), "Browse..."),
             multiple = FALSE,
@@ -69,7 +76,7 @@ ui_tab_tool_1 <- function() {
 
           # Input: Select a file --
           fileInput(
-            inputId = "file2",
+            inputId = ns("file2"),
             label = "Upload Calendar CSV",
             buttonLabel = list(icon("calendar-alt"), "Browse..."),
             multiple = FALSE,
@@ -84,7 +91,7 @@ ui_tab_tool_1 <- function() {
           12,
           align = "center",
           actionButton(
-            inputId = "go_viz",
+            inputId = ns("go_viz"),
             label = "Create / Refresh Visualisation",
             icon = icon("project-diagram"),
             style = "padding:10px; font-size:125%"
@@ -95,17 +102,17 @@ ui_tab_tool_1 <- function() {
           12,
           align = "center",
           actionLink(
-            inputId = "viz_help",
+            inputId = ns("viz_help"),
             label = HTML("Understanding the Network Visualisation"),
             icon = icon("info-circle"),
             style = "font-size:125%"
           )
         )),
         br(),
-        bsModal(
-          id = "modal_viz",
+        shinyBS::bsModal(
+          id = ns("modal_viz"),
           title = HTML("<h2><strong>Network Visualisation Help</strong></h2>"),
-          trigger = "viz_help",
+          trigger = ns("viz_help"),
           size = "large",
           ... =
             p(
@@ -135,17 +142,17 @@ ui_tab_tool_1 <- function() {
         ),
         hr(),
         checkboxInput(
-          inputId = "disp1",
+          inputId = ns("disp1"),
           label = "Display network input table",
           value = TRUE
         ),
         checkboxInput(
-          inputId = "disp2",
+          inputId = ns("disp2"),
           label = "Display calendar input table",
           value = TRUE
         ),
         checkboxInput(
-          inputId = "disp3",
+          inputId = ns("disp3"),
           label = "Display extra Service Point information (Requires refresh)",
           value = TRUE
         ),
@@ -155,22 +162,22 @@ ui_tab_tool_1 <- function() {
             6,
             align = "center",
             actionButton(
-              inputId = "jb2i",
+              inputId = ns("jb2i"),
               label = "Back to Intro",
               icon = icon("arrow-left")
             )
           ),
-          uiOutput("next_button")
+          uiOutput(ns("next_button"))
         ),
         width = 3
       ),
       mainPanel(
         # Output: Data file --
 
-        grVizOutput("network", height = "450px"),
-        tableOutput("file_check_issues"),
-        tableOutput("contents1"),
-        tableOutput("contents2")
+        DiagrammeR::grVizOutput(ns("network"), height = "450px"),
+        tableOutput(ns("file_check_issues")),
+        tableOutput(ns("contents1")),
+        tableOutput(ns("contents2"))
       )
     )
   )

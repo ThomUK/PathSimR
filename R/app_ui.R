@@ -12,7 +12,7 @@ app_ui <- function(request) {
     navbarPage(
 
       ##### SHINY UI CODE #####
-      theme = shinytheme("cerulean"),
+      theme = shinythemes::shinytheme("cerulean"),
       title = c(tagList(icon("compass"), "Navigation Bar")),
       id = "navbar",
 
@@ -23,28 +23,28 @@ app_ui <- function(request) {
       ui_tab_overview_and_glossary(),
 
       #### WIZARD 1 - SETUP TAB ####
-      ui_tab_wizard_1(),
+      mod_wizard_ui_1("wizard"),
 
       #### WIZARD 2 - DATA ENTRY TAB ####
-      ui_tab_wizard_2(),
+      mod_wizard_ui_2("wizard"),
 
       #### WIZARD 3 - FINAL WIZARD TABLES & DOWNLOAD TAB ####
-      ui_tab_wizard_3(),
+      mod_wizard_ui_3("wizard"),
 
       #### SERVICE DISTRIBUTION TOOL TAB ####
-      ui_tab_service_dist(),
+      mod_distribution_tool_ui("distribution_tool"),
 
       #### TOOL 1 - NETWORK IMPORT & VISUALISATION TAB ####
-      ui_tab_tool_1(),
+      mod_network_visualisation_ui("network_visualisation"),
 
       #### TOOL 2 - SIMULATION SETUP & RUN TAB ####
-      ui_tab_tool_2(),
+      mod_simulation_setup_ui("simulation_setup"),
 
       #### TOOL 3 - SIMULATION OUTPUTS TAB ####
-      ui_tab_tool_3(),
+      mod_simulation_outputs_ui("simulation_outputs"),
 
       #### TOOL 4 - DOWNLOAD OUTPUTS TAB ####
-      ui_tab_tool_4()
+      mod_download_outputs_ui("download_outputs")
     )
   )
 }

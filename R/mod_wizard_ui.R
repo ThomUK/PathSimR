@@ -1,4 +1,204 @@
-ui_tab_wizard_2 <- function() {
+mod_wizard_ui_1 <- function(id) {
+  ns <- NS(id)
+
+  #### Creating the starting name matricies ####
+  service_points <- matrix(
+    nrow = 1,
+    ncol = 1,
+    data = c("OP Clinic")
+  )
+  colnames(service_points) <- c("Service Points (enter required names below)")
+
+
+  exits <- matrix(
+    nrow = 1,
+    ncol = 1,
+    data = c("Home")
+  )
+  colnames(exits) <- c("Exits (enter required names below)")
+
+  tabPanel(
+    "W1. Setup",
+    sidebarLayout(
+      sidebarPanel(
+        h3(strong("Instructions")),
+        h4("Step 1: Enter names of all Service Points"),
+        p(
+          "'OP Clinic' is currently listed as an example Service Point.
+               Enter names in the 'Service Point' column by selecting an empty cell or editing an existing one.
+                           The entry form will automatically grow when the limit is reached.
+                           To refresh, click away and then enter new name.",
+          actionLink(
+            inputId = ns("serv_point_help"),
+            label = "What is a Service Point?",
+            icon = icon("info-circle")
+          ),
+          style = "color:gray"
+        ),
+        shinyBS::bsModal(
+          id = ns("modal_serv_point"),
+          title = HTML("<h2><strong>Service Point Help</strong></h2>"),
+          trigger = ns("serv_point_help"),
+          size = "large",
+          ... =
+            HTML(
+              "
+                         <p> A Service Point is a ward, clinic or any treatment/service that occurs on the pathway. This can range from a GP surgery on a set timetable to a bedded ward providing continuous care.
+               The key defining feature of a service point is that it has an associated capacity and service time.</p>
+                              "
+            )
+        ),
+        br(),
+        h4("Step 2: Enter names of all Exits"),
+        p(
+          "'Home' is currently listed as an example Exit.
+               Enter names in the 'Exit' column by selecting an empty cell or editing an existing one.
+                           The entry form will automatically grow when the limit is reached.
+                           To refresh, click away and then enter new name.",
+          actionLink(
+            inputId = ns("exit_help"),
+            label = "What is an Exit?",
+            icon = icon("info-circle")
+          ),
+          style = "color:gray"
+        ),
+        shinyBS::bsModal(
+          id = ns("modal_exit"),
+          title = HTML("<h2><strong>Exit Help</strong></h2>"),
+          trigger = ns("exit_help"),
+          size = "large",
+          ... =
+            HTML(
+              "
+                         <p> An exit is any location/service where patients are no longer tracked,
+               i.e. they have left the pathway of interest. Example exits could be home, care home, mortality, another pathway that isn't being modelled (e.g. 'Further Treatment', 'Out of patch'').
+                              These locations have no associated capacity or LoS and are simply end points along the patient pathway.</p>
+                              "
+            )
+        ),
+        br(),
+        h4(
+          "Step 3: Check the resulting tables and ensure all entries are included"
+        ),
+        br(),
+        h4("Step 4: Proceed by pressing the 'Next' button."),
+        p(
+          "If you require to add/remove any names during the wizard process, you can return to this page and edit the inputs
+               to restart the wizard.",
+          style = "color:gray"
+        ),
+        br(),
+        fluidRow(
+          column(
+            6,
+            align = "center",
+            actionButton(
+              inputId = ns("w1_back"),
+              label = "Back to Intro",
+              icon = icon("arrow-left")
+            )
+          ),
+          column(6, align = "center", actionButton(
+            inputId = ns("w1_next"), label = c(tagList("Next", icon("arrow-right")))
+          ))
+        ),
+        width = 3
+      ),
+      mainPanel(
+        fluidRow(
+          br(),
+          fluidRow(h2(strong(
+            textOutput(ns("duplicate"))
+          )), align = "center"),
+          br(),
+          br(),
+          column(
+            width = 1,
+            offset = 0,
+            style = "padding:0px;"
+          ),
+          column(
+            4,
+            shinyMatrix::matrixInput(
+              inputId = ns("service_points"),
+              value = service_points,
+              class = "character",
+              cols = list(
+                names = TRUE,
+                extend = FALSE,
+                editableNames = FALSE
+              ),
+              rows = list(
+                names = FALSE,
+                extend = TRUE,
+                editableNames = FALSE,
+                delta = 1
+              ),
+              copy = FALSE,
+              paste = TRUE
+            )
+          ),
+          column(
+            width = 2,
+            offset = 0,
+            style = "padding:0px;"
+          ),
+          column(
+            4,
+            shinyMatrix::matrixInput(
+              inputId = ns("exits"),
+              value = exits,
+              class = "character",
+              cols = list(
+                names = TRUE,
+                extend = FALSE,
+                editableNames = FALSE
+              ),
+              rows = list(
+                names = FALSE,
+                extend = TRUE,
+                editableNames = FALSE,
+                delta = 1
+              ),
+              copy = FALSE,
+              paste = TRUE
+            )
+          ),
+          column(
+            width = 1,
+            offset = 0,
+            style = "padding:0px;"
+          )
+        ),
+        br(),
+        fluidRow(
+          column(
+            width = 1,
+            offset = 0,
+            style = "padding:0px;"
+          ),
+          column(4, tableOutput(ns("sp_table")), align = "center"),
+          column(
+            width = 2,
+            offset = 0,
+            style = "padding:0px;"
+          ),
+          column(4, tableOutput(ns("exit_table")), align = "center"),
+          column(
+            width = 1,
+            offset = 0,
+            style = "padding:0px;"
+          )
+        )
+      )
+    )
+  )
+}
+
+
+mod_wizard_ui_2 <- function(id) {
+  ns <- NS(id)
+
   tabPanel(
     "W2. Data Entry",
     sidebarLayout(
@@ -17,18 +217,18 @@ ui_tab_wizard_2 <- function() {
                  If the distribution and parameters for the service point are not know, use the Service Distribution tool (in the navigation bar above)
                  to either fit models to uploaded data or scale against BNSSG data and then enter resulting distributions and parameters.",
           actionLink(
-            inputId = "serv_help",
+            inputId = ns("serv_help"),
             label = "What is a Length of Service and how does it connect to distributions and parameters?",
             icon = icon("info-circle")
           ),
           style = "color:gray"
         ),
-        bsModal(
-          id = "modal_serv",
+        shinyBS::bsModal(
+          id = ns("modal_serv"),
           title = HTML(
             "<h2><strong>Length of Service & Distributions Help</strong></h2>"
           ),
-          trigger = "serv_help",
+          trigger = ns("serv_help"),
           size = "large",
           ... =
             HTML(
@@ -52,16 +252,16 @@ ui_tab_wizard_2 <- function() {
         p(
           "Enter numberic values into both boxes.",
           actionLink(
-            inputId = "queue_help",
+            inputId = ns("queue_help"),
             label = "What counts as a queue?",
             icon = icon("info-circle")
           ),
           style = "color:gray"
         ),
-        bsModal(
-          id = "modal_queue",
+        shinyBS::bsModal(
+          id = ns("modal_queue"),
           title = HTML("<h2><strong>External & Internal Queue Help</strong></h2>"),
-          trigger = "queue_help",
+          trigger = ns("queue_help"),
           size = "large",
           ... =
             fluidRow(column(
@@ -106,16 +306,16 @@ ui_tab_wizard_2 <- function() {
           "If there is a Transition Delay associated with the move, select the describing distribution and enter the neccessary parameters.
                  A fixed Transition Delay can be modelled using the uniform distribution and entering the same value into the min and max boxes.",
           actionLink(
-            inputId = "delay_help",
+            inputId = ns("delay_help"),
             label = "What is a Delay and how are they important?",
             icon = icon("info-circle")
           ),
           style = "color:gray"
         ),
-        bsModal(
-          id = "modal_delay",
+        shinyBS::bsModal(
+          id = ns("modal_delay"),
           title = HTML("<h2><strong>Departure Delays Help</strong></h2>"),
-          trigger = "delay_help",
+          trigger = ns("delay_help"),
           size = "large",
           ... =
             fluidRow(column(
@@ -157,16 +357,16 @@ ui_tab_wizard_2 <- function() {
           "The External Arrival Rate & Capacity are able to change at given times throughout the simulation. These changes occur at times set in the respective calendars.
                  Both calendars require at least 1 row to be filled.",
           actionLink(
-            inputId = "cal_help",
+            inputId = ns("cal_help"),
             label = "How do I fill the calendar?",
             icon = icon("info-circle")
           ),
           style = "color:gray"
         ),
-        bsModal(
-          id = "modal_calendar",
+        shinyBS::bsModal(
+          id = ns("modal_calendar"),
           title = HTML("<h2><strong>Calendar Help</strong></h2>"),
-          trigger = "cal_help",
+          trigger = ns("cal_help"),
           size = "large",
           ... =
             HTML(
@@ -190,7 +390,7 @@ ui_tab_wizard_2 <- function() {
             ),
           br(),
           fluidRow(column(
-            12, tableOutput("ext_arr_example"),
+            12, tableOutput(ns("ext_arr_example")),
             align = "center"
           )),
           HTML(
@@ -213,7 +413,7 @@ ui_tab_wizard_2 <- function() {
                                   </ul>
                               <p>&nbsp;</p>"
           ),
-          fluidRow(column(12, tableOutput("cap_example"),
+          fluidRow(column(12, tableOutput(ns("cap_example")),
             align =
               "center"
           ))
@@ -236,18 +436,107 @@ ui_tab_wizard_2 <- function() {
             6,
             align = "center",
             actionButton(
-              inputId = "j2s",
+              inputId = ns("w2_prev"),
               label = "Previous",
               icon = icon("arrow-left")
             )
           ),
           column(6, align = "center", actionButton(
-            inputId = "j2ftd", label = c(tagList("Next", icon("arrow-right")))
+            inputId = ns("w2_next"), label = c(tagList("Next", icon("arrow-right")))
           ))
         ),
         width = 3
       ),
-      mainPanel(uiOutput("tabs"))
+      mainPanel(uiOutput(ns("tabs")))
+    )
+  )
+}
+
+
+mod_wizard_ui_3 <- function(id) {
+  ns <- NS(id)
+
+  tabPanel(
+    "W3. Final Wizard Tables & Download",
+    sidebarLayout(
+      sidebarPanel(
+        h3(strong("Instructions")),
+        h4(
+          "Step 1:  Press the 'Create/Refresh tables' button to see a summary of the data entered & Issues Log."
+        ),
+        p(
+          "There are 4 tables: Issues, Mean Length of Service (only appears when no issues), Network Template and Calendar template",
+          style = "color:gray"
+        ),
+        br(),
+        h4(
+          "Step 2: If there are any issues, return to the previous page and ammend the data inputs."
+        ),
+        p(
+          "The location of the issue is listed along with a brief description.",
+          style = "color:gray"
+        ),
+        br(),
+        h4(
+          "Step 3: Once there are no issues remaining, the option to download the templates for further use becomes available"
+        ),
+        p(
+          "The templates created in the wizard can be saved down and then directly used in PathSimR at a later date.
+                 Both templates are required for use in this way.",
+          style = "color:gray"
+        ),
+        br(),
+        h4("Step 4: Proceed by pressing the 'Move to Simulation Tool' button."),
+        p(
+          "The inputs created in the wizard can be pulled through on the following page",
+          style = "color:gray"
+        ),
+        br(),
+        fluidRow(column(
+          12,
+          align = "center",
+          actionButton(
+            inputId = ns("go"),
+            label = "Create / Refresh tables",
+            style = "padding:10px; font-size:150%"
+          )
+        )),
+        br(),
+        uiOutput(ns("download_buttons")),
+        br(),
+        br(),
+        fluidRow(
+          column(
+            6,
+            align = "center",
+            actionButton(
+              inputId = ns("w3_prev"),
+              label = "Previous",
+              icon = icon("arrow-left")
+            )
+          ),
+          uiOutput(ns("w3_to_sim_ui"))
+        ),
+        width = 3
+      ),
+      mainPanel(
+        fluidRow(
+          br(),
+          column(12, tableOutput(ns("issues")), align = "center")
+        ),
+        fluidRow(
+          br(),
+          column(12, tableOutput(ns("means")), align = "center")
+        ),
+        fluidRow(
+          br(),
+          column(12, tableOutput(ns("var_view")), align = "center")
+        ),
+        fluidRow(
+          br(),
+          column(12, tableOutput(ns("cal_view")), align = "center")
+        )
+      )
     )
   )
 }

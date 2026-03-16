@@ -15,25 +15,8 @@ run_app <- function(
     ...) {
   # from PathSimR. find a better place for this
   options(shiny.maxRequestSize = 30 * 1024^2) # Sets the Shiny file upload size limit to 30MB
+  logger::log_threshold(logger::DEBUG)
 
-  # load the libraries in a single place
-  suppressMessages({
-    library(DiagrammeR)
-    library(magrittr)
-    library(readr)
-    library(DT)
-    library(openxlsx)
-    library(grid)
-    library(gridExtra)
-    library(parallel)
-    library(data.table)
-    library(tidyverse)
-    library(shinyMatrix)
-    library(fitdistrplus)
-    library(shinyBS)
-    library(shinyjs)
-    library(shinythemes)
-  })
 
   with_golem_options(
     app = shinyApp(

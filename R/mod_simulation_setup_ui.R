@@ -1,23 +1,23 @@
-ui_tab_tool_2 <- function() {
+mod_simulation_setup_ui <- function(id) {
+  ns <- NS(id)
+
   tabPanel(
     "2. Simulation Setup & Run",
     sidebarLayout(
-      # Sidebar panel for inputs --
       sidebarPanel(
-        # Input: Select warm up & simulation period --
         h4(strong("Instructions")),
         br(),
         actionLink(
-          inputId = "sim_mode_help",
+          inputId = ns("sim_mode_help"),
           label = HTML("<strong>Which Simulation Mode should I use?</strong>"),
           icon = icon("info-circle"),
           style = "font-size:110%"
         ),
         br(),
-        bsModal(
-          id = "modal_sim_mode",
+        shinyBS::bsModal(
+          id = ns("modal_sim_mode"),
           title = HTML("<h2><strong>Simulation Mode Help</strong></h2>"),
-          trigger = "sim_mode_help",
+          trigger = ns("sim_mode_help"),
           size = "large",
           ... =
             HTML(
@@ -43,14 +43,14 @@ ui_tab_tool_2 <- function() {
         h4(strong("Mode 1: Trial Simulation")),
         h5("Step 1: Input Simulation period below"),
         actionLink(
-          inputId = "wu_help",
+          inputId = ns("wu_help"),
           label = HTML("<strong>What are the warm-up and simulation periods?</strong>"),
           icon = icon("info-circle")
         ),
-        bsModal(
-          id = "modal_wu",
+        shinyBS::bsModal(
+          id = ns("modal_wu"),
           title = HTML("<h2><strong>Warm-up and Simulation Period Help</strong></h2>"),
-          trigger = "wu_help",
+          trigger = ns("wu_help"),
           size = "large",
           ... =
             HTML(
@@ -137,16 +137,12 @@ ui_tab_tool_2 <- function() {
         h5(
           "Step 5: Simulation Outputs and Download Outputs tabs are now available"
         ),
-
-
-        # Horizontal line -
-
         hr(),
         fluidRow(column(
           12,
           align = "center",
           selectInput(
-            inputId = "run_type",
+            inputId = ns("run_type"),
             label = "Select Mode",
             choices = c("Trial Simulation", "Full Simulation"),
             selected = "Trial Simulation",
@@ -154,10 +150,10 @@ ui_tab_tool_2 <- function() {
           )
         )),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = paste0("input['", ns("run_type"), "'] == 'Full Simulation'"),
           hr(),
           numericInput(
-            inputId = "wu",
+            inputId = ns("wu"),
             label = "Length of warm-up period",
             value = 0,
             min = 0
@@ -165,16 +161,16 @@ ui_tab_tool_2 <- function() {
         ),
         hr(),
         numericInput(
-          inputId = "st",
+          inputId = ns("st"),
           label = "Length of simulation period",
           value = "",
           min = 1
         ),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = paste0("input['", ns("run_type"), "'] == 'Full Simulation'"),
           hr(),
           numericInput(
-            inputId = "reps",
+            inputId = ns("reps"),
             label = "Number of simulation replications",
             value = 100,
             min = 1
@@ -185,7 +181,7 @@ ui_tab_tool_2 <- function() {
           12,
           align = "center",
           actionButton(
-            inputId = "checklist",
+            inputId = ns("checklist"),
             label = "Create / Refresh Checklist",
             icon = icon("clipboard"),
             style = "padding:10px; font-size:125%"
@@ -196,7 +192,7 @@ ui_tab_tool_2 <- function() {
           12,
           align = "center",
           actionButton(
-            inputId = "sim",
+            inputId = ns("sim"),
             label = "Run Simulation",
             icon = icon("play"),
             style = "padding:10px; font-size:125%"
@@ -208,28 +204,24 @@ ui_tab_tool_2 <- function() {
             6,
             align = "center",
             actionButton(
-              inputId = "jb2niv",
+              inputId = ns("sim_prev"),
               label = "Previous",
               icon = icon("arrow-left")
             )
           ),
-          uiOutput("next_button2")
+          uiOutput(ns("next_button2"))
         ),
         width = 3
       ),
-
-      # Main panel for displaying outputs -
       mainPanel(
         fluidRow(
-          column(4, align = "center", tableOutput("checklist_table_render")),
-          column(8, grVizOutput("cl_viz"))
+          column(4, align = "center", tableOutput(ns("checklist_table_render"))),
+          column(8, DiagrammeR::grVizOutput(ns("cl_viz")))
         ),
         fluidRow(column(12, align = "center", h1(textOutput(
-          "comp"
+          ns("comp")
         )))),
         br()
-        # ,
-        # fluidRow(column(12,align="center",tableOutput("run_time")))
       )
     )
   )
