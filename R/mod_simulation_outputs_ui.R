@@ -153,7 +153,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Warm-Up Period Assistance")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           p(
             "The warm-up period represents the time it takes for a simulation to reach stable running conditions and after which results can be recorded.
                          As each simulation starts from empty, it is important that the warm-up period be long enough so that the results collected are reflective of
@@ -167,7 +167,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           h2(strong(
             "Not Available in Full Simulation"
           ))
@@ -194,7 +194,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Service Point Statistics")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(column(
             12,
             align = "center", DiagrammeR::grVizOutput(ns("tables_viz1"), height = "400px")
@@ -250,7 +250,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -262,7 +262,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Pathway Statistics")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(column(
             12,
             align = "center", DiagrammeR::grVizOutput(ns("tables_viz2"), height = "400px")
@@ -316,7 +316,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -328,7 +328,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Patient Occupancy Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
@@ -357,7 +357,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -369,7 +369,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Bed Occupancy Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
@@ -398,7 +398,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -410,7 +410,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Capacity Driven Delay Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
@@ -439,7 +439,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -451,7 +451,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Transition Delay Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
@@ -480,7 +480,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
@@ -492,7 +492,7 @@ mod_simulation_outputs_ui <- function(id) {
         h2(strong("Queueing Summary")),
         hr(),
         conditionalPanel(
-          condition = "input.run_type=='Full Simulation'",
+          condition = "input['simulation_setup-run_type']=='Full Simulation'",
           fluidRow(
             column(
               6,
@@ -521,7 +521,7 @@ mod_simulation_outputs_ui <- function(id) {
           )
         ),
         conditionalPanel(
-          condition = "input.run_type=='Trial Simulation'",
+          condition = "input['simulation_setup-run_type']=='Trial Simulation'",
           h2(
             strong("Not Available in Trial Simulation")
           )
