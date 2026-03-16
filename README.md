@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/ThomUK/PathSimR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ThomUK/PathSimR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This is a fork of a project from
