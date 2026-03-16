@@ -4879,10 +4879,10 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
 
 
   # tidyr:: namespace required inside parallel operations
-  multi_spread <- tidyr::spread(
+  multi_spread <- tidyr::pivot_wider(
     data = multi,
-    key = metric,
-    value = value
+    names_from = metric,
+    values_from = value
   )
 
 
