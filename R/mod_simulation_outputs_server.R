@@ -8,8 +8,11 @@
 #' @noRd
 mod_simulation_outputs_server <- function(id, sim_out, viz) {
   moduleServer(id, function(input, output, session) {
+    observeEvent(sim_out(), {
+      logger::log_info("Rendering simulation results.")
+    })
+
     ### RENDER TOTAL TIME IN SYSTEM #####
-    logger::log_info("Rendering simulation results.")
 
     output$ttis <- DT::renderDT(
       {
