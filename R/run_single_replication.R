@@ -3873,6 +3873,9 @@ run_single_replication <- function(j, var_input, syst_names, syst_names_single,
     tmp3 <- merge(tmp2, tds_node, by = "patient", all = TRUE)
     tmp4 <- merge(tmp3, dep_node, by = "patient", all = TRUE)
 
+    # skip this iteration for any nodes that had no activity (e.g. during a short trial simulation)
+    if (nrow(tmp4) == 0) next
+
     tmp4 <- cbind(0, i, tmp4)
     colnames(tmp4)[1] <- "rep"
     colnames(tmp4)[2] <- "node"
